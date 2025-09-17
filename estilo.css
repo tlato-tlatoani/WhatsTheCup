@@ -1,0 +1,255 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: white;
+    background: #000;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+    flex-wrap: wrap;
+}
+
+/* === Panel izquierdo === */
+.left {
+    flex: 3;
+    background: #E52C6D;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 40px;
+}
+
+.titulo {
+    font-family: 'Fugaz One', cursive;
+    font-size: 2.1rem;
+    margin: 0;
+    color: rgb(252, 253, 192);
+}
+
+.titulo2 {
+    font-family: 'Fugaz One', cursive;
+    font-size: 1.6rem;
+    margin: 0;
+    color: #AAE52C;
+}
+
+.subtitulo {
+    font-family: 'Fugaz One', cursive;
+    font-size: 3.5rem;
+    margin: 5px 0 0 0;
+    color: #AAE52C;
+}
+
+.left span {
+    font-weight: bold;
+    color: #AAE52C;
+}
+
+/* === Panel derecho === */
+.right {
+    flex: 7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background: radial-gradient(circle at top left, #E52C6D, transparent 70%),
+        linear-gradient(155deg, #741686, #0300A0, #0300A0);
+    background-blend-mode: overlay;
+}
+
+/* === Formulario === */
+.form-box {
+    width: 70%;
+    max-width: 500px;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    border-radius: 15px;
+}
+
+.form-box h2 {
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Subir foto */
+.upload {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: #999999;
+    margin-bottom: 10px;
+}
+
+.upload button {
+    background: #fff;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Inputs */
+form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+form label {
+    display: flex;
+    flex-direction: column;
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form input[type="date"] {
+    padding: 10px;
+    border: 2px solid #AAE52C;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    transition: 0.3s;
+}
+
+form input::placeholder {
+    color: #ccc;
+}
+
+form input:focus {
+    border-color: #fff;
+    outline: none;
+}
+
+/* Full width input */
+.full {
+    grid-column: span 2;
+}
+
+/* Género */
+.genero {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: white;
+}
+
+/* Botón enviar */
+.btn {
+    grid-column: span 2;
+    display: flex;
+    justify-content: center;
+}
+
+.btn-text {
+    font-family: 'Fugaz One', cursive;
+    font-size: 0.9rem;
+    color: #482ce5;
+    font-weight: bold;
+    background: #AAE52C;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 15px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s;
+}
+
+.btn-text:hover {
+    background: #8bcf2c;
+}
+
+/* === Responsividad === */
+@media (max-width: 900px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .left,
+    .right {
+        flex: 1 1 100%;
+        width: 100%;
+        height: auto;
+    }
+
+    form {
+        grid-template-columns: 1fr;
+    }
+
+    .form-box {
+        width: 90%;
+    }
+}
+
+.genero {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.genero label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    color: white;
+}
+
+.radio-custom {
+    position: relative;
+    padding-left: 30px;
+    cursor: pointer;
+    user-select: none;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.radio-custom input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.radio-custom .check {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 20px;
+    width: 20px;
+    border: 2px solid #AAE52C;
+    border-radius: 50%;
+    background-color: transparent;
+    transition: 0.2s;
+}
+
+.radio-custom input:checked~.check {
+    background-color: #AAE52C;
+}
+
+.radio-custom span.check {
+    display: inline-block;
+}
+
+.radio-custom:hover .check {
+    border-color: #fff;
+}
+
+

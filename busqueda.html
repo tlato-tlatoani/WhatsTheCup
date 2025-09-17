@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap" rel="stylesheet">
+  <title>Usuarios - What's The Cup</title>
+  <link rel="stylesheet" href="busqueda.css">
+</head>
+<body>
+
+  <!-- Top bar -->
+  <header class="topbar">
+    <div class="logo">WHAT’S THE CUP</div>
+    <input type="text" placeholder="Buscar..." class="search-bar">
+  </header>
+
+  <main class="main-container">
+    <!-- Left profile card -->
+    <aside class="profile-card">
+      <div class="profile-pic-circle">
+        <img src="CHAE.jpg" alt="Foto de perfil" class="profile-pic">
+      </div>
+      <h3>Nombre Usuario</h3>
+
+      <!-- Botones principales -->
+      <div class="buttons">
+        <button>PUBLICACIONES</button>
+        <button>AGREGAR MUNDIAL</button>
+        <button>AGREGAR CATEGORIA</button>
+      </div>
+
+      <!-- Filtro por fechas -->
+      <div class="filter-section">
+        <h4>Buscar por fecha</h4>
+        <label for="fecha-desde">Desde:</label>
+        <input type="date" id="fecha-desde">
+        <label for="fecha-hasta">Hasta:</label>
+        <input type="date" id="fecha-hasta">
+        <button>FILTRAR</button>
+      </div>
+
+      <!-- Otros filtros -->
+      <div class="extra-buttons">
+        <button>CATEGORIA</button>
+        <button>BUSCAR USUARIO</button>
+      </div>
+    </aside>
+
+    <!-- Right content (vacío por ahora) -->
+    <section class="content-section">
+      <!-- Aquí podrás poner cards, categorías o tablas después -->
+    </section>
+  </main>
+
+</body>
+</html>

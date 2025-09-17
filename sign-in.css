@@ -1,0 +1,147 @@
+/* Reset y altura completa */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+    font-family: 'Fugaz One', cursive;
+    color: #0300A0;
+}
+
+/* Contenedor principal: divide pantalla en dos columnas */
+.main-container {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+}
+
+/* Lado izquierdo */
+.left {
+    flex: 3; /* 30% */
+    background-color: #AAE52C;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 40px;
+}
+
+.left .titulo {
+    
+    font-family: 'Fugaz One', cursive;
+    font-size: 2.6rem;
+    margin: 0;
+    color: #E52C6D;
+}
+
+
+.left .subtitulo {
+    font-family: 'Fugaz One', cursive;
+    font-size: 2.5rem;
+    margin: 0;
+    color: #E52C6D;
+}
+
+/* Lado derecho */
+.right {
+    flex: 7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background: radial-gradient(circle at top left, #AAE52C, transparent 70%),
+        linear-gradient(155deg, #b3e079, #F2EA93, #F2EA93);
+    background-blend-mode: overlay;
+}
+
+/* Tarjeta del formulario */
+
+
+/* Tarjeta del formulario */
+.card {
+    
+    padding: 30px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 4px 8px #E52C6D;
+    border: 2px solid #E52C6D; 
+}
+
+
+.card-title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2rem;
+    font-family: 'Fugaz One', cursive;
+    color: #0300A0; 
+}
+
+/* Formularios */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin: 10px 0 5px;
+}
+
+input {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #e52c6d;
+    border-radius: 6px;
+}
+
+button {
+  background: #AAE52C;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: 'Fugaz One', cursive;
+    color: #0300A0;
+
+}
+
+button:hover {
+    background-color: #e52c6d;
+}
+
+p {
+    text-align: center;
+    margin-top: 10px;
+}
+
+a {
+    color: #e52c6d;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.register-text {
+    text-align: center;
+    margin-top: 20px;
+    font-weight: bold;
+    color: #0300A0;
+}
+
+.register-link {
+    display: block;
+    text-align: center;
+    margin-top: 5px;
+    font-weight: bold;
+    color: #0300A0;
+    text-decoration: none;
+}
+
+.register-link:hover {
+    text-decoration: underline;
+}

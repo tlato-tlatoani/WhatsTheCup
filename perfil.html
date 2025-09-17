@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Pantalla Perfil</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="perfil.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="profile-pic">
+        <div class="profile-text">FOTO DE PERFIL</div>
+        <img src="" alt=" ">
+      </div>
+      <h2>HELLO ...</h2>
+    </div>
+    <div class="upload">
+          <div class="circle"></div>
+          <input type="file" id="file" style="display:none;">
+          <button type="button"class="button-two" onclick="document.getElementById('file').click()">SELECCIONAR FOTO</button>
+        </div>
+    <div class="form-grid">
+        
+      <input type="text" class="input-large" placeholder="Nombre y Apellido...">
+      <input type="email" placeholder="EMAIL">
+      <input type="password" placeholder="contraseña">
+      <input type="date" placeholder="Día de Nacimiento...">
+      <input type="text" placeholder="Nacionalidad...">
+      <input type="text" placeholder="Genero...">
+      <input type="text" placeholder="País de Nacimiento...">
+    </div>
+
+    <div class="buttons">
+      <button>SALIR</button>
+      <button>EDITAR</button>
+    </div>
+  </div>
+</body>
+</html>
