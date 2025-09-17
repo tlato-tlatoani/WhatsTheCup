@@ -1,0 +1,365 @@
+body {
+    height: 100%;
+    width: 100%;
+
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+
+    background: linear-gradient(300deg,#aadfad,#f2ea93) !important;
+    background-size: 180% 180% !important;
+    animation: gradient-animation 18s ease infinite !important;
+}
+
+
+
+.navbar, .bg-body-tertiary {
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+.header-mundiales h1{
+    font-family: "Fugaz One", sans-serif;
+    font-weight: 400;
+    font-size: 50px;
+    color: #e52c6d !important;
+    text-align: center;
+    margin-top: 20px;
+}
+
+#layout {
+    display: flex;
+    flex: 1; 
+    min-height: 100vh;
+    width: 100%;
+    justify-content: center;
+ 
+}
+
+#sidebar-container{
+  min-width: 250px;
+  max-width: 300px;
+  width: 20vw; 
+  justify-content: center;
+  margin-left: 20px;
+  margin-top: 70px
+}
+
+
+#pagina-principal{
+  flex: 1;
+  min-width: 0;
+  padding: 20px;
+  box-sizing: border-box;
+  margin: 1px;
+}
+
+#footer{
+    text-align: center;
+      color: #0300A0;
+
+  font-family: "Poppins", sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  margin: 20px;
+}
+
+/* Acomodo*/
+
+#header-mundiales{
+    display:flex;
+    margin:10px;
+    justify-content: space-between;
+ 
+
+    font-family: "Fugaz One", sans-serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 20px;
+    color: #0300A0;
+}
+
+#header-mundiales select{
+    width: 200px;
+    height: 50px;
+    border-radius: 40px;
+    border: none;
+    padding: 5px;
+    align-self: center;
+    text-align: center;
+
+    background-color: #e52c6d;
+    box-shadow: 0 2px 10px 0 #64646438;
+
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    color:#f2ea93 ;
+}
+
+#header-mundiales select:hover{
+  cursor: pointer;
+  box-shadow: 0 4px 16px 0 #AAE52C;
+}
+
+#mundiales {
+  margin: 10px;
+  display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(255px, 1fr));
+  gap: 30px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 255px;
+  height: 350px;
+  margin: 6px;
+  padding: 5px;
+  background-color: #ffffff33;
+  box-shadow: 0 2px 8px 0 #6464642b;
+  border-radius: 20px;
+}
+
+.card-img-top {
+  margin: 10px;
+  border-radius: 20px;
+  align-content: center;
+  width: 200px !important;
+  height: 200px !important;
+}
+
+.card-text {
+  text-align: left;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: #e52c6d;
+}
+
+#paginacion{
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: center;
+  margin-top: 40px; 
+
+}
+
+
+.pagination {
+  background: #f2ea93;
+  border-radius: 30px;
+  padding: 10px 24px;
+  
+  display: inline-flex;
+  justify-content: center;
+  gap: 0;
+}
+
+.pagination li {
+  list-style: none;
+}
+
+.page-item {
+  margin: 0;
+}
+
+.page-link {
+  color: #0300A0;
+  background: transparent;
+
+  border-radius: 0;
+  font-family: "Poppins", sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  padding: 8px 18px;
+  margin: 0;
+  
+}
+
+
+.page-link:focus {
+  box-shadow: none;
+  outline: none;
+}
+
+
+/*modal*/
+/* ===== MODAL PUBLICACIÓN ===== */
+
+#modal-publicacion {
+  position: fixed;
+  inset: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0,0,0,0.25);
+  z-index: 1000;
+  font-family: "Poppins", sans-serif;
+}
+
+#modal-publicacion.show {
+  display: flex;
+}
+
+.modal-window {
+  background-color: #D9D9D9;
+  border-radius: 20px;
+  padding: 30px 40px;
+  width: 600px;
+  max-width: 95%;
+  position: relative;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.25);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Título */
+#titulo-modal {
+  font-family: "Poppins", sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  color: #e52c6d;
+  margin: 0;
+}
+
+/* Input Título */
+#titulo {
+  background: #0300a0;
+  color: #AAE52C;
+  border: none;
+  border-radius:15px;
+  padding: 15px;
+  font-size: 18px;
+  font-weight: 700;
+  width: 100%;
+  text-transform: uppercase;
+}
+
+/* Textarea */
+#contenido {
+  background: #0300a0;
+  color: #AAE52C;
+  border: none;
+  border-radius: 20px;
+  padding: 14px 18px;
+  font-size: 15px;
+  width: 100%;
+  resize: vertical;
+}
+
+/* Placeholder en input título */
+#titulo::placeholder {
+  color: #AAE52C;   /* verde neón */
+  font-weight: 700;
+  text-transform: uppercase;
+    font-family: poppins, sans-serif;
+  font-size: 30px;
+  font-weight: 600;
+  opacity: 1;       /* para que no se vea grisáceo */
+}
+
+/* Placeholder en textarea */
+#contenido::placeholder {
+  color: #AAE52C;   /* amarillo suave */
+  font-family: poppins, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  opacity: 1;
+}
+
+/* Select categoría */
+#categoria {
+  background: #e52c6d;
+  color: #f2ea93;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 18px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  appearance: none;
+  margin-left: auto;
+}
+
+/* Botón publicar */
+.btn-publicar {
+  background: linear-gradient(180deg,#AAE52C,#AADFAD);
+  border: none;
+  border-radius: 40px;
+  padding: 12px 30px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #0300a0;
+  cursor: pointer;
+  align-self: center;
+  transition: all 0.2s ease;
+}
+.btn-publicar:hover {
+  box-shadow: 0 4px 14px #AAE52C;
+}
+
+
+/* Cerrar modal */
+.modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  font-size: 22px;
+  font-weight: bold;
+  color: #e52c6d;
+  cursor: pointer;
+}
+
+.modal-publicacion hr{
+    border: none;
+    height: 2px;
+    background: #0300A0;
+}
+
+#form-publicacion {
+  display: flex;
+  margin: 10px;
+  flex-direction: column;
+  align-items: center;  
+  gap: 16px;
+  width: 100%;
+}
+#form-publicacion input,
+#form-publicacion textarea {
+  width: 100%;           
+  max-width: 500px;
+  
+}
+
+.multimedia{
+ width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;           
+  padding: 0;
+  background-color:#e52c6d ;
+  
+}
+
+
+.bi-camera-reels, .bi-image{
+
+  color: #f2ea93;
+}
+
+.fila-cat{
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  justify-content: flex-start;
+  align-items: right;
+
+}
+
