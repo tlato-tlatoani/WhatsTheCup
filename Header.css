@@ -1,0 +1,61 @@
+.container-fluid{
+  display:flex;
+  margin:20px;
+  justify-content: space-between;
+}
+
+.navbar-brand {
+  font-family: "Fugaz One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 40px;
+  color: #0300A0 !important;
+}
+
+.container-fluid input, button {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 30px;
+}
+
+.container-fluid input{
+    width: 700px;
+    height: 50px;
+    border-radius: 40px;
+    border: none;
+    padding: 5px;
+   
+    
+    background-color: #ffffff33;
+    box-shadow: 0 2px 8px 0 #6464642b;
+
+   
+}
+
+.container-fluid button{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;           
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  background-color: #f2ea93;
+}
+
+.container-fluid button .bi-search {
+  color: #0300A0; 
+}
+
+.container-fluid input::placeholder{
+
+  text-align: left;
+  padding: 20px;
+
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  color:#0300A0;
+    
+}

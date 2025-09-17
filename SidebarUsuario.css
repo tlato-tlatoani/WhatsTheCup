@@ -1,0 +1,50 @@
+
+  .foto-perfil {
+    width: 110px;
+    height: 110px;
+    margin: 10px;
+    border-radius: 100px;
+    align-content: center;
+  }
+
+  body{
+    background: transparent;
+  }
+
+  .sidebar{
+    width: 250px;
+    min-height: 440px;
+    background-color: #ffffff33;
+    box-shadow: 0 2px 8px 0 #6464642b;
+    border-radius: 45px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px 0 24px 0;
+    margin: 10px;
+    gap: 15px;
+  
+  }
+
+  .sidebar h1 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: #0300A0;
+  margin: 0;
+  text-align: center;
+}
+
+.sidebar button {
+  width: 210px;
+  height: 48px;
+  margin: 8px 0;
+  border-radius: 24px;
+  border: none;
+  background: #f2ea93;
+  color: #0300A0;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  display: block;
+}
