@@ -1,0 +1,266 @@
+body {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: linear-gradient(300deg, #F8BD51, #E52C6D) !important;
+  font-family: "Poppins", sans-serif;
+  color: #0300A0;
+}
+
+
+#footer{
+    text-align: center;
+    color: #0300A0;
+
+    font-family: "Poppins", sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    margin: 20px;
+}
+
+#layout {
+  display: flex;
+  flex: 1;
+  min-height: 100vh;
+  width: 100%;
+  justify-content: center;
+}
+
+#sidebar-container {
+  min-width: 250px;
+  max-width: 300px;
+  width: 20vw;
+  justify-content: center;
+  margin-left: 20px;
+  margin-top: 70px;
+}
+
+#pagina-principal {
+  flex: 1;
+  min-width: 0;
+  padding: 20px 60px;
+  box-sizing: border-box;
+}
+
+#header-titulo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: "Fugaz One", sans-serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 24px;
+  color: #0300A0;
+  margin-bottom: 10px;
+}
+
+
+.imagen-mundial {
+  width: 120px;
+  height: 120px;
+  border-radius: 20px;
+  box-shadow: 0 2px 8px 0 #6464642b;
+  background-color: #ffffff33;
+  object-fit: cover;
+  margin-top: 5px;
+}
+
+
+#form-mundial {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* ← tres columnas iguales */
+  grid-template-areas:
+    "titulo titulo titulo"
+    "mundial mundial anio"
+    "icono descripcion descripcion"
+    "campeon marcador subcampeon" 
+    "goleador cantante ."
+    "equipos equipos equipos"
+    "copa . ."
+    "mascota . btn";
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+
+  padding: 5px;
+
+}
+
+.label-input.mundial { grid-area: mundial; }
+.label-input.anio { grid-area: anio; }
+.imagen-icono { grid-area: icono; }
+.label-input.descripcion { grid-area: descripcion; }
+.label-input.campeon { grid-area: campeon; }
+.label-input.marcador { grid-area: marcador; }
+.label-input.subcampeon { grid-area: subcampeon; }
+.label-input.goleador { grid-area: goleador; }
+.label-input.cantante { grid-area: cantante; }
+.label-input.equipos { grid-area: equipos; }
+.copa { grid-area: copa; }
+.mascota { grid-area: mascota; }
+#btn-publicar { grid-area: btn; }
+
+
+.label-input {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem; /* Espacio entre label y input */
+}
+
+
+/*ESTILOS*/
+
+body input, textarea{
+  border-radius: 30px;
+  border: none;
+  padding: 15px;
+  background-color: #ffffff33;
+  box-shadow: 0 2px 8px 0 #6464642b;
+
+  font-size: 16px;
+  font-family: "Poppins", sans-serif;
+  color: #0300A0;
+}
+
+.mundial-titulo{
+  height: 70px;
+
+  font-family: "Fugaz One", sans-serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 24px;
+  color: #0300A0;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.multimedia{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;
+  padding: 0;
+  background-color: #e52c6d;
+}
+
+.bi-image{
+  color: #f2ea93;
+}
+
+.imagen-icono, .copa, .mascota{
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+#btn-publicar {
+  background: linear-gradient(180deg,#AAE52C,#AADFAD);
+  border: none;
+  border-radius: 40px;
+  padding: 12px 30px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #0300a0;
+  cursor: pointer;
+  align-self: center;
+  transition: all 0.2s ease;
+  width: 150px;
+  justify-self: center;
+
+}
+
+#btn-publicar:hover {
+  box-shadow: 0 4px 14px #AAE52C;
+}
+
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+  max-height: 700px;
+}
+
+/* Contenedor general de la barra */
+.label-input.equipos .tagify {
+  --tags-border-color: #cccccc;
+  --tags-hover-border-color: #AAE52C;
+  --tag-bg: #e52c6d;
+  --tag-hover: #AAE52C;
+  --tag-text-color: #f2ea93;
+  --tag-remove-btn-color: #f2ea93;
+
+  border: 1.5px solid var(--tags-border-color);
+  padding: 6px;
+  min-height: 45px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  transition: border-color 0.2s ease;
+
+  border-radius: 30px;
+  border: none;
+  padding: 15px;
+  background-color: #ffffff33;
+  box-shadow: 0 2px 8px 0 #6464642b;
+}
+
+/* Efecto hover o focus */
+.label-input.equipos .tagify:hover,
+.label-input.equipos .tagify:focus-within {
+  border-color: var(--tags-hover-border-color);
+    font-size: 16px;
+  font-family: "Poppins", sans-serif;
+  color: #0300A0;
+}
+
+
+/* Cada etiqueta (chip) */
+.label-input.equipos .tagify__tag {
+  background-color: var(--tag-bg);
+  border-radius: 30px;
+  padding: 4px 10px;
+  display: flex;
+  align-items: center;
+  transition: all 0.2s ease;
+}
+
+/* Al pasar el mouse */
+.label-input.equipos .tagify__tag:hover {
+  background-color: var(--tag-hover);
+  font-size: 16px;
+  font-family: "Poppins", sans-serif;
+  color: #0300A0;
+}
+
+/* Texto del tag */
+.label-input.equipos .tagify__tag-text {
+  color: var(--tag-text-color);
+  font-weight: 500;
+}
+
+/* Botón de eliminar */
+.label-input.equipos .tagify__tag__removeBtn {
+  color: var(--tag-remove-btn-color);
+  margin-left: 6px;
+  font-size: 14px;
+}
+
+/* Input donde se escriben nuevos tags */
+.label-input.equipos .tagify__input {
+  min-width: 80px;
+  outline: none;
+  background: transparent;
+  font-size: 14px;
+  color: #555;
+  font-size: 16px;
+  font-family: "Poppins", sans-serif;
+  color: #0300A0;
+}
+

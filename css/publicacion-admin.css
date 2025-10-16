@@ -5,7 +5,7 @@ body{
      display: flex;
      flex-direction: column;
     min-height: 100vh;
-    background: linear-gradient(300deg,#aadfad,#f2ea93) !important;
+    background: linear-gradient(300deg,#F8BD51,#E52C6D) !important;
 }
 
 
@@ -82,7 +82,10 @@ min-width: 250px;
     display: block;
 }
 
-
+.eliminar{
+    display: flex;
+    flex-direction: row;
+}
 /*Acomodo*/
 
 #imagen-publicacion {
@@ -208,4 +211,27 @@ hr{
   padding: 18px 32px;
 
 }
+
+
+.eliminar button{
+ width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;           
+  padding: 0;
+  background-color:#e52c6d ;
+  box-shadow: 0 2px 8px 0 #6464642b;
+}
+
+
+.bi-x{
+
+  color: #f2ea93;
+}
+
+a{
+    text-decoration: none !important;
+}
+
+
 

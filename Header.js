@@ -1,5 +1,3 @@
-
-
 document.addEventListener("DOMContentLoaded", () => {
   fetch("Header.html")
     .then(response => response.text())

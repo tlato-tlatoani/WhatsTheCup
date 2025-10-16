@@ -1,22 +1,59 @@
-body{
+body {
+    height: 100%;
+    width: 100%;
+
     margin: 0;
-     display: flex;
-     flex-direction: column;
+    display: flex;
+    flex-direction: column;
     min-height: 100vh;
-    
-    background: linear-gradient(300deg,#F8BD51,#E52C6D) !important;
+
+    background: linear-gradient(300deg,#aadfad,#f2ea93) !important;
+    	background-size: 400% 400%;
+	    animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient{
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+a{
+    text-decoration: none !important;
+}
+
+
+.navbar, .bg-body-tertiary {
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+.header-mundiales h1{
+    font-family: "Fugaz One", sans-serif;
+    font-weight: 400;
+    font-size: 50px;
+    color: #e52c6d !important;
+    text-align: center;
+    margin-top: 20px;
 }
 
 #layout {
-   display: flex;
-  flex: 1; 
-  min-height: 100vh;
-  width: 100%;
-  justify-content: center;
+    display: flex;
+    flex: 1; 
+    min-height: 100vh;
+    width: 100%;
+    justify-content: center;
+ 
 }
 
 #sidebar-container{
-min-width: 250px;
+  min-width: 250px;
   max-width: 300px;
   width: 20vw; 
   justify-content: center;
@@ -24,8 +61,9 @@ min-width: 250px;
   margin-top: 70px
 }
 
+
 #pagina-principal{
-    flex: 1;
+  flex: 1;
   min-width: 0;
   padding: 20px;
   box-sizing: border-box;
@@ -34,29 +72,21 @@ min-width: 250px;
 
 #footer{
     text-align: center;
-    color: #0300A0;
+      color: #0300A0;
 
-    font-family: "Poppins", sans-serif;
-    font-size: 20px;
-    font-weight: 400;
-    margin: 20px;
+  font-family: "Poppins", sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  margin: 20px;
 }
 
 /* Acomodo*/
 
-
-.imagen-post{
-  margin: 0 auto;
-  width: 320px;
-  height: 160px;
-  border-radius: 20px;
-
-}
-
-#header-titulo{
+#header-mundiales{
     display:flex;
     margin:10px;
     justify-content: space-between;
+ 
 
     font-family: "Fugaz One", sans-serif;
     font-style: italic;
@@ -65,8 +95,8 @@ min-width: 250px;
     color: #0300A0;
 }
 
-#header-titulo button{
-     width: 200px;
+#header-mundiales select{
+    width: 200px;
     height: 50px;
     border-radius: 40px;
     border: none;
@@ -83,120 +113,103 @@ min-width: 250px;
     color:#f2ea93 ;
 }
 
-#header-intro{
-    display: inline-flex;
-
-  color: #0300A0;
-  font-family: "Poppins", sans-serif;
-  font-size: 20px;
-  font-weight: 400;
-  margin: 20px;
+#header-mundiales select:hover{
+  cursor: pointer;
+  box-shadow: 0 4px 16px 0 #AAE52C;
 }
 
-#header-intro img{
-    width: 200px;
-    height: 150px;
-    border-radius: 20px;
-    margin-right: 20px;
-    box-shadow: 0 2px 8px 0 #6464642b;
+#mundiales {
+  margin: 10px;
+  display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(255px, 1fr));
+  gap: 30px;
 }
 
-.publicacion{
-   width: 100%;
-   max-width: 1115px;
-  margin: 10px auto;
-  padding: 25px;
-  border: none;
- background-color: #ffffff33;
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 255px;
+  height: 350px;
+  margin: 6px;
+  padding: 5px;
+  background-color: #ffffff33;
   box-shadow: 0 2px 8px 0 #6464642b;
   border-radius: 20px;
-  display: flex;
-  gap: 15px;
-
-
 }
 
-.titulo{
-    font-family: "Fugaz One", sans-serif;
-    font-weight: 400;
-    font-size: 30px;
-    color: #e52c6d;
-    margin: 0;
+.card:hover {
+  box-shadow: 0 4px 16px 0 #e52c6d;
+  cursor: pointer;
+  transform: translateY(-5px);
+  transition: all 0.3s ease;
 }
-
-.infografia{ 
-     font-family: "Poppins", sans-serif;
-    font-size: 18px;
-    font-weight: 600;
-    color: #E52C6D;
-    margin: 0;
-    max-width: 700px;
-    text-align: justify;
-}
-
-.nombre-post{
-  display: flex;
-    align-items: center;
-    gap: 18px;
-}
-.preview{
-    display: block;
-    gap: 10px;
-}
-
-.preview p{
-    font-family: "Poppins", sans-serif;
-    font-size: 18px;
-    font-weight: 400;
-    color: #0300A0;
-    margin: 0;
-    max-width: 700px;
-    text-align: justify;
-}
-
-.interaccion h2{
+.card-img-top {
   margin: 10px;
+  border-radius: 20px;
+  align-content: center;
+  width: 200px !important;
+  height: 200px !important;
+}
+
+.card-text {
+  text-align: left;
   font-family: "Poppins", sans-serif;
-  font-size: 18px;
-  font-weight: 400;
-  color: #0300A0;
-  max-width: 700px;
- 
-}
-
-
-.interaccion .bi-check-lg {
-  font-size: 28px;
-  color: #28a745; /* Verde */
-  align-items: center;
-}
-
-.interaccion .bi-x {
-  font-size: 28px;
+  font-weight: 600;
+  font-size: 20px;
   color: #e52c6d;
-   align-items: center;
-} 
-
-.interaccion{
-  display: flex;
-  align-items: left;
-  gap: 18px; /* Espacio entre imagen y los íconos */
-  margin-top: 18px;
-  justify-content: flex-start;
 }
 
-#footer{
-    text-align: center;
-      color: #0300A0;
+#paginacion{
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: center;
+  margin-top: 40px; 
 
+}
+
+
+.pagination {
+  background: #f2ea93;
+  border-radius: 30px;
+  padding: 10px 24px;
+  
+  display: inline-flex;
+  justify-content: center;
+  gap: 0;
+}
+
+.pagination li {
+  list-style: none;
+}
+
+.page-item {
+  margin: 0;
+}
+
+.page-link {
+  color: #0300A0;
+  background: transparent;
+
+  border-radius: 0;
   font-family: "Poppins", sans-serif;
   font-size: 20px;
-  font-weight: 400;
-  margin: 20px;
+  font-weight: 500;
+  padding: 8px 18px;
+  margin: 0;
+  
 }
 
 
+.page-link:focus {
+  box-shadow: none;
+  outline: none;
+}
 
+
+/*modal*/
+/* ===== MODAL PUBLICACIÓN ===== */
 
 #modal-publicacion {
   position: fixed;
@@ -370,3 +383,4 @@ min-width: 250px;
   align-items: right;
 
 }
+

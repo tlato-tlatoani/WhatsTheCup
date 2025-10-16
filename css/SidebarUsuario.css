@@ -26,6 +26,11 @@
   
   }
 
+  a{
+    text-decoration: none !important;
+}
+
+
   .sidebar h1 {
   font-family: "Poppins", sans-serif;
   font-weight: 600;
@@ -47,4 +52,10 @@
   font-weight: 500;
   font-size: 18px;
   display: block;
+  cursor: pointer;
+}
+
+button:hover {
+    background-color: #AAE52C; 
+    transform: scale(1.05);
 }

@@ -1,7 +1,9 @@
+
+
 document.addEventListener("DOMContentLoaded", () => {
-  fetch("SidebarUsuario.html")
+  fetch("Header.html")
     .then(response => response.text())
     .then(data => {
-      document.getElementById("sidebar-container").innerHTML = data;
+      document.body.insertAdjacentHTML("afterbegin", data);
     });
 });
