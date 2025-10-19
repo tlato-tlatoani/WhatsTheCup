@@ -47,8 +47,8 @@ min-width: 250px;
 
 #titulo {
   display: flex;
-  align-items: center;      /* Centra verticalmente */
-  gap: 18px;                /* Espacio entre título y autor/fecha */
+  align-items: center;      
+  gap: 18px;                
 }
 
 #titulo h1 {

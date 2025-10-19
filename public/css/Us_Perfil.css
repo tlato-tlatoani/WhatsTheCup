@@ -1,0 +1,132 @@
+body {
+  margin: 20px;
+  padding:5px;
+  background: linear-gradient(300deg,#aadfad,#f2ea93) !important;
+  background-size: 400% 400%;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+a{
+  text-decoration: none !important;
+}
+
+
+#foto-de-perfil{
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+
+
+#saludo {
+  font-family: "Fugaz One", cursive;
+  color: #0300A0;
+  display: flex;
+  gap:10px;
+}
+
+#saludo h1:first-child {
+  color: #0300A0; /* azul fuerte */
+}
+
+#saludo h1:last-child {
+  color: #e52c6d; /* fucsia */
+}
+
+#div-genero, #div-fecha, #div-pais, #div-correo ,#div-contra, #div-nacionalidad{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  
+}
+
+#saludo, #form-perfil{
+  display: block; 
+
+}
+
+.preview p{
+    font-family: "Poppins", sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: #0300A0;
+    margin: 0;
+    max-width: 700px;
+    text-align: justify;
+}
+
+
+.publicacion{
+  width: 100%;
+  max-width: 1115px;
+  margin: 10px auto;
+  padding: 25px;
+  border: 1px solid #ddd;
+  background-color: #ffffff33;
+  box-shadow: 0 2px 8px 0 #6464642b;
+  border-radius: 20px;
+  display: flex;
+  gap: 15px;
+
+}
+
+.imagen-post{
+  margin: 0 auto;
+  width: 320px;
+  height: 160px;
+  border-radius: 20px;
+
+}
+
+.titulo{
+    font-family: "Fugaz One", sans-serif;
+    font-weight: 400;
+    font-size: 30px;
+    color: #e52c6d;
+    margin: 0;
+}
+
+.infografia{ 
+     font-family: "Poppins", sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: #E52C6D;
+    margin: 0;
+    max-width: 700px;
+    text-align: justify;
+}
+
+.interaccion{
+  display: flex;
+  align-items: left;
+  gap: 18px; /* Espacio entre imagen y los íconos */
+  margin-top: 18px;
+  justify-content: flex-start;
+
+  font-family: "Poppins", sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: #0300A0;
+    margin: 0;
+    max-width: 700px;
+    text-align: justify;
+}
+
+
+.bi-heart-fill, .bi-chat-right-text {
+  font-size: 28px;
+  color: #e52c6d;
+} 
+
+#header-perfil{
+  width: 100%;
+  max-width: 1115px;
+  margin: 10px auto;
+  padding: 25px;
+  display: flex;
+  gap: 15px;
+}
+

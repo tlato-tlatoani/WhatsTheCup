@@ -11,18 +11,6 @@ document.addEventListener("DOMContentLoaded", () => {
       const container = document.getElementById("sidebar-container");
       container.innerHTML = html;
 
-      // Ahora que el sidebar está en el DOM, enlazamos el botón
-      const btnCrear = document.getElementById("AgregarMundial");
-      if (btnCrear) {
-        btnCrear.addEventListener('click', () => {
-          // Llama a la función que abre el modal. Debe existir en scope global.
-          if (typeof abrirModal === 'function') {
-            abrirModal();
-          } else {
-            console.warn('abrirModal no está definida');
-          }
-        });
-      }
     })
     .catch(err => console.error('Error cargando sidebar:', err));
 });
