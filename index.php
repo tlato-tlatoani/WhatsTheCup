@@ -1,0 +1,71 @@
+<?php
+// 1. DEFINIR LA RAÍZ DEL PROYECTO
+// Esta constante nos permite incluir archivos de forma segura fuera de 'public/'
+define('PROJECT_ROOT', dirname(__DIR__)); 
+
+// Definir la URL base si la necesitas para los assets (CSS/JS)
+define('BASE_URL', '/WhatsTheCup/public/'); 
+
+
+// ====================================================================
+// A. MANEJADOR DE PETICIONES POST (Lógica: Recibir formulario)
+// ====================================================================
+
+// Verificamos si la solicitud es un envío de formulario (POST)
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    
+    // Si la acción es el registro, cargamos el script de procesamiento
+    if (isset($_POST['btn_registrar'])) {
+        // Incluimos el script que contiene tu lógica de registro (Controller)
+        require_once PROJECT_ROOT . '/app/controllers/registro_usuario.php';
+        
+        // **IMPORTANTE:** El controlador registro.php debe terminar con una redirección (header("Location: ..."))
+        // Si no se produce la redirección, el script se detiene aquí.
+        exit(); 
+    }
+    
+    // Aquí se agregarían otras lógicas de POST (Ej: if (isset($_POST['btn_login'])) { ... })
+}
+
+
+// ====================================================================
+// B. MANEJADOR DE PETICIONES GET (Lógica: Mostrar vistas)
+// ====================================================================
+
+// 1. Determinar la ruta solicitada por el usuario (usando un parámetro GET simple)
+// Ejemplo de URL: http://localhost/WhatsTheCup/public/index.php?route=registro
+$route = $_GET['route'] ?? 'landing'; // Valor por defecto: 'landing' (para Us-Landing.php)
+
+
+// 2. Mapear la ruta a un archivo de vista específico
+switch ($route) {
+    case 'landing':
+        $view_path = PROJECT_ROOT . '/app/views/user-views/Us-Landing.php';
+        break;
+    case 'registro':
+        $view_path = PROJECT_ROOT . '/app/views/user-views/Us-CrearCuenta.php';
+        break;
+    case 'iniciarsesion':
+        $view_path = PROJECT_ROOT . '/app/views/user-views/Us-IniciarSesion.php';
+        break;
+    
+    // Aquí se agregan todas las demás vistas que quieras mostrar (perfil, post, etc.)
+
+    default:
+        // Si la ruta no está definida, mostramos un error 404
+        header("HTTP/1.0 404 Not Found");
+        $view_path = PROJECT_ROOT . '/app/views/error-views/404.php'; // Crea tu vista 404
+        break;
+}
+
+// 3. Cargar la Vista
+if (file_exists($view_path)) {
+    // La vista se encarga de incluir sus propios Header/Sidebar.
+    require_once $view_path;
+} else {
+    // Esto solo ocurre si la ruta estaba definida, pero el archivo falta.
+    header("HTTP/1.0 500 Internal Server Error");
+    echo "<h1>Error 500</h1><p>El archivo de vista para la ruta '{$route}' no se encontró.</p>";
+}
+
+?>
