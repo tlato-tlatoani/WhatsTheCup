@@ -32,33 +32,36 @@
         </div>
 
         <!-- Formulario -->
-        <form>
+        <form action="/WhatsTheCup/public/index.php" method="POST">
           <label>
-            <input type="text" placeholder="Nombre(s)" required>
+            <input type="text" name="NOMBRES" placeholder="Nombre(s)" required>
           </label>
           <label>
-            <input type="text" placeholder="Apellido(s)" required>
+            <input type="text" name="APELLIDO_P" placeholder="Apellido(s)" required>
           </label>
           <label>
-            <input type="email" placeholder="Correo electrónico" required>
+            <input type="text" name="APELLIDO_M" placeholder="Apellido(s)" required>
           </label>
           <label>
-            <input type="password" placeholder="Contraseña" required>
+            <input type="email" name="CORREO" placeholder="Correo electrónico" required>
+          </label>
+          <label>
+            <input type="password" name="CONTRASENNA" placeholder="Contraseña" required>
           </label>
           <label>
             Fecha de nacimiento
-            <input type="date" required>
+            <input type="date" name="NACIMIENTO" required>
           </label>
 
           <!-- Género -->
           <div class="genero">
             <label class="radio-custom">
-              <input type="radio" name="genero" value="Femenino" required>
+              <input type="radio" name="GENERO" value="Femenino" required>
               <span class="check"></span>
               Femenino
             </label>
             <label class="radio-custom">
-              <input type="radio" name="genero" value="Masculino" required>
+              <input type="radio" name="GENERO" value="Masculino" required>
               <span class="check"></span>
               Masculino
             </label>
@@ -66,18 +69,20 @@
 
 
           <label class="full">
-            <input type="text" placeholder="País de nacimiento" required>
+            <input type="text" name="PAIS_ORIGEN" placeholder="País de nacimiento" required>
           </label>
 
             <label class="full">
-            <input type="text" placeholder="Nacionalidad" required>
+            <input type="text" name="NACIONALIDAD" placeholder="Nacionalidad" required>
           </label>
 
           <!-- Botón enviar -->
           <div class="btn">
-            <button type="submit" class="btn-text">REGISTRARSE</button>
+            <button type="submit" name="btn_registrar" class="btn-text">REGISTRARSE</button>
           </div>
         </form>
+
+
       </div>
     </div>
   </div>
