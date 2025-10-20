@@ -1,11 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
-  fetch("SidebarUsuario.html")
+  fetch("/WhatsTheCup/app/views/SidebarUsuario.php")
     .then(response => response.text())
-    .then(html => {
-      const container = document.getElementById("sidebar-container");
-      container.innerHTML = html;
-
-    })
-    .catch(err => console.error('Error cargando sidebar:', err));
+    .then(data => {
+      document.getElementById("sidebar-container").innerHTML = data;
+    });
 });
 

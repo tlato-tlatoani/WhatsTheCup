@@ -6,10 +6,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap" rel="stylesheet">
 
   <title>Categorías - What's The Cup</title>
-  <link rel="stylesheet" href="css/categorias.css">
-  <link rel="stylesheet" href="css/fuentes.css">
-  <link rel="stylesheet" href="css/Header.css">
-  <link rel="stylesheet" href="css/SidebarAdmin.css">
+  <link rel="stylesheet" href="/WhatsTheCup/public/css/Ad_Categorias.css">
+    <link rel="stylesheet" href="/WhatsTheCup/public/css/SidebarAdmin.css">
+    <link rel="stylesheet" href="/WhatsTheCup/public/css/Header.css">
+    <link rel="stylesheet" href="/WhatsTheCup/public/css/Fuentes.css">
 </head>
 
 <body>
@@ -48,7 +48,9 @@
   </main>
 
 
-  <script src="js/Header.js"></script>
-  <script src="js/categorias.js"></script>
+
+
+<script src="/WhatsTheCup/public/js/Header.js"></script>
+<script src="/WhatsTheCup/public/js/Categorias.js"></script>
 </body>
 </html>

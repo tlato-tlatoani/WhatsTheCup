@@ -130,3 +130,49 @@ a{
   gap: 15px;
 }
 
+#paginacion{
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: center;
+  margin-top: 40px; 
+
+}
+
+
+.pagination {
+  background: #f2ea93;
+  border-radius: 30px;
+  padding: 10px 24px;
+  
+  display: inline-flex;
+  justify-content: center;
+  gap: 0;
+}
+
+.pagination li {
+  list-style: none;
+}
+
+.page-item {
+  margin: 0;
+}
+
+.page-link {
+  color: #0300A0;
+  background: transparent;
+
+  border-radius: 0;
+  font-family: "Poppins", sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  padding: 8px 18px;
+  margin: 0;
+  
+}
+
+
+.page-link:focus {
+  box-shadow: none;
+  outline: none;
+}
+

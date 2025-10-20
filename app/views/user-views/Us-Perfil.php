@@ -3,15 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <title>Pantalla Perfil</title>
-  <link href="https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/perfil.css">
-   <link rel="stylesheet" href="css/Header.css">
-    <link rel="stylesheet" href="css/fuentes.css">
+  <link rel="stylesheet" href="/WhatsTheCup/public/css/Us_Perfil.css">
+  <link rel="stylesheet" href="/WhatsTheCup/public/css/Header.css">
+  <link rel="stylesheet" href="/WhatsTheCup/public/css/Fuentes.css">
 </head>
 <body>
   
   <div id="header-perfil">
-    <img id="foto-de-perfil" src="imagenes/CHAE.jpg" alt="Foto de perfil">
+    <img id="foto-de-perfil" src="/WhatsTheCup/public/imagenes/FDP.png" alt="Foto de perfil">
     <div id="saludo">
       <h1>HOLA,</h1>
       <h1>NOMBRE DE USUARIO</h1>
@@ -60,13 +59,13 @@
         <button id="btn-guardar" style="display:none;" onclick="guardar()" type="submit">Guardar</button>
     </form>
     
-        <a href="inicio.html"><button id="btn-cerrar">Cerrar sesión</button></a>
+        <a href="/WhatsTheCup/app/views/user-views/Us-Busqueda.php"><button id="btn-cerrar">Cerrar sesión</button></a>
   </div>
 
     </div>
   
 
-  <a href="Publicacion.html">
+  <a href="/WhatsTheCup/app/views/user-views/Us-Post.php">
     <div class="publicacion">
         
 
@@ -80,7 +79,7 @@
                 
 
         <div class="interaccion">
-            <img src="imagenes/FDP.png" class="imagen-post">
+            <img src="/WhatsTheCup/public/imagenes/FDP.png" class="imagen-post">
             <h2> <i class="bi bi-heart-fill"></i> 10</h2>
             <h2> <i class="bi bi-chat-right-text"></i> 5</h2>
         </div>
@@ -88,7 +87,7 @@
     </div>
     </a>
 
-    <a href="Publicacion.html">
+    <a href="/WhatsTheCup/app/views/user-views/Us-Post.php">
     <div class="publicacion">
         
 
@@ -102,7 +101,7 @@
                 
 
         <div class="interaccion">
-            <img src="imagenes/FDP.png" class="imagen-post">
+            <img src="/WhatsTheCup/public/imagenes/FDP.png" class="imagen-post">
             <h2> <i class="bi bi-heart-fill"></i> 10</h2>
             <h2> <i class="bi bi-chat-right-text"></i> 5</h2>
         </div>
@@ -110,7 +109,7 @@
     </div>
     </a>
 
-    <a href="Publicacion.html">
+    <a href="/WhatsTheCup/app/views/user-views/Us-Post.php">
     <div class="publicacion">
         
 
@@ -124,7 +123,7 @@
                 
 
         <div class="interaccion">
-            <img src="imagenes/FDP.png" class="imagen-post">
+            <img src="/WhatsTheCup/public/imagenes/FDP.png" class="imagen-post">
             <h2> <i class="bi bi-heart-fill"></i> 10</h2>
             <h2> <i class="bi bi-chat-right-text"></i> 5</h2>
         </div>
@@ -156,6 +155,7 @@
   </ul>
  </nav>
 
-  <script src="js/Header.js"></script>
+
+<script src="/WhatsTheCup/public/js/Header.js"></script>
 </body>
 </html>

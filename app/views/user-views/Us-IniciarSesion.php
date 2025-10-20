@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/WhatsTheCup/public/css/Fuentes.css">
+  <link rel="stylesheet" href="/WhatsTheCup/public/css/Us_IniciarSesion.css">
 
   <title>Sign In - WHATS THE CUP</title>
-  <link rel="stylesheet" href="css/sign-in.css">
+
 </head>
 <body>
   <div class="main-container">
@@ -28,7 +29,7 @@
           
           <p><a href="#">¿Olvidaste tu contraseña?</a></p>
           <p class="register-text">¿No tienes una cuenta?</p>
-          <p><a href="inicio.html" class="register-link">REGÍSTRATE</a></p>
+          <p><a href="/WhatsTheCup/app/views/user-views/Us-CrearCuenta.php" class="register-link">REGÍSTRATE</a></p>
         </form>
       </div>
     </div>

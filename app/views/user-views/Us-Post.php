@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/SidebarUsuario.css">
-     <link rel="stylesheet" href="css/Publicacion.css">
-      <link rel="stylesheet" href="css/Header.css">
-    <link rel="stylesheet" href="css/fuentes.css">
+    <link rel="stylesheet" href="/WhatsTheCup/public/css/SidebarUsuario.css">
+    <link rel="stylesheet" href="/WhatsTheCup/public/css/Us_Post.css">
+    <link rel="stylesheet" href="/WhatsTheCup/public/css/Header.css">
+    <link rel="stylesheet" href="/WhatsTheCup/public/css/Fuentes.css">
     <title>Whats The Cup</title>
 </head>
 <body>
@@ -54,12 +54,12 @@
 
     <div id="comentarios">
     <div id="escribir-comentario">
-        <img src="imagenes/FDP.png" class="foto-comentario">
+        <img src="/WhatsTheCup/public/imagenes/FDP.png" class="foto-comentario">
         <input type="text" placeholder="Añade un comentario...">
     </div>
     
    <div class="comentario">
-  <img src="imagenes/FDP.png" class="foto-comentario">
+  <img src="/WhatsTheCup/public/imagenes/FDP.png" class="foto-comentario">
   <div class="comentario-contenido">
     <h3>Usuario X</h3>
     <p class="comentario-usuario">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec volutpat justo. Vestibulum at ante at dolor lacinia sollicitudin. In condimentum laoreet orci luctus tristique.</p>
@@ -67,7 +67,7 @@
 </div>
 
 <div class="comentario">
-  <img src="imagenes/FDP.png" class="foto-comentario">
+  <img src="/WhatsTheCup/public/imagenes/FDP.png" class="foto-comentario">
   <div class="comentario-contenido">
     <h3>Usuario X</h3>
     <p class="comentario-usuario">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec volutpat justo. Vestibulum at ante at dolor lacinia sollicitudin. In condimentum laoreet orci luctus tristique.</p>
@@ -83,8 +83,8 @@
 
 <h1 id="footer"> Whats The Cup. Todos los derechos reservados </h1>
     
-<script src="js/Header.js"></script>
-<script src="js/Publicacion.js"></script>
+<script src="/WhatsTheCup/public/js/Header.js"></script>
+<script src="/WhatsTheCup/public/js/Us_Post.js"></script>
 
 </body>
 </html>

@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/SidebarAdmin.css">
-    <link rel="stylesheet" href="css/Header.css">
-    <link rel="stylesheet" href="css/publicacion-admin.css">
-    <link rel="stylesheet" href="css/fuentes.css">
+  <link rel="stylesheet" href="/WhatsTheCup/public/css/Ad_Post.css">
+    <link rel="stylesheet" href="/WhatsTheCup/public/css/SidebarAdmin.css">
+    <link rel="stylesheet" href="/WhatsTheCup/public/css/Header.css">
+    <link rel="stylesheet" href="/WhatsTheCup/public/css/Fuentes.css">
     <title>Whats The Cup</title>
 </head>
 <body>
@@ -87,9 +87,9 @@
 </div>
 
 <h1 id="footer"> Whats The Cup. Todos los derechos reservados </h1>
-    
-<script src="js/Header.js"></script>
-<script src="js/publicacion-admin.js"></script>
+ 
+<script src="/WhatsTheCup/public/js/Header.js"></script>
+<script src="/WhatsTheCup/public/js/Ad_Post.js"></script>
 
 </body>
 </html>

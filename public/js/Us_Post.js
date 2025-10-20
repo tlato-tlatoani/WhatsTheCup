@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  fetch("SidebarUsuario.html")
+  fetch("/WhatsTheCup/app/views/SidebarUsuario.php")
     .then(response => response.text())
     .then(data => {
       document.getElementById("sidebar-container").innerHTML = data;

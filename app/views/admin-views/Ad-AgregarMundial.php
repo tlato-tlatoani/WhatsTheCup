@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/agregar-mundial.css">
-    <link rel="stylesheet" href="css/SidebarAdmin.css">
-     <link rel="stylesheet" href="css/Header.css">
-    <link rel="stylesheet" href="css/fuentes.css">
+  <link rel="stylesheet" href="/WhatsTheCup/public/css/Ad_AgregarMundial.css">
+    <link rel="stylesheet" href="/WhatsTheCup/public/css/SidebarAdmin.css">
+    <link rel="stylesheet" href="/WhatsTheCup/public/css/Header.css">
+    <link rel="stylesheet" href="/WhatsTheCup/public/css/Fuentes.css">
     <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify"></script>
     <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.polyfills.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" />
@@ -45,7 +45,7 @@
     </button>
 
 
-    <img src="imagenes/FDP.png" class="imagen-mundial">
+    <img src="/WhatsTheCup/public/imagenes/FDP.png" class="imagen-mundial">
   </div>
 
   <div class="label-input descripcion">
@@ -89,7 +89,7 @@
      <button type="button" class="multimedia" onclick="document.getElementById('archivo-copa').click()">
      <i class="bi bi-image"></i>
     </button>
-    <img src="imagenes/FDP.png" class="imagen-mundial">
+    <img src="/WhatsTheCup/public/imagenes/FDP.png" class="imagen-mundial">
   </div>
 
   
@@ -99,7 +99,7 @@
     <button type="button" class="multimedia" onclick="document.getElementById('archivo-mascota').click()">
      <i class="bi bi-image"></i>
     </button>
-    <img src="imagenes/FDP.png" class="imagen-mundial">
+    <img src="/WhatsTheCup/public/imagenes/FDP.png" class="imagen-mundial">
   </div>
 
 
@@ -117,10 +117,10 @@
 <h1 id="footer"> Whats The Cup. Todos los derechos reservados </h1>
     
 
-<script src="js/SidebarAdmin.js"></script>
-<script src="js/Header.js"></script>
-<script src="js/agregar-mundial.js"></script>
+  
 
+<script src="/WhatsTheCup/public/js/Header.js"></script>
+<script src="/WhatsTheCup/public/js/Ad_AgregarMundial.js"></script>
 
 </body>
 </html>

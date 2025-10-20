@@ -5,7 +5,7 @@ var input = document.querySelector('input[name=basic]');
 new Tagify(input)
 
 document.addEventListener("DOMContentLoaded", () => {
-  fetch("SidebarAdmin.html")
+  fetch("/WhatsTheCup/app/views/SidebarAdmin.php")
     .then(response => response.text())
     .then(html => {
       const container = document.getElementById("sidebar-container");

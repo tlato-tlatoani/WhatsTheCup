@@ -1,17 +1,17 @@
 <div class="sidebar">
-  <img src="imagenes/FDP.png" class="foto-perfil" alt="Foto de perfil">
+  <img src="/WhatsTheCup/public/imagenes/FDP.png" class="foto-perfil" alt="Foto de perfil">
   <h1>Admin</h1>
 
 
-  <a href="Publicaciones-admin.html">
+  <a href="/WhatsTheCup/app/views/admin-views/Ad-AprobarPosts.php">
     <button>Publicaciones</button>
   </a>
 
-  <a href="categorias.html"> 
+  <a href="/WhatsTheCup/app/views/admin-views/Ad-Categorias.php"> 
     <button>Categorías</button> 
   </a>
 
-  <a href="agregar-mundial.html">
+  <a href="/WhatsTheCup/app/views/admin-views/Ad-AgregarMundial.php">
   <button id="AgregarMundial">Agregar mundial</button>
   </a>
   

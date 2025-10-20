@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/Infografia.css">
-    <link rel="stylesheet" href="css/SidebarUsuario.css">
-     <link rel="stylesheet" href="css/Header.css">
-    <link rel="stylesheet" href="css/fuentes.css">
+    <link rel="stylesheet" href="/WhatsTheCup/public/css/Us_Infografia.css">
+    <link rel="stylesheet" href="/WhatsTheCup/public/css/SidebarUsuario.css">
+    <link rel="stylesheet" href="/WhatsTheCup/public/css/Header.css">
+    <link rel="stylesheet" href="/WhatsTheCup/public/css/Fuentes.css">
     <title>Whats The Cup</title>
 </head>
 <body>
@@ -21,7 +21,7 @@
             </div>
    
             <div id="header-intro">
-                <img src="imagenes/FDP.png" class="imagen-post">
+                <img src="/WhatsTheCup/public/imagenes/FDP.png" class="imagen-post">
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec volutpat justo. 
                 Vestibulum at ante at dolor lacinia sollicitudin.In condimentum laoreet orci luctus tristique. 
                 Aliquam erat volutpat. Pellentesque sed ipsum aliquam, feugiat erat et, aliquet eros. </p>
@@ -32,7 +32,7 @@
 
 <div id="publicaciones">
 
-    <a href="Publicacion.html">
+    <a href="/WhatsTheCup/app/views/user-views/Us-Post.php">
     <div class="publicacion">
         
 
@@ -45,7 +45,7 @@
                 
 
         <div class="interaccion">
-            <img src="imagenes/FDP.png" class="imagen-post">
+            <img src="/WhatsTheCup/public/imagenes/FDP.png" class="imagen-post">
             <h2> <i class="bi bi-heart-fill"></i> 10</h2>
             <h2> <i class="bi bi-chat-right-text"></i> 5</h2>
         </div>
@@ -53,7 +53,7 @@
     </div>
     </a>
 
-    <a href="Publicacion.html">
+    <a href="/WhatsTheCup/app/views/user-views/Us-Post.php">
     <div class="publicacion">
         
 
@@ -66,7 +66,7 @@
                 
 
         <div class="interaccion">
-            <img src="imagenes/FDP.png" class="imagen-post">
+            <img src="/WhatsTheCup/app/views/user-views/Us-Post.php" class="imagen-post">
             <h2> <i class="bi bi-heart-fill"></i> 10</h2>
             <h2> <i class="bi bi-chat-right-text"></i> 5</h2>
         </div>
@@ -74,7 +74,7 @@
     </div>
     </a>
 
-    <a href="Publicacion.html">
+    <a href="/WhatsTheCup/app/views/user-views/Us-Post.php">
     <div class="publicacion">
         
 
@@ -87,7 +87,7 @@
                 
 
         <div class="interaccion">
-            <img src="imagenes/FDP.png" class="imagen-post">
+            <img src="/WhatsTheCup/public/imagenes/FDP.png" class="imagen-post">
             <h2> <i class="bi bi-heart-fill"></i> 10</h2>
             <h2> <i class="bi bi-chat-right-text"></i> 5</h2>
         </div>
@@ -138,8 +138,8 @@
   </div>
 </div>
 
-<script src="js/Header.js"></script>
-<script src="js/Infografia.js"></script>
+<script src="/WhatsTheCup/public/js/Header.js"></script>
+<script src="/WhatsTheCup/public/js/Us_Infografia.js"></script>
 
 </body>
 </html>

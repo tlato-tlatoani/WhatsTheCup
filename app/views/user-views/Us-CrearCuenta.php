@@ -5,8 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Crear Cuenta - What's The Cup</title>
-  <link href="https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/estilo.css">
+ <link rel="stylesheet" href="/WhatsTheCup/public/css/Fuentes.css">
+ <link rel="stylesheet" href="/WhatsTheCup/public/css/Us_CrearCuenta.css">
 </head>
 
 <body>
@@ -67,6 +67,10 @@
 
           <label class="full">
             <input type="text" placeholder="País de nacimiento" required>
+          </label>
+
+            <label class="full">
+            <input type="text" placeholder="Nacionalidad" required>
           </label>
 
           <!-- Botón enviar -->

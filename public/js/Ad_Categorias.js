@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  fetch("SidebarAdmin.html")
+  fetch("/WhatsTheCup/app/views/SidebarAdmin.php")
     .then(response => response.text())
     .then(html => {
       const container = document.getElementById("sidebar-container");
