@@ -24,15 +24,17 @@
       <div class="form-box">
         <h2 class="titulo2">CREAR CUENTA</h2>
 
+
+        <!-- Formulario -->
+        <form action="/WhatsTheCup/index.php" method="POST" enctype="multipart/form-data">
+          
         <!-- Subir foto -->
         <div class="upload">
           <div class="circle"></div>
-          <input type="file" id="file" style="display:none;">
+          <input type="file" id="file" name="IMAGEN_PERFIL" style="display:none;">
           <button type="button" onclick="document.getElementById('file').click()">Subir foto</button>
         </div>
 
-        <!-- Formulario -->
-        <form action="/WhatsTheCup/public/index.php" method="POST">
           <label>
             <input type="text" name="NOMBRES" placeholder="Nombre(s)" required>
           </label>

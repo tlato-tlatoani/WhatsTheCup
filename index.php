@@ -5,7 +5,7 @@
 define('PROJECT_ROOT', __DIR__);
 
 // Opcional: Definir la URL base si la necesitas para los assets (CSS/JS)
-define('BASE_URL', '/WhatsTheCup/public/'); 
+define('BASE_URL', '/WhatsTheCup/'); 
 
 
 // ====================================================================
@@ -37,24 +37,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // Ejemplo de URL: http://localhost/WhatsTheCup/public/index.php?route=registro
 $route = $_GET['route'] ?? 'landing'; // Valor por defecto: 'landing' (para Us-Landing.php)
 
-$base_app = dirname(PROJECT_ROOT) . '/app/views/user-views/';
 
+// 2. Mapear la ruta a un archivo de vista específico
 switch ($route) {
     case 'landing':
-        $view_path = $base_app . 'Us-Landing.php';
+        $view_path = PROJECT_ROOT . '/app/views/user-views/Us-Landing.php';
         break;
     case 'registro':
-        $view_path = $base_app . 'Us-CrearCuenta.php';
+        $view_path = PROJECT_ROOT . '/app/views/user-views/Us-CrearCuenta.php';
         break;
     case 'iniciarsesion':
-        $view_path = $base_app . 'Us-IniciarSesion.php';
+        $view_path = PROJECT_ROOT . '/app/views/user-views/Us-IniciarSesion.php';
         break;
     default:
         header("HTTP/1.0 404 Not Found");
-        $view_path = dirname(PROJECT_ROOT) . '/app/views/error-views/404.php';
+        $view_path = PROJECT_ROOT . '/app/views/error-views/404.php';
         break;
 }
-
 
 // 3. Cargar la Vista
 if (file_exists($view_path)) {
