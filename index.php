@@ -1,9 +1,10 @@
 <?php
 // 1. DEFINIR LA RAÍZ DEL PROYECTO
 // Esta constante nos permite incluir archivos de forma segura fuera de 'public/'
-define('PROJECT_ROOT', dirname(__DIR__)); 
+// (Ej: app/controllers, Conexion.php)
+define('PROJECT_ROOT', __DIR__);
 
-// Definir la URL base si la necesitas para los assets (CSS/JS)
+// Opcional: Definir la URL base si la necesitas para los assets (CSS/JS)
 define('BASE_URL', '/WhatsTheCup/public/'); 
 
 
@@ -36,27 +37,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // Ejemplo de URL: http://localhost/WhatsTheCup/public/index.php?route=registro
 $route = $_GET['route'] ?? 'landing'; // Valor por defecto: 'landing' (para Us-Landing.php)
 
+$base_app = dirname(PROJECT_ROOT) . '/app/views/user-views/';
 
-// 2. Mapear la ruta a un archivo de vista específico
 switch ($route) {
     case 'landing':
-        $view_path = PROJECT_ROOT . '/app/views/user-views/Us-Landing.php';
+        $view_path = $base_app . 'Us-Landing.php';
         break;
     case 'registro':
-        $view_path = PROJECT_ROOT . '/app/views/user-views/Us-CrearCuenta.php';
+        $view_path = $base_app . 'Us-CrearCuenta.php';
         break;
     case 'iniciarsesion':
-        $view_path = PROJECT_ROOT . '/app/views/user-views/Us-IniciarSesion.php';
+        $view_path = $base_app . 'Us-IniciarSesion.php';
         break;
-    
-    // Aquí se agregan todas las demás vistas que quieras mostrar (perfil, post, etc.)
-
     default:
-        // Si la ruta no está definida, mostramos un error 404
         header("HTTP/1.0 404 Not Found");
-        $view_path = PROJECT_ROOT . '/app/views/error-views/404.php'; // Crea tu vista 404
+        $view_path = dirname(PROJECT_ROOT) . '/app/views/error-views/404.php';
         break;
 }
+
 
 // 3. Cargar la Vista
 if (file_exists($view_path)) {
