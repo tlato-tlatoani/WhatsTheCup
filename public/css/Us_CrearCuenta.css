@@ -1,7 +1,7 @@
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
-    color: white;
+    font-family: poppins, sans-serif;
+    color: #f2ea93;
     background: #000;
 }
 
@@ -39,6 +39,18 @@ a{
     text-decoration: none !important;
 }
 
+#label-nacimiento {
+    padding:5px;
+    font-family: poppins, sans-serif;
+    font-size: 12px;
+    color: #f2ea93;
+}
+
+#nombres-div {
+
+ align-content:center;
+ 
+}
 
 .subtitulo {
     font-family: 'Fugaz One', cursive;
@@ -97,12 +109,14 @@ a{
 }
 
 .upload button {
-    background: #fff;
+    background: #f2ea93;
     border: none;
     padding: 6px 12px;
     border-radius: 20px;
     cursor: pointer;
+    font-family: Poppins, sans-serif;
     font-weight: bold;
+    color: #0300A0;
 }
 
 /* Inputs */
@@ -159,19 +173,18 @@ form input:focus {
 }
 
 .btn-text {
-    font-family: 'Fugaz One', cursive;
-    font-size: 0.9rem;
-    color: #482ce5;
-    font-weight: bold;
-    background: #AAE52C;
-    border: none;
-    padding: 15px 30px;
-    border-radius: 15px;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: 0.3s;
+  background: linear-gradient(180deg,#AAE52C,#AADFAD);
+  border: none;
+  border-radius: 40px;
+  padding: 12px 30px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #0300a0;
+  cursor: pointer;
+  align-self: center;
+  transition: all 0.2s ease;
+  justify-self: center;
+
 }
 
 .btn-text:hover {
@@ -211,7 +224,7 @@ form input:focus {
     align-items: center;
     gap: 5px;
     cursor: pointer;
-    color: white;
+    color: #f2ea93;
 }
 
 .radio-custom {

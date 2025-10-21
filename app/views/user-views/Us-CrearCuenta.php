@@ -1,3 +1,14 @@
+<?php
+// Al inicio de /app/views/user-views/Us-CrearCuenta.php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+$errores = $_SESSION['errores_registro'] ?? [];
+$datos = $_SESSION['datos_registro'] ?? [];
+unset($_SESSION['errores_registro']); // Limpia los errores después de leerlos
+unset($_SESSION['datos_registro']);   // Limpia los datos después de leerlos
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -30,19 +41,22 @@
           
         <!-- Subir foto -->
         <div class="upload">
-          <div class="circle"></div>
+          <div class="circle" id="profilePicCircle"></div>
           <input type="file" id="file" name="IMAGEN_PERFIL" style="display:none;">
           <button type="button" onclick="document.getElementById('file').click()">Subir foto</button>
         </div>
 
+        <div id="nombres-div">
+            <label id="label-nombres">
+                <input type="text" name="NOMBRES" placeholder="Nombre(s)" required>
+            </label>
+      </div>
+          
           <label>
-            <input type="text" name="NOMBRES" placeholder="Nombre(s)" required>
+            <input type="text" name="APELLIDO_P" placeholder="Apellido Paterno" required>
           </label>
           <label>
-            <input type="text" name="APELLIDO_P" placeholder="Apellido(s)" required>
-          </label>
-          <label>
-            <input type="text" name="APELLIDO_M" placeholder="Apellido(s)" required>
+            <input type="text" name="APELLIDO_M" placeholder="Apellido Materno" required>
           </label>
           <label>
             <input type="email" name="CORREO" placeholder="Correo electrónico" required>
@@ -50,10 +64,16 @@
           <label>
             <input type="password" name="CONTRASENNA" placeholder="Contraseña" required>
           </label>
-          <label>
+          <?php if (isset($errores['contrasenna'])): ?>
+              <p class="error-message"><?php echo htmlspecialchars($errores['contrasenna']); ?></p>
+          <?php endif; ?>
+          <label id="label-nacimiento">
             Fecha de nacimiento
             <input type="date" name="NACIMIENTO" required>
           </label>
+          <?php if (isset($errores['nacimiento'])): ?>
+            <p class="error-message"><?php echo htmlspecialchars($errores['nacimiento']); ?></p>
+          <?php endif; ?>
 
           <!-- Género -->
           <div class="genero">
@@ -88,6 +108,8 @@
       </div>
     </div>
   </div>
+
+<script src="/WhatsTheCup/public/js/Us_CrearCuenta.js"></script> 
 </body>
 
 </html>
