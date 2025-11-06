@@ -18,14 +18,14 @@
     <div class="right">
       <div class="card">
         <h2 class="card-title">HOLA DE NUEVO...</h2>
-        <form>
+       <form action="/WhatsTheCup/index.php" method="POST">
           <label for="email">CORREO ELECTRONICO</label>
-          <input type="email" id="email" placeholder="correo@ejemplo.com" required>
+          <input type="email" id="email" name="CORREO" placeholder="correo@ejemplo.com" required>
           
           <label for="password">CONTRASEÑA</label>
-          <input type="password" id="password" placeholder="Contraseña" required>
+          <input type="password" id="password" name="CONTRASENNA" placeholder="Contraseña" required>
           
-          <button type="submit">INICIAR SESION</button>
+          <button type="submit" name="btn_iniciar_sesion">INICIAR SESION</button>
           
           <p><a href="#">¿Olvidaste tu contraseña?</a></p>
           <p class="register-text">¿No tienes una cuenta?</p>
@@ -36,3 +36,11 @@
   </div>
 </body>
 </html>
+
+<!-- <?php
+
+$errores = $_SESSION['errores_login'] ?? [];
+$correo_previo = $_SESSION['datos_login']['CORREO'] ?? '';
+
+unset($_SESSION['errores_login'], $_SESSION['datos_login']);
+?> -->

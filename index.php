@@ -19,14 +19,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['btn_registrar'])) {
         // Incluimos el script que contiene tu lógica de registro (Controller)
         require_once PROJECT_ROOT . '/app/controllers/registro_usuario.php';
-        
-        // **IMPORTANTE:** El controlador registro.php debe terminar con una redirección (header("Location: ..."))
-        // Si no se produce la redirección, el script se detiene aquí.
+   
         exit(); 
     }
     
-    // Aquí se agregarían otras lógicas de POST (Ej: if (isset($_POST['btn_login'])) { ... })
+    if (isset($_POST['btn_iniciar_sesion'])) {
+        require_once PROJECT_ROOT . '/app/controllers/inicio_sesion.php';
+        exit();
+    }
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['btn_actualizar'])) {
+        require_once PROJECT_ROOT . '/app/controllers/actualizar_usuario.php';
+        exit;
+    }
+    }
+
 }
+    // Aquí se agregarían otras lógicas de POST 
 
 
 // ====================================================================
@@ -49,6 +59,15 @@ switch ($route) {
     case 'iniciarsesion':
         $view_path = PROJECT_ROOT . '/app/views/user-views/Us-IniciarSesion.php';
         break;
+    case 'adlanding':
+        $view_path = PROJECT_ROOT . '/app/views/ad-views/Ad-Landing.php';
+        break;
+     case 'perfil':
+        require_once PROJECT_ROOT . '/app/controllers/actualizar_usuario.php';
+        $view_path = PROJECT_ROOT . '/app/views/Us-views/Us-Perfil.php';
+        break;
+
+
     default:
         header("HTTP/1.0 404 Not Found");
         $view_path = PROJECT_ROOT . '/app/views/error-views/404.php';

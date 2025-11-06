@@ -1,5 +1,5 @@
 <?php
-// /app/controllers/registro_usuario.php
+
 // --- Habilitar errores para depuración (¡Solo en desarrollo!) ---
 error_reporting(E_ALL);
 ini_set('display_errors', 1);

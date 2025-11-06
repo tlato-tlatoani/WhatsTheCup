@@ -10,8 +10,7 @@ define('EDAD_MINIMA', 12); // Edad mínima requerida
 
 /**
  * Valida la contraseña según los criterios especificados.
- * Criterios: Mínimo 8 caracteres, al menos una mayúscula, una minúscula, un número y un carácter especial.
- *
+
  * @param string $contrasenna La contraseña a validar.
  * @return array Arreglo asociativo ['valido' => bool, 'mensaje' => string]
  */
@@ -77,59 +76,5 @@ function validarEdad(string $fechaNacimiento, int $edadMinima): array {
     }
 }
 
-// --- Lógica Principal de la API ---
 
-// $respuesta = [
-//     'errores' => [],
-//     'valido' => true
-// ];
-
-// // 1. Verificar el método de la solicitud (solo aceptar POST)
-// if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-//     http_response_code(405); // Método no permitido
-//     $respuesta['valido'] = false;
-//     $respuesta['errores']['metodo'] = 'Método no permitido. Utiliza POST.';
-//     echo json_encode($respuesta);
-//     exit;
-// }
-
-// // 2. Obtener y validar los datos de entrada (asegúrate que los nombres coincidan con los enviados desde el frontend)
-// $contrasenna = $_POST['CONTRASENNA'] ?? null;
-// $fechaNacimiento = $_POST['NACIMIENTO'] ?? null;
-
-// // Validar contraseña
-// if ($contrasenna === null || $contrasenna === '') {
-//     $respuesta['valido'] = false;
-//     $respuesta['errores']['contrasenna'] = 'La contraseña es requerida.';
-// } else {
-//     $validacionPass = validarContrasenna($contrasenna);
-//     if (!$validacionPass['valido']) {
-//         $respuesta['valido'] = false;
-//         $respuesta['errores']['contrasenna'] = $validacionPass['mensaje'];
-//     }
-// }
-
-// // Validar fecha de nacimiento y edad
-// if ($fechaNacimiento === null || $fechaNacimiento === '') {
-//     $respuesta['valido'] = false;
-//     $respuesta['errores']['nacimiento'] = 'La fecha de nacimiento es requerida.';
-// } else {
-//     $validacionEdad = validarEdad($fechaNacimiento, EDAD_MINIMA);
-//     if (!$validacionEdad['valido']) {
-//         $respuesta['valido'] = false;
-//         $respuesta['errores']['nacimiento'] = $validacionEdad['mensaje'];
-//     }
-// }
-
-// // 3. Enviar respuesta JSON
-// if ($respuesta['valido']) {
-//     http_response_code(200); // OK
-//     echo json_encode(['mensaje' => 'Validación exitosa.']);
-// } else {
-//     http_response_code(400); // Bad Request (errores de validación)
-//     echo json_encode($respuesta);
-// }
-
-// exit; // Terminar ejecución
-
-// ?>
+?>
