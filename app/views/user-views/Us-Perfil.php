@@ -1,3 +1,14 @@
+<?php
+
+    if (!defined('BASE_URL')) {
+
+         define('BASE_URL', '/WhatsTheCup/');
+    }
+
+    require_once __DIR__ . '/../../controllers/actualizar_usuario.php'; 
+
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -9,7 +20,8 @@
 </head>
 <body>
   
- <form id="form-perfil" "/WhatsTheCup/index.php" method="POST" enctype="multipart/form-data">
+<form id="form-perfil" action="/WhatsTheCup/index.php" method="POST" enctype="multipart/form-data">
+
   <div id="header-perfil">
 
    <div class="perfil-header">
@@ -23,7 +35,6 @@
     <!-- Saludo / Nombre -->
     <div id="saludo">
         <h1>HOLA,</h1>
-        <?php echo($usuario["NOMBRES"]);?>
         <p id="static-nombre"><?php  echo htmlspecialchars($usuario['NOMBRES']); ?></p>
         <input type="text" name="NOMBRES" id="input-nombre" class="editar" value="<?php echo htmlspecialchars($usuario['NOMBRES']); ?>" style="display:none;" disabled>
     </div>
@@ -40,9 +51,10 @@
 
 <div id="div-fecha">
     <i class="bi bi-cake"></i>
-        <p id="static-fecha"><?php echo date('d/m/Y', strtotime($usuario['NACIMIENTO'] ?? '')); ?></p> 
+        <?php $fecha_db = $usuario['NACIMIENTO'] ?? ''; ?>
+        <p id="static-fecha"><?php echo !empty($fecha_db) ? date('d/m/Y', strtotime($fecha_db)) : 'Fecha no disponible'; ?></p> 
     
-        <input type="date" name="NACIMIENTO" class="editar  value="<?php echo htmlspecialchars($usuario['NACIMIENTO'] ?? ''); ?>" style="display:none;" disabled>
+        <input type="date" name="NACIMIENTO" class="editar" value="<?php echo htmlspecialchars($usuario['NACIMIENTO'] ?? ''); ?>" style="display:none;" disabled>
 </div>
 
 <div id="div-pais">

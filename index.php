@@ -1,11 +1,12 @@
 <?php
 // 1. DEFINIR LA RAÍZ DEL PROYECTO
-// Esta constante nos permite incluir archivos de forma segura fuera de 'public/'
-// (Ej: app/controllers, Conexion.php)
 define('PROJECT_ROOT', __DIR__);
 
-// Opcional: Definir la URL base si la necesitas para los assets (CSS/JS)
 define('BASE_URL', '/WhatsTheCup/'); 
+
+if (session_status() == PHP_SESSION_NONE) {
+    session_start(); 
+}
 
 
 // ====================================================================
@@ -63,8 +64,7 @@ switch ($route) {
         $view_path = PROJECT_ROOT . '/app/views/ad-views/Ad-Landing.php';
         break;
      case 'perfil':
-        require_once PROJECT_ROOT . '/app/controllers/actualizar_usuario.php';
-        $view_path = PROJECT_ROOT . '/app/views/Us-views/Us-Perfil.php';
+        $view_path = PROJECT_ROOT . '/app/views/user-views/Us-Perfil.php';
         break;
 
 
