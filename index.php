@@ -14,14 +14,11 @@ if (session_status() == PHP_SESSION_NONE) {
 // ====================================================================
 
 // Verificamos si la solicitud es un envío de formulario (POST)
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    
-    // Si la acción es el registro, cargamos el script de procesamiento
+if ($_SERVER['REQUEST_METHOD'] === 'POST') 
+{
     if (isset($_POST['btn_registrar'])) {
-        // Incluimos el script que contiene tu lógica de registro (Controller)
         require_once PROJECT_ROOT . '/app/controllers/registro_usuario.php';
-   
-        exit(); 
+        exit();
     }
     
     if (isset($_POST['btn_iniciar_sesion'])) {
@@ -29,14 +26,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['btn_actualizar'])) {
         require_once PROJECT_ROOT . '/app/controllers/actualizar_usuario.php';
-        exit;
-    }
+        exit();
     }
 
+    if (isset($_POST['btn_agregar_mundial'])) {
+        require_once PROJECT_ROOT . '/app/controllers/agregar_mundial.php';
+        exit();
+    }
 }
+
     // Aquí se agregarían otras lógicas de POST 
 
 
@@ -69,7 +69,11 @@ switch ($route) {
     case 'editar_perfil':
         $view_path = PROJECT_ROOT . '/app/views/user-views/Us-editar_perfil.php';
         break;
-  
+        
+  case 'adagregarmundial':
+    $view_path = PROJECT_ROOT . '/app/views/admin-views/Ad-AgregarMundial.php';
+    break;
+
 
 
     default:

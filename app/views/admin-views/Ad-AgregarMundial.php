@@ -1,121 +1,208 @@
+<?php 
+if (!defined('BASE_URL')) {
+    define('BASE_URL', '/WhatsTheCup/');
+}
+?>
+
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+?>
+
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/WhatsTheCup/public/css/Ad_AgregarMundial.css">
-    <link rel="stylesheet" href="/WhatsTheCup/public/css/SidebarAdmin.css">
-    <link rel="stylesheet" href="/WhatsTheCup/public/css/Header.css">
-    <link rel="stylesheet" href="/WhatsTheCup/public/css/Fuentes.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/css/Ad_AgregarMundial.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/css/SidebarAdmin.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/css/Header.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/css/Fuentes.css">
+
+    <!-- Tagify -->
     <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.polyfills.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css" rel="stylesheet"/>
 
     <title>Whats The Cup</title>
 </head>
 <body>
 
 <div id="layout">
-<div id="sidebar-container"></div>
-<div id="pagina-principal">
 
-     <div id="introduccion">
+    <div id="sidebar-container">
+        <?php include dirname(__DIR__) . '/SidebarAdmin.php'; ?>
+    </div>
+
+    <div id="pagina-principal">
+
+        <div id="introduccion">
             <div id="header-titulo">
                 <h1>AGREGAR MUNDIAL</h1>
             </div>
-     </div>
+        </div>
 
+        <!-- ===========================
+             FORMULARIO COMPLETO
+        ============================ -->
+        
+<form id="form-mundial" method="POST" enctype="multipart/form-data"
+      action="<?= BASE_URL ?>index.php?route=adagregarmundial">
 
-   <form id="form-mundial">
-  <div class="label-input mundial">
-    <label>País</label>
-    <input type="text" name="i_pais" class="mundial-titulo">
-  </div>
+            <!-- TÍTULO -->
+            <div class="label-input titulo">
+                <label>Título del Mundial</label>
+                <input type="text" name="i_titulo" class="mundial-titulo" required>
+            </div>
 
-  <div class="label-input anio">
-    <label>Año</label>
-    <input type="text" name="i_anio" class="mundial-titulo">
-  </div>
+            <!-- PAÍS -->
+            <div class="label-input mundial">
+                <label>País Sede</label>
+                <input type="text" name="i_pais" class="mundial-titulo" required>
+            </div>
 
-  <div class="imagen-icono">
-    <label>Agregar ícono</label>
-    <input type="file" name="i_imagen" id="archivo-icono">
-    <button type="button" class="multimedia" onclick="document.getElementById('archivo-icono').click()">
-     <i class="bi bi-image"></i>
-    </button>
+            <!-- AÑO -->
+            <div class="label-input anio">
+                <label>Año</label>
+                <input type="text" name="i_anio" class="mundial-titulo" required>
+            </div>
 
+            <!-- ICONO -->
+            <div class="imagen-icono">
+                <label>Ícono</label>
 
-    <img src="/WhatsTheCup/public/imagenes/FDP.png" class="imagen-mundial">
-  </div>
+                <input type="file" name="i_imagen" id="archivo-icono" accept="image/*" required style="display:none;">
 
-  <div class="label-input descripcion">
-    <label>Descripción</label>
-    <textarea name="i_descripcion" rows="5"></textarea>
-  </div>
+                <button type="button" class="multimedia" onclick="document.getElementById('archivo-icono').click()">
+                    <i class="bi bi-image"></i>
+                </button>
 
-  <div class="label-input campeon">
-    <label>Campeón</label>
-    <input type="text" name="i_campeon">
-  </div>
+                <img src="<?= BASE_URL ?>public/imagenes/FDP.png" class="imagen-mundial" id="preview-icono">
+            </div>
 
-  <div class="label-input marcador">
-    <label>Marcador</label>
-    <input type="text" name="i_marcador">
-  </div>
+            <!-- DESCRIPCIÓN -->
+            <div class="label-input descripcion">
+                <label>Descripción</label>
+                <textarea name="i_descripcion" rows="5" required></textarea>
+            </div>
 
-  <div class="label-input subcampeon">
-    <label>Subcampeón</label>
-    <input type="text" name="i_subcampeon">
-  </div>
+            <!-- DETALLES -->
+            <div class="label-input campeon">
+                <label>Campeón</label>
+                <input type="text" name="i_campeon" required>
+            </div>
 
-  <div class="label-input goleador">
-    <label>Líder de goleo</label>
-    <input type="text" name="i_goleador">
-  </div>
+            <div class="label-input marcador">
+                <label>Marcador</label>
+                <input type="text" name="i_marcador" required>
+            </div>
 
-  <div class="label-input cantante">
-    <label>Cantante</label>
-    <input type="text" name="i_cantante">
-  </div>
+            <div class="label-input subcampeon">
+                <label>Subcampeón</label>
+                <input type="text" name="i_subcampeon" required>
+            </div>
 
-  <div class="label-input equipos">
-    <label>Equipos</label>
-    <input name="basic" value="tag1, tag2">
-  </div>
+            <div class="label-input goleador">
+                <label>Líder de goleo</label>
+                <input type="text" name="i_goleador" required>
+            </div>
 
-  <div class="copa">
-    <label>Copa</label>
-    <input type="file" name="i_copa" id="archivo-copa">
-     <button type="button" class="multimedia" onclick="document.getElementById('archivo-copa').click()">
-     <i class="bi bi-image"></i>
-    </button>
-    <img src="/WhatsTheCup/public/imagenes/FDP.png" class="imagen-mundial">
-  </div>
+            <div class="label-input cantante">
+                <label>Cantante del mundial</label>
+                <input type="text" name="i_cantante" required>
+            </div>
 
-  
-  <div class="mascota">
-    <label>Mascota</label>
-    <input type="file" name="i_mascota" id="archivo-mascota">
-    <button type="button" class="multimedia" onclick="document.getElementById('archivo-mascota').click()">
-     <i class="bi bi-image"></i>
-    </button>
-    <img src="/WhatsTheCup/public/imagenes/FDP.png" class="imagen-mundial">
-  </div>
+            <!-- EQUIPOS (TAGIFY) -->
+            <div class="label-input equipos">
+                <label>Equipos</label>
+                <input id="input-equipos" name="input_equipos">
+            </div>
 
+            <!-- Campo hidden JSON -->
+            <input type="hidden" name="equipos_json" id="equipos_json">
 
-  <button type="submit" id="btn-publicar">Agregar</button>
-</form>
+            <!-- COPA -->
+            <div class="copa">
+                <label>Copa</label>
 
+                <input type="file" name="i_copa" id="archivo-copa" accept="image/*" required style="display:none;">
 
+                <button type="button" class="multimedia" onclick="document.getElementById('archivo-copa').click()">
+                    <i class="bi bi-image"></i>
+                </button>
+
+                <img src="<?= BASE_URL ?>public/imagenes/FDP.png" class="imagen-mundial" id="preview-copa">
+            </div>
+
+            <!-- MASCOTA -->
+            <div class="mascota">
+                <label>Mascota</label>
+
+                <input type="file" name="i_mascota" id="archivo-mascota" accept="image/*" required style="display:none;">
+
+                <button type="button" class="multimedia" onclick="document.getElementById('archivo-mascota').click()">
+                    <i class="bi bi-image"></i>
+                </button>
+
+                <img src="<?= BASE_URL ?>public/imagenes/FDP.png" class="imagen-mundial" id="preview-mascota">
+            </div>
+
+            <!-- BOTÓN -->
+<button type="submit" id="btn-publicar" name="btn_agregar_mundial">
+    Agregar Mundial
+</button>
+
+        </form>
+
+        <!-- ===========================
+             SCRIPTS
+        ============================ -->
+
+        <!-- TAGIFY -->
+        <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const equiposInput = document.getElementById("input-equipos");
+            const tagify = new Tagify(equiposInput);
+
+            document.getElementById("form-mundial").addEventListener("submit", function() {
+                const listaEquipos = tagify.value.map(tag => tag.value);
+                document.getElementById("equipos_json").value = JSON.stringify(listaEquipos);
+            });
+
+        });
+        </script>
+
+        <!-- PREVIEW DE IMÁGENES -->
+        <script>
+        function previewFile(input, imgElementId) {
+            input.addEventListener("change", () => {
+                const file = input.files[0];
+                if (file) {
+                    document.getElementById(imgElementId).src = URL.createObjectURL(file);
+                }
+            });
+        }
+
+        previewFile(document.getElementById('archivo-icono'), 'preview-icono');
+        previewFile(document.getElementById('archivo-copa'), 'preview-copa');
+        previewFile(document.getElementById('archivo-mascota'), 'preview-mascota');
+        </script>
+
+    </div>
 </div>
 
-</div>
-</div>
+<h1 id="footer">Whats The Cup. Todos los derechos reservados</h1>
 
-<h1 id="footer"> Whats The Cup. Todos los derechos reservados </h1>
-    
-<script src="/WhatsTheCup/public/js/Header.js"></script>
-<script src="/WhatsTheCup/public/js/Ad_AgregarMundial.js"></script>
+<script>
+    const BASE_URL = "<?= BASE_URL ?>";
+</script>
+
+<script src="<?= BASE_URL ?>public/js/Header.js"></script>
+<script src="<?= BASE_URL ?>public/js/SidebarAdmin.js"></script>
 
 </body>
 </html>
