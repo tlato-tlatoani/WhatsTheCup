@@ -271,3 +271,37 @@ form input:focus {
 }
 
 
+/* Contenedor principal del input de correo para establecer la posición relativa */
+.input-group-correo {
+    position: relative; /* Es clave para que la lista de sugerencias se posicione absolutamente */
+    margin-bottom: 20px; /* Ajusta el espacio para que no choque con el siguiente campo */
+}
+
+/* Estilos para el contenedor de sugerencias */
+.suggestions-box {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: absolute; /* Permite que la caja flote sobre otros elementos */
+    top: 100%; /* La posiciona justo debajo del input */
+    left: 0;
+    right: 0;
+    z-index: 10; /* Asegura que esté sobre otros elementos del formulario */
+    background-color: white;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-height: 150px;
+    overflow-y: auto;
+    border-top: none; /* Mejor estética */
+}
+
+.suggestions-box li {
+    padding: 8px 15px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #333;
+}
+
+.suggestions-box li:hover {
+    background-color: #f0f0f0;
+}

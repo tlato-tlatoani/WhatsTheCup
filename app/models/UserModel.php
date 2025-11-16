@@ -58,7 +58,7 @@ class UserModel {
             
             if ($ejecucionExitosa) {
                 // Si la ejecución fue exitosa, retornar TRUE
-                return true; 
+                return $pdo->lastInsertId();
             } else {
                 // Si execute() devuelve false, capturamos la información de error.
                 return ['errorInfo' => $stmt->errorInfo()];
@@ -171,4 +171,56 @@ class UserModel {
             return "Error de BD: " . $e->getMessage();
         }
     }
+
+    
+    public function consultarCorreoExistente(string $correo): bool|array {
+        $sql = "SELECT COUNT(ID_USUARIO) FROM USUARIO WHERE CORREO = ?"; 
+        
+        try {
+            $pdo = $this->db->getConnection();
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([$correo]);
+            
+            $count = $stmt->fetchColumn(); // Obtiene el valor de COUNT()
+            $stmt->closeCursor();
+
+            return ($count > 0); // Retorna TRUE si el conteo es mayor a 0 (existe)
+            
+        } catch (PDOException $e) {
+            error_log('Error PDO en UserModel::consultarCorreoExistente: ' . $e->getMessage()); 
+            // Retorna array para indicar un fallo grave de BD
+            return ['errorInfo' => ['PDOException', $e->getCode(), $e->getMessage()]];
+        }
+    }
+
+    
+public function buscarUsuarioOAuth(string $googleId, string $correo): ?array {
+    $sql = "CALL sp_buscar_usuario_oauth(?, ?)";
+
+    try {
+        $pdo = $this->db->getConnection();
+        $stmt = $pdo->prepare($sql);
+        
+        // Pasa GOOGLE_ID y CORREO al SP
+        $stmt->execute([$googleId, $correo]);
+        
+        $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+        $stmt->closeCursor();
+
+        return $usuario ?: null;
+
+    } catch (PDOException $e) {
+        error_log("Error de BD en buscarUsuarioOAuth: " . $e->getMessage());
+        return null;
+    }
 }
+
+public function asociarGoogleId($id_usuario, $google_id) {
+    $query = $this->db->prepare("CALL sp_asociar_google_id(?, ?)");
+    $query->execute([$id_usuario, $google_id]);
+}
+
+}
+
+
+

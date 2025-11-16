@@ -67,8 +67,30 @@ if (isset($_POST['btn_registrar'])) {
     
     $datosRegistro['NACIONALIDAD'] = htmlspecialchars($_POST['NACIONALIDAD'] ?? '');
     $datosRegistro['PAIS_ORIGEN'] = htmlspecialchars($_POST['PAIS_ORIGEN'] ?? '');
-    $datosRegistro['CORREO'] = filter_var($_POST['CORREO'] ?? '', FILTER_SANITIZE_EMAIL);
 
+    $userModel = new UserModel();
+    $correo_limpio = filter_var($_POST['CORREO'] ?? '', FILTER_SANITIZE_EMAIL);
+    $datosRegistro['CORREO'] = $correo_limpio;
+
+    // --- NUEVA VALIDACIÓN DE CORREO EXISTENTE ---
+    if (empty($correo_limpio) || !filter_var($correo_limpio, FILTER_VALIDATE_EMAIL)) {
+        $esValido = false;
+        $erroresValidacion['correo'] = 'El correo electrónico no es válido.';
+    } else {
+        $validacionCorreo = $userModel->consultarCorreoExistente($correo_limpio);
+
+        if (is_array($validacionCorreo)) {
+        // Error grave de BD
+        $esValido = false;
+        $erroresValidacion['general'] = 'Error al verificar la existencia del correo en la base de datos.';
+
+        } elseif ($validacionCorreo === true) {
+         // Correo ya existe
+         $esValido = false;
+        $erroresValidacion['correo'] = 'Este correo electrónico ya está registrado.';
+        }
+
+    }
 
     $imagen_perfil_blob = NULL;
     if (isset($_FILES['IMAGEN_PERFIL']) && $_FILES['IMAGEN_PERFIL']['error'] === UPLOAD_ERR_OK) {
@@ -100,7 +122,7 @@ if (isset($_POST['btn_registrar'])) {
 
 
     
-    $userModel = new UserModel(); 
+    //$userModel = new UserModel(); 
 
    $resultadoRegistro = $userModel->registrarUsuario($datosRegistro);
 

@@ -44,9 +44,9 @@ function validarContrasenna(string $contrasenna): array {
     }
 
     // 5. Validar al menos un carácter especial (puedes ajustar el grupo [!@#$%^&*()-_=+{};:,<.>/?] según necesites)
-    if (!preg_match('/[!@#$%^&*()\-=_+{};:,<.>\/?]/', $contrasenna)) {
-        $mensajeError .= 'La contraseña debe contener al menos un carácter especial (ej: !@#$%). ';
-        $esValida = false;
+    if (!preg_match('/[!@#$%^&*()\-=_+{};:,<.>\/?☺☻♥♦♣♠•◘○|¬°]/u', $contrasenna)){
+         $mensajeError .= 'La contraseña debe contener al menos un carácter especial (ej: !@#$% o ♥). ';
+         $esValida = false;
     }
 
     return ['valido' => $esValida, 'mensaje' => trim($mensajeError)];

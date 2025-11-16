@@ -1,13 +1,34 @@
 <?php
-// Al inicio de /app/views/user-views/Us-CrearCuenta.php
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
+
+// =================================================================
+// ZONA A: INICIALIZACIÓN DE GOOGLE OAUTH
+// =================================================================
+// Carga la librería de Composer (necesaria para la clase Google_Client)
+require_once PROJECT_ROOT . '/vendor/autoload.php';
+
+// Reemplaza con tus CREDENCIALES
+define('GOOGLE_CLIENT_ID', '442951345014-535grmggqi08tpjgvts530p408j9f0rb.apps.googleusercontent.com');
+define('GOOGLE_CLIENT_SECRET', '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');
+define('GOOGLE_REDIRECT_URI', 'http://localhost/WhatsTheCup/index.php?route=google-callback');
+
+$client = new Google_Client();
+$client->setClientId(GOOGLE_CLIENT_ID);
+$client->setClientSecret(GOOGLE_CLIENT_SECRET);
+$client->setRedirectUri(GOOGLE_REDIRECT_URI);
+$client->addScope('email');
+$client->addScope('profile'); // Para obtener el nombre y apellido
+
+// Genera la URL a la que el botón debe apuntar
+$google_login_url = $client->createAuthUrl();
+// =================================================================
+
 $errores = $_SESSION['errores_registro'] ?? [];
 $datos = $_SESSION['datos_registro'] ?? [];
-unset($_SESSION['errores_registro']); // Limpia los errores después de leerlos
-unset($_SESSION['datos_registro']);   // Limpia los datos después de leerlos
 ?>
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -35,7 +56,6 @@ unset($_SESSION['datos_registro']);   // Limpia los datos después de leerlos
       <div class="form-box">
         <h2 class="titulo2">CREAR CUENTA</h2>
 
-
         <!-- Formulario -->
         <form action="/WhatsTheCup/index.php" method="POST" enctype="multipart/form-data">
           
@@ -58,9 +78,15 @@ unset($_SESSION['datos_registro']);   // Limpia los datos después de leerlos
           <label>
             <input type="text" name="APELLIDO_M" placeholder="Apellido Materno" required>
           </label>
-          <label>
-            <input type="email" name="CORREO" placeholder="Correo electrónico" required>
-          </label>
+
+          <div id="mails" class="input-group-correo"> 
+            <label>
+                   <input type="email" name="CORREO" id="CORREO" placeholder="Correo electrónico" required autocomplete="off">
+            </label>
+           <ul id="suggestions" class="suggestions-box" style="display:none;"> </ul>
+
+          </div>
+
           <label>
             <input type="password" name="CONTRASENNA" placeholder="Contraseña" required>
           </label>
@@ -89,14 +115,21 @@ unset($_SESSION['datos_registro']);   // Limpia los datos después de leerlos
             </label>
           </div>
 
+    <div id="country-origin-group" class="input-group-correo">
+       <label class="full">
+         <input type="text" name="PAIS_ORIGEN" id="countryInput" placeholder="País de nacimiento" required autocomplete="off">
+      </label>
+      <ul id="countrySuggestions" class="suggestions-box" style="display:none;"></ul>
+    </div>
 
-          <label class="full">
-            <input type="text" name="PAIS_ORIGEN" placeholder="País de nacimiento" required>
-          </label>
 
-            <label class="full">
-            <input type="text" name="NACIONALIDAD" placeholder="Nacionalidad" required>
-          </label>
+    <div id="nation-origin-group" class="input-group-correo">
+      <label class="full">
+         <input type="text" name="NACIONALIDAD" id="nationInput" placeholder="Nacionalidad" required autocomplete="off">
+      </label>
+      <ul id="nationSuggestions" class="suggestions-box" style="display:none;"></ul>
+   </div>
+
 
           <!-- Botón enviar -->
           <div class="btn">
@@ -104,12 +137,41 @@ unset($_SESSION['datos_registro']);   // Limpia los datos después de leerlos
           </div>
         </form>
 
+           <a href="<?php echo htmlspecialchars($google_login_url); ?>" class="btn-google">
+                    <!-- Icono de Google. Asumo que tienes una imagen SVG o PNG en esta ruta -->
+                    <img src="/WhatsTheCup/public/img/google-icon.svg" alt="Google Icon" class="google-icon"> 
+                    Registrarse con Google
+                </a>
 
       </div>
     </div>
   </div>
 
 <script src="/WhatsTheCup/public/js/Us_CrearCuenta.js"></script> 
+<script src="/WhatsTheCup/public/js/Lista_Paises.js"></script> 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </body>
+
+
+<?php if (isset($errores['correo'])): ?>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    Swal.fire({
+        icon: "error",
+        title: "Correo en uso",
+        text: "<?php echo $errores['correo']; ?>",
+        confirmButtonText: "Entendido"
+    });
+});
+</script>
+<?php endif; ?>
+
+<?php 
+// Ahora sí podemos limpiar
+unset($_SESSION['errores_registro']);
+unset($_SESSION['datos_registro']);
+?>
+
 
 </html>

@@ -84,18 +84,86 @@ END$$
 
 DELIMITER ;
 
+DELIMITER $$
 
-SELECT * FROM USUARIO;
-CALL sp_actualizar_usuario(
-    1,                         -- ID_USUARIO
-    'Narayani',                -- NOMBRES
-    'Cabrera',                 -- APELLIDO_P
-    'Ramirez',                 -- APELLIDO_M (changed)
-    '2004-02-10',              -- NACIMIENTO
-    'F',                       -- GENERO
-    'Mexicana',                -- NACIONALIDAD
-    'México',                  -- PAIS_ORIGEN
-    'narayani.cabrera@newmail.com',  -- CORREO (changed)
-    'nuevaClave456',            -- CONTRASENNA (changed)
-    null
-);
+CREATE PROCEDURE sp_consultar_usuarios (
+    IN p_ID_USUARIO INT
+)
+BEGIN
+    IF p_ID_USUARIO IS NULL THEN
+        --  Consulta todos los usuarios
+        SELECT 
+            ID_USUARIO,
+            NOMBRES,
+            APELLIDO_P,
+            APELLIDO_M,
+            NACIMIENTO,
+            GENERO,
+            NACIONALIDAD,
+            PAIS_ORIGEN,
+            CORREO,
+            IMAGEN_PERFIL,
+            TIPO_USUARIO
+        FROM usuario;
+    ELSE
+        --  Consulta un usuario específico
+        SELECT 
+            ID_USUARIO,
+            NOMBRES,
+            APELLIDO_P,
+            APELLIDO_M,
+            NACIMIENTO,
+            GENERO,
+            NACIONALIDAD,
+            PAIS_ORIGEN,
+            CORREO,
+            IMAGEN_PERFIL,
+            TIPO_USUARIO
+        FROM usuario
+        WHERE ID_USUARIO = p_ID_USUARIO;
+    END IF;
+END $$
+
+DELIMITER ;
+
+USE WTC;
+DELIMITER $$
+CREATE PROCEDURE sp_iniciar_sesion(
+    IN p_CORREO VARCHAR(30),
+    IN p_CONTRASENNA VARCHAR(30) 
+)
+BEGIN
+    SELECT 
+        ID_USUARIO, 
+        NOMBRES, CONTRASENNA	
+        CORREO, 
+        TIPO_USUARIO 
+    FROM 
+        USUARIO
+    WHERE 
+        CORREO = p_CORREO AND CONTRASENNA = p_CONTRASENNA;
+
+END$$
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS sp_asociar_google_id;
+DELIMITER $$
+
+CREATE PROCEDURE sp_asociar_google_id (
+    IN p_ID_USUARIO INT,
+    IN p_GOOGLE_ID VARCHAR(255)
+)
+BEGIN
+    -- Evitar asignar Google ID si ya está en uso por otro usuario
+    IF EXISTS (SELECT 1 FROM USUARIO WHERE GOOGLE_ID = p_GOOGLE_ID) THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'El GOOGLE_ID ya está asociado a otro usuario.';
+    END IF;
+
+    -- Actualizar el usuario objetivo
+    UPDATE USUARIO
+    SET GOOGLE_ID = p_GOOGLE_ID
+    WHERE ID_USUARIO = p_ID_USUARIO;
+END$$
+
+DELIMITER ;

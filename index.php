@@ -57,6 +57,13 @@ switch ($route) {
     case 'registro':
         $view_path = PROJECT_ROOT . '/app/views/user-views/Us-CrearCuenta.php';
         break;
+
+
+    case 'google-callback':
+        require PROJECT_ROOT . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'controllers' . DIRECTORY_SEPARATOR . 'api' . DIRECTORY_SEPARATOR . 'Google_Controller.php';
+        // Si el controlador no redirige, la ejecución seguirá al 'default' (404).
+        exit;
+
     case 'iniciarsesion':
         $view_path = PROJECT_ROOT . '/app/views/user-views/Us-IniciarSesion.php';
         break;

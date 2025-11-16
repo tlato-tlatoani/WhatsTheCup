@@ -1,0 +1,135 @@
+/* Fondo degradado */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #ff7e5f, #ff758c);
+    font-family: 'Fugaz One', cursive;
+    color: #241b53;
+
+}
+
+/* Top bar */
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: rgba(255, 255, 255, 0.486);
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #6A5AC2;
+}
+
+.search-bar {
+    flex-grow: 1;
+    margin-left: 20px;
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 36px;
+    border: 1px solid #ec4f4f77;
+    background-color: #ec4f4f77;
+}
+
+/* Main layout */
+.main-container {
+    display: flex;
+    gap: 20px;
+    padding: 20px 30px;
+}
+
+/* Profile card */
+.profile-card {
+    background-color: #ffffff7a;
+    border-radius: 12px;
+    padding: 20px;
+    width: 270px;
+    flex-shrink: 0;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.profile-card h3 {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+/* Foto circular */
+.profile-pic-circle {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 15px auto;
+    border-radius: 50%;
+    background-color: #e0e0e0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.profile-pic {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Botones principales */
+.profile-card .buttons button,
+.extra-buttons button,
+.filter-section button {
+    display: block;
+    width: 100%;
+    padding: 10px 0;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 36px;
+    cursor: pointer;
+    background-color: #A193F2;
+    color: #0300A0;
+    transition: background-color 0.3s, transform 0.2s;
+    font-family: 'Fugaz One', cursive;
+
+}
+
+/* Hover */
+.profile-card .buttons button:hover,
+.extra-buttons button:hover,
+.filter-section button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+/* Filtro por fechas */
+.filter-section {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.filter-section h4 {
+    margin: 0 0 10px 0;
+    font-size: 16px;
+}
+
+.filter-section label {
+    display: block;
+    font-size: 14px;
+    margin: 5px 0 3px;
+}
+
+.filter-section input {
+    width: 80%;
+    padding: 6px 8px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+/* Sección derecha vacía */
+.content-section {
+    flex-grow: 1;
+    background-color: rgba(255,255,255,0.3);
+    border-radius: 12px;
+    min-height: 400px;
+    padding: 20px;
+}
