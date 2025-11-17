@@ -127,3 +127,28 @@ CREATE TABLE Multimedia (
     tipo_mime VARCHAR(100) NOT NULL,
     contenido LONGBLOB NOT NULL
 );
+
+CREATE TABLE mundial (
+    id INT(11) AUTO_INCREMENT PRIMARY KEY,
+    anio YEAR(4),
+    titulo VARCHAR(100),
+    descripcion TEXT,
+    equipos TEXT,
+    formato TEXT,
+    estadios TEXT,
+    partidos TEXT,
+    estadisticas TEXT,
+    entrevistas TEXT,
+    incidentes TEXT,
+    polemicas TEXT,
+    jugadas TEXT,
+    CreadoAdmin INT(11),
+    ModificadoAdmin INT(11),
+    detalles LONGTEXT,
+    FOREIGN KEY (CreadoAdmin) REFERENCES Usuario(id)
+        ON DELETE SET NULL 
+        ON UPDATE CASCADE,
+    FOREIGN KEY (ModificadoAdmin) REFERENCES Usuario(id)
+        ON DELETE SET NULL
+        ON UPDATE CASCADE
+);
