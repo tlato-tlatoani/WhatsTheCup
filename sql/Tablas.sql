@@ -103,3 +103,20 @@ AFTER CONTRASENNA;
 
 INSERT INTO Multimedia_mundial (multimedia_id, mundial_id, es_copa)
 VALUES (LAST_INSERT_ID(), 6, 1);
+
+CREATE TABLE multimedia_mundial (
+    id INT(11) AUTO_INCREMENT PRIMARY KEY,
+    multimedia_id INT(11) NOT NULL,
+    mundial_id INT(11) NOT NULL,
+    es_banner TINYINT(1) DEFAULT 0,
+    es_copa TINYINT(1) DEFAULT 0,
+    es_mascota TINYINT(1) DEFAULT 0,
+
+    CONSTRAINT fk_mm_multimedia 
+        FOREIGN KEY (multimedia_id) REFERENCES Multimedia(id)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+
+    CONSTRAINT fk_mm_mundial 
+        FOREIGN KEY (mundial_id) REFERENCES Mundial(id)
+        ON DELETE CASCADE ON UPDATE CASCADE
+);
