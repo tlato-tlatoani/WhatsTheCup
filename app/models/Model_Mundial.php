@@ -83,6 +83,8 @@ public function obtenerMundiales()
     return $result;
 }
 
+
+
 public function obtenerTodosLosMundiales() 
 {
 
@@ -108,12 +110,7 @@ public function obtenerTodosLosMundiales()
         return $data;
     }
 
-public function listarMundiales() {
-    $stmt = $this->conn->query("CALL sp_listar_mundiales()");
-    $mundiales = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    $stmt->closeCursor();
-    return $mundiales;
-}
+
 
 
 }

@@ -367,3 +367,73 @@ a{
 
 }
 
+/* === CONTENEDOR DEL FORMULARIO DE FILTROS === */
+.filtros-container {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    background: #ffffffdd;
+    backdrop-filter: blur(4px);
+    border: 1px solid #ddd;
+    padding: 12px 18px;
+    border-radius: 10px;
+    margin: 20px 0;
+    box-shadow: 0 4px 10px #00000015;
+}
+
+/* === INPUT DE TEXTO === */
+.filtros-container input[type="text"] {
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+    width: 220px;
+    transition: 0.2s ease-in-out;
+}
+
+.filtros-container input[type="text"]:focus {
+    border-color: #e52c6d;
+    box-shadow: 0 0 4px #e52c6d80;
+}
+
+/* === SELECT === */
+.filtros-container select {
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.filtros-container select:hover {
+    border-color: #e52c6d;
+}
+
+/* === BOTONES === */
+.btn-filtrar,
+.btn-limpiar {
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 15px;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-filtrar {
+    background-color: #e52c6d;
+    color: white;
+}
+
+.btn-filtrar:hover {
+    background-color: #c3245c;
+}
+
+.btn-limpiar {
+    background-color: #ddd;
+}
+
+.btn-limpiar:hover {
+    background-color: #c7c7c7;
+}
