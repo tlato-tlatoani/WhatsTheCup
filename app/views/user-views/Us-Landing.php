@@ -1,149 +1,76 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <link rel="stylesheet" href="/WhatsTheCup/public/css/Us_Landing.css">
-    
-    <link rel="stylesheet" href="/WhatsTheCup/public/css/SidebarUsuario.css">
-    <link rel="stylesheet" href="/WhatsTheCup/public/css/Header.css">
-    <link rel="stylesheet" href="/WhatsTheCup/public/css/Fuentes.css">
-    
-    <title>Whats The Cup</title>
-</head>
-<body id="gradient">
+<?php
+if (!defined('BASE_URL')) {
+    define('BASE_URL', '/WhatsTheCup/');
+}
 
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+require_once dirname(__DIR__, 3) . '/app/models/Model_Mundial.php';
+
+$model = new Model_Mundial();
+$mundiales = $model->obtenerTodosLosMundiales();
+
+//$listaMundiales = $model->obtenerMundiales();
+// $listaMundiales es un array con todos los registros
+?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap" rel="stylesheet">
+  <title>Dashboard - What's The Cup</title>
+
+  <link rel="stylesheet" href="<?= BASE_URL ?>public/css/Us_Landing.css">
+  <link rel="stylesheet" href="<?= BASE_URL ?>public/css/SidebarUsuario.css">
+  <link rel="stylesheet" href="<?= BASE_URL ?>public/css/Header.css">
+  <link rel="stylesheet" href="<?= BASE_URL ?>public/css/Fuentes.css">
+</head>
+<body>
 
 <div id="layout">
-<div id="sidebar-container">
-    <?php include __DIR__ . '/../SidebarUsuario.php'; ?>
-</div>
+   <div id="sidebar-container"></div>
 
   <div id="pagina-principal">
 
     <div id="header-mundiales">
       <h1>LISTA DE MUNDIALES</h1>
-      <select placeholder="Filtrar por">
 
+      <select>
         <option>Más reciente</option>
-        <option> Más antiguo</option>
-        <option> Más popular</option>
-
+        <option>Más antiguo</option>
+        <option>Más popular</option>
       </select>
-
     </div>
 
     <div id="mundiales">
-      <a href="/WhatsTheCup/app/views/user-views/Us-Infografia.php">
-        <div class="card" style="width: 18rem;">
-          <img src="/WhatsTheCup/public/imagenes/FDP.png" class="card-img-top" alt="...">
-          <div class="card-body">
-            <p class="card-text">Norteamérica 2026</p>
-          </div>
-       </div>
-      </a>
 
-      <a href="/WhatsTheCup/app/views/user-views/Us-Infografia.php">
-        <div class="card" style="width: 18rem;">
-          <img src="/WhatsTheCup/public/imagenes/FDP.png" class="card-img-top" alt="...">
-          <div class="card-body">
-            <p class="card-text">Norteamérica 2026</p>
-          </div>
-       </div>
-      </a>
+     <?php foreach ($mundiales as $m): ?>
+<a href="<?= BASE_URL ?>index.php?route=usinfografia&id=<?= $m['id'] ?>">
+    <div class="card" style="width: 18rem;">
+    
+        <img 
+            src="data:<?= $m['banner_mime'] ?>;base64,<?= $m['banner_base64'] ?>"
+            class="card-img-top"
+        />
 
-      <a href="/WhatsTheCup/app/views/user-views/Us-Infografia.php">
-        <div class="card" style="width: 18rem;">
-          <img src="/WhatsTheCup/public/imagenes/FDP.png" class="card-img-top" alt="...">
-          <div class="card-body">
-            <p class="card-text">Norteamérica 2026</p>
-          </div>
-       </div>
-      </a>
+        <div class="card-body">
+            <p class="card-text"><?= $m['titulo'] ?> (<?= $m['anio'] ?>)</p>
+        </div>
 
-      <a href="/WhatsTheCup/app/views/user-views/Us-Infografia.php">
-        <div class="card" style="width: 18rem;">
-          <img src="/WhatsTheCup/public/imagenes/FDP.png" class="card-img-top" alt="...">
-          <div class="card-body">
-            <p class="card-text">Norteamérica 2026</p>
-          </div>
-       </div>
-      </a>
-
-      <a href="/WhatsTheCup/app/views/user-views/Us-Infografia.php">
-        <div class="card" style="width: 18rem;">
-          <img src="/WhatsTheCup/public/imagenes/FDP.png" class="card-img-top" alt="...">
-          <div class="card-body">
-            <p class="card-text">Norteamérica 2026</p>
-          </div>
-       </div>
-      </a>
-
-      <a href="/WhatsTheCup/app/views/user-views/Us-Infografia.php">
-        <div class="card" style="width: 18rem;">
-          <img src="/WhatsTheCup/public/imagenes/FDP.png" class="card-img-top" alt="...">
-          <div class="card-body">
-            <p class="card-text">Norteamérica 2026</p>
-          </div>
-       </div>
-      </a>
-
-      <a href="/WhatsTheCup/app/views/user-views/Us-Infografia.php">
-        <div class="card" style="width: 18rem;">
-          <img src="/WhatsTheCup/public/imagenes/FDP.png" class="card-img-top" alt="...">
-          <div class="card-body">
-            <p class="card-text">Norteamérica 2026</p>
-          </div>
-       </div>
-      </a>
-
-      <a href="/WhatsTheCup/app/views/user-views/Us-Infografia.php">
-        <div class="card" style="width: 18rem;">
-          <img src="/WhatsTheCup/public/imagenes/FDP.png" class="card-img-top" alt="...">
-          <div class="card-body">
-            <p class="card-text">Norteamérica 2026</p>
-          </div>
-       </div>
-      </a>
-
-      
-
-      <div id="paginacion">
-      
-        <nav aria-label="Page navigation example">
-          <ul class="pagination">
-            <li class="page-item">
-              <a class="page-link" href="#" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-              </a>
-            </li>
-
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-
-            <li class="page-item">
-              <a class="page-link" href="#" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-              </a>
-            </li>
-          </ul>
-        </nav>
-
-      </div>
-
+    </div>
+</a>
+<?php endforeach; ?>
 
     </div>
 
   </div>
-  
 </div>
-  
-<h1 id="footer"> Whats The Cup. Todos los derechos reservados </h1>
 
-<script src="/WhatsTheCup/public/js/Header.js"></script>
-<script src="/WhatsTheCup/public/js/Us_Landing.js"></script>
+<h1 id="footer">Whats The Cup. Todos los derechos reservados</h1>
 
+<script src="<?= BASE_URL ?>public/js/Header.js"></script>
+<script src="<?= BASE_URL ?>public/js/Us_Landing.js"></script>
 </body>
-</html> 
+</html>

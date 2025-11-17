@@ -22,7 +22,8 @@ class Model_Mundial {
     /**
      * Registrar Mundial usando SP
      */
-    public function registrarMundial($data, $files) {
+    public function registrarMundial($data, $files) 
+    {
 
 
         // Procesar archivos BLOB
@@ -70,4 +71,49 @@ class Model_Mundial {
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         return $row['id_mundial'] ?? null;
     }
+
+public function obtenerMundiales()
+{
+    $stmt = $this->conn->prepare("CALL sp_obtener_mundiales()");
+    $stmt->execute();
+
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $stmt->closeCursor(); // importante para no bloquear siguientes llamadas
+
+    return $result;
+}
+
+public function obtenerTodosLosMundiales() 
+{
+
+        $stmt = $this->conn->query("CALL sp_obtener_mundiales()");
+        $mundiales = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt->closeCursor();
+
+        return $mundiales;
+    }
+
+    /* ============================================
+       ➤ OBTENER UN MUNDIAL POR ID (para infografía)
+       ============================================ */
+    public function obtenerMundialPorId($id) 
+    {
+
+        $stmt = $this->conn->prepare("CALL sp_obtener_mundial_por_id(?)");
+        $stmt->execute([$id]);
+
+        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+        $stmt->closeCursor();
+
+        return $data;
+    }
+
+public function listarMundiales() {
+    $stmt = $this->conn->query("CALL sp_listar_mundiales()");
+    $mundiales = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $stmt->closeCursor();
+    return $mundiales;
+}
+
+
 }

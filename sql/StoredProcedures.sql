@@ -260,3 +260,20 @@ END $$
 DELIMITER ;
 
 ALTER TABLE Mundial ADD COLUMN detalles JSON NULL;
+
+DELIMITER $$
+
+CREATE PROCEDURE sp_obtener_mundiales()
+BEGIN
+    SELECT 
+        id_mundial,
+        titulo,
+        anio,
+        icono_nombre,
+        icono_mime,
+        icono_contenido
+    FROM mundiales
+    ORDER BY id_mundial DESC;
+END $$
+
+DELIMITER ;

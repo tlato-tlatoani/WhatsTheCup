@@ -35,6 +35,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
         require_once PROJECT_ROOT . '/app/controllers/agregar_mundial.php';
         exit();
     }
+
+    if (isset($_POST['btn_agregar_categoria'])) {
+       require_once PROJECT_ROOT . '/app/controllers/agregar_categorias.php';
+       exit();
+    }
+
 }
 
     // Aquí se agregarían otras lógicas de POST 
@@ -70,16 +76,27 @@ switch ($route) {
         $view_path = PROJECT_ROOT . '/app/views/user-views/Us-editar_perfil.php';
         break;
         
-  case 'adagregarmundial':
-    $view_path = PROJECT_ROOT . '/app/views/admin-views/Ad-AgregarMundial.php';
+    case 'adagregarmundial':
+       $view_path = PROJECT_ROOT . '/app/views/admin-views/Ad-AgregarMundial.php';
+       break;
+    case 'usinfografia':
+    $view_path = PROJECT_ROOT . '/app/views/user-views/Us-Infografia.php';
     break;
 
+    case 'adinfografia':
+       $view_path = PROJECT_ROOT . '/app/views/admin-views/Ad-Infografia.php';
+       break;
 
+    case 'adcategorias':
+    $view_path = PROJECT_ROOT . '/app/views/admin-views/Ad-Categorias.php';
+    break;
 
     default:
         header("HTTP/1.0 404 Not Found");
         $view_path = PROJECT_ROOT . '/app/views/error-views/404.php';
         break;
+
+        
 }
 
 // 3. Cargar la Vista
