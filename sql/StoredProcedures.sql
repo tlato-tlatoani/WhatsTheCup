@@ -1,8 +1,5 @@
 DELIMITER $$
 
-DROP PROCEDURE IF EXISTS sp_registrar_usuario;
--- Se elimina la versión antigua del procedimiento antes de crear la nueva.
-
 CREATE PROCEDURE sp_registrar_usuario (
     IN p_NOMBRES VARCHAR(20),
     IN p_APELLIDO_P VARCHAR(20),
@@ -12,7 +9,7 @@ CREATE PROCEDURE sp_registrar_usuario (
     IN p_NACIONALIDAD VARCHAR(20),
     IN p_PAIS_ORIGEN VARCHAR(20),
     IN p_CORREO VARCHAR(30),
-    IN p_CONTRASENNA VARCHAR(30),
+    IN p_CONTRASENNA VARCHAR(70),
     IN p_IMAGEN_PERFIL LONGBLOB
 )
 BEGIN

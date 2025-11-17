@@ -14,16 +14,17 @@ if (session_status() == PHP_SESSION_NONE) {
 require_once PROJECT_ROOT . '/vendor/autoload.php';
 require_once PROJECT_ROOT . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'models' . DIRECTORY_SEPARATOR . 'UserModel.php';
 
+if (!defined('BASE_URL')) {
+    define('BASE_URL', '/WhatsTheCup/'); // Definición usada por index.php
+}
+// Aseguramos que la URL para el header Location sea absoluta
+define('ABSOLUTE_BASE_URL', 'http://localhost' . BASE_URL);
+
 // Reemplaza con tus CREDENCIALES
-define('GOOGLE_CLIENT_ID', 'TU_CLIENT_ID_QUE_TE_DIO_GOOGLE');
-define('GOOGLE_CLIENT_SECRET', 'TU_CLIENT_SECRET_QUE_TE_DIO_GOOGLE');
+define('GOOGLE_CLIENT_ID', '442951345014-535grmggqi08tpjgvts530p408j9f0rb.apps.googleusercontent.com');
+define('GOOGLE_CLIENT_SECRET', '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');
 // La URI DEBE coincidir con la registrada en Google Cloud
 define('GOOGLE_REDIRECT_URI', 'http://localhost/WhatsTheCup/index.php?route=google-callback');
-
-// URL base para redirecciones (Asumiendo que BASE_URL está definida en otro lugar)
-if (!defined('BASE_URL')) {
-    define('BASE_URL', 'http://localhost/WhatsTheCup/'); 
-}
 
 
 $client = new Google_Client();
@@ -34,6 +35,15 @@ $client->setRedirectUri(GOOGLE_REDIRECT_URI);
 
 if (isset($_GET['code'])) {
     
+    // --- LÍNEA DE DEBUG 1: Agrega esto ---
+    //die("CHECKPOINT 1: Código recibido. Valor del código: " . $_GET['code']);
+    // ------------------------------------
+
+    // 2. Intercambiar el código por el token
+    //$client->authenticate($_GET['code']);
+
+
+
     // =============================================================
     // 1. OBTENER DATOS DEL USUARIO DE GOOGLE
     // =============================================================
@@ -42,7 +52,7 @@ if (isset($_GET['code'])) {
         $client->setAccessToken($token);
     } catch (\Exception $e) {
         $_SESSION['error'] = 'Fallo en la comunicación con Google.';
-        header('Location: ' . BASE_URL . 'index.php?route=registro');
+     header('Location: ' . ABSOLUTE_BASE_URL . 'index.php?route=registro');
         exit;
     }
 
@@ -84,9 +94,9 @@ if (isset($_GET['code'])) {
         
         // Redirección basada en el tipo de usuario
         if ($_SESSION['tipo_usuario'] === 'ADMIN') {
-            header("Location: " . BASE_URL . "index.php?route=adlanding");
+          header('Location: ' . ABSOLUTE_BASE_URL . 'index.php?route=adlanding');
         } else {
-            header("Location: " . BASE_URL . "index.php?route=landing");
+           header('Location: ' . ABSOLUTE_BASE_URL . 'index.php?route=landing');
         }
         exit();
 
@@ -144,7 +154,7 @@ if (isset($_GET['code'])) {
         $_SESSION['tipo_usuario'] = 'USUARIO';
 
         $_SESSION['mensaje'] = '¡Registro exitoso con Google!';
-        header('Location: ' . BASE_URL . 'index.php?route=perfil');
+     header('Location: ' . ABSOLUTE_BASE_URL . 'index.php?route=registro');
         exit;
 
     }
@@ -152,6 +162,6 @@ if (isset($_GET['code'])) {
 } else {
     // Si no hay 'code' en la URL, el usuario canceló
     $_SESSION['alerta'] = 'Registro cancelado.';
-    header('Location: ' . BASE_URL . 'index.php?route=registro');
+    header('Location: ' . ABSOLUTE_BASE_URL . 'index.php?route=registro');
     exit;
 }

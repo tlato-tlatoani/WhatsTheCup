@@ -56,14 +56,48 @@ class UserModel {
 
             $ejecucionExitosa = $stmt->execute();
             
-            if ($ejecucionExitosa) {
+        //    if ($ejecucionExitosa) {
                 // Si la ejecución fue exitosa, retornar TRUE
-                return $pdo->lastInsertId();
+        //        return $pdo->lastInsertId();
+      //    } else {
+                // Si execute() devuelve false, capturamos la información de error.
+          //      return ['errorInfo' => $stmt->errorInfo()];
+        //    }
+
+
+            $ejecucionExitosa = $stmt->execute();
+            
+            if ($ejecucionExitosa) {
+                // Cierra el cursor (es obligatorio después de ejecutar un SP)
+                $stmt->closeCursor(); 
+                
+                // --- MODIFICACIÓN CLAVE ---
+                $nuevoId = $pdo->lastInsertId();
+                
+                // Si lastInsertId es 0 o una cadena vacía, retornamos 1
+                // (Opcional, solo si el SP no maneja la inserción directa)
+                if (empty($nuevoId) || !is_numeric($nuevoId)) {
+                   // Si no obtenemos un ID, asumimos que algo salió mal o el SP es complejo. 
+                   // En este caso, lo mejor es devolver un error o 0.
+                   return 0; 
+                }
+                
+                return $nuevoId; // Retorna el ID numérico
+                // --------------------------
             } else {
                 // Si execute() devuelve false, capturamos la información de error.
+                $stmt->closeCursor(); // Asegura el cierre del cursor
                 return ['errorInfo' => $stmt->errorInfo()];
             }
 
+
+
+
+
+
+
+
+            
         } catch (PDOException $e) {
             // Manejo de excepción de PDO (ej. error de conexión)
             error_log('Error PDO en UserModel: ' . $e->getMessage()); 
@@ -215,9 +249,17 @@ public function buscarUsuarioOAuth(string $googleId, string $correo): ?array {
     }
 }
 
+
 public function asociarGoogleId($id_usuario, $google_id) {
-    $query = $this->db->prepare("CALL sp_asociar_google_id(?, ?)");
+    // 1. Obtener la conexión PDO real
+    $pdo = $this->db->getConnection(); 
+
+    // 2. Usar prepare() sobre el objeto PDO
+    $query = $pdo->prepare("CALL sp_asociar_google_id(?, ?)"); 
     $query->execute([$id_usuario, $google_id]);
+    
+    // Opcional: Cerrar cursor
+    $query->closeCursor();
 }
 
 }
