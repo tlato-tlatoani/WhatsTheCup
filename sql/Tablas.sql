@@ -120,3 +120,10 @@ CREATE TABLE multimedia_mundial (
         FOREIGN KEY (mundial_id) REFERENCES Mundial(id)
         ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+CREATE TABLE Multimedia (
+    id INT(11) AUTO_INCREMENT PRIMARY KEY,
+    nombre_archivo VARCHAR(255) NOT NULL,
+    tipo_mime VARCHAR(100) NOT NULL,
+    contenido LONGBLOB NOT NULL
+);
