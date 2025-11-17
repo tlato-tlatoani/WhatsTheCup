@@ -100,143 +100,191 @@ CALL sp_actualizar_usuario(
     null
 );
 
-DELIMITER $$
-
-CREATE PROCEDURE sp_registrar_mundial (
+CREATE PROCEDURE sp_registrar_mundial(
     IN p_anio YEAR,
     IN p_titulo VARCHAR(100),
     IN p_descripcion TEXT,
-    IN p_equipos_texto VARCHAR(255),
+    IN p_equipos TEXT,
     IN p_detalles JSON,
     IN p_sedes JSON,
 
-    -- Icono
-    IN p_icono_nombre   VARCHAR(255),
-    IN p_icono_mime     VARCHAR(100),
-    IN p_icono_contenido LONGBLOB,
+    IN p_banner_nombre VARCHAR(255),
+    IN p_banner_mime VARCHAR(100),
+    IN p_banner_contenido LONGBLOB,
 
-    -- Copa
-    IN p_copa_nombre    VARCHAR(255),
-    IN p_copa_mime      VARCHAR(100),
+    IN p_copa_nombre VARCHAR(255),
+    IN p_copa_mime VARCHAR(100),
     IN p_copa_contenido LONGBLOB,
 
-    -- Mascota
-    IN p_mascota_nombre    VARCHAR(255),
-    IN p_mascota_mime      VARCHAR(100),
+    IN p_mascota_nombre VARCHAR(255),
+    IN p_mascota_mime VARCHAR(100),
     IN p_mascota_contenido LONGBLOB,
 
-    IN p_creadoAdmin INT
+    IN p_admin INT
 )
 BEGIN
-    DECLARE v_mundial_id INT;
-    DECLARE v_pais_id INT;
-
+    DECLARE nuevo_id INT;
     DECLARE i INT DEFAULT 0;
-    DECLARE j INT DEFAULT 0;
+    DECLARE sede_nombre VARCHAR(100);
+    DECLARE sede_id INT;
 
-    DECLARE sedes_count INT;
-    DECLARE v_nombre_pais VARCHAR(100);
+    -- Insertar Mundial
+    INSERT INTO Mundial(anio, titulo, descripcion, equipos, detalles, CreadoAdmin)
+    VALUES(p_anio, p_titulo, p_descripcion, p_equipos, p_detalles, p_admin);
 
-    DECLARE equipo VARCHAR(100);
-    DECLARE equipos_json JSON DEFAULT JSON_ARRAY();
+    SET nuevo_id = LAST_INSERT_ID();
 
-    DECLARE equipos_cursor CURSOR FOR 
-        SELECT TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(p_equipos_texto, ',', n.n), ',', -1))
-        FROM (
-            SELECT 1 n UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION
-            SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10
-        ) n
-        WHERE n.n <= (LENGTH(p_equipos_texto) - LENGTH(REPLACE(p_equipos_texto, ',', '')) + 1);
 
-    DECLARE CONTINUE HANDLER FOR NOT FOUND SET i = 9999;
+ INSERT INTO Multimedia(nombre_archivo, tipo_mime, contenido)
+    VALUES(p_banner_nombre, p_banner_mime, p_banner_contenido);
 
-    START TRANSACTION;
+    INSERT INTO Multimedia_mundial(multimedia_id, mundial_id, es_banner, es_copa, es_mascota)
+    VALUES(LAST_INSERT_ID(), nuevo_id, 1, 0, 0);
 
-    -- Insertar en MUNDIAL
-    INSERT INTO Mundial (anio, titulo, descripcion, equipos, detalles, CreadoAdmin)
-    VALUES (p_anio, p_titulo, p_descripcion, p_equipos_texto, p_detalles, p_creadoAdmin);
+    -- Insertar Copa
+    INSERT INTO Multimedia(nombre_archivo, tipo_mime, contenido)
+    VALUES(p_copa_nombre, p_copa_mime, p_copa_contenido);
 
-    SET v_mundial_id = LAST_INSERT_ID();
+    INSERT INTO Multimedia_mundial(multimedia_id, mundial_id, es_banner, es_copa, es_mascota)
+    VALUES(LAST_INSERT_ID(), nuevo_id, 0, 1, 0);
 
-    -- Procesar lista de equipos
-    SET i = 0;
-    OPEN equipos_cursor;
+    -- Insertar Mascota
+    INSERT INTO Multimedia(nombre_archivo, tipo_mime, contenido)
+    VALUES(p_mascota_nombre, p_mascota_mime, p_mascota_contenido);
 
-    read_loop: LOOP
-        
-        FETCH equipos_cursor INTO equipo;
-        IF i = 9999 THEN
-            LEAVE read_loop;
-        END IF;
+    INSERT INTO Multimedia_mundial(multimedia_id, mundial_id, es_banner, es_copa, es_mascota)
+    VALUES(LAST_INSERT_ID(), nuevo_id, 0, 0, 1);
 
-        IF i = 0 THEN
-            SET equipos_json = JSON_ARRAY(equipo);
-        ELSE
-            SET equipos_json = JSON_ARRAY_APPEND(equipos_json, '$', equipo);
-        END IF;
+    -- INSERTAR SEDES EN TABLAS Pais → Sede
+    WHILE i < JSON_LENGTH(p_sedes) DO
 
-        SET i = i + 1;
-    END LOOP;
+        SET sede_nombre = JSON_UNQUOTE(JSON_EXTRACT(p_sedes, CONCAT('$[', i, ']')));
 
-    CLOSE equipos_cursor;
+        -- Buscar si ya existe el país:
+        SELECT id INTO sede_id FROM Pais WHERE pais = sede_nombre LIMIT 1;
 
-    -- Procesar sedes
-    SET sedes_count = JSON_LENGTH(p_sedes);
-    SET j = 0;
-
-    WHILE j < sedes_count DO
-
-        SET v_nombre_pais = JSON_UNQUOTE(JSON_EXTRACT(p_sedes, CONCAT('$[', j, ']')));
-
-        SELECT id INTO v_pais_id
-        FROM Pais
-        WHERE pais = v_nombre_pais
-        LIMIT 1;
-
-        IF v_pais_id IS NULL THEN
-            INSERT INTO Pais(pais) VALUES (v_nombre_pais);
-            SET v_pais_id = LAST_INSERT_ID();
+        IF sede_id IS NULL THEN
+            INSERT INTO Pais(pais) VALUES(sede_nombre);
+            SET sede_id = LAST_INSERT_ID();
         END IF;
 
         INSERT INTO Sede(mundial_id, sede_id)
-        VALUES (v_mundial_id, v_pais_id);
+        VALUES(nuevo_id, sede_id);
 
-        SET j = j + 1;
+        SET i = i + 1;
     END WHILE;
 
-    -- ICONO
-    INSERT INTO Multimedia(nombre_archivo, tipo_mime, contenido)
-    VALUES (p_icono_nombre, p_icono_mime, p_icono_contenido);
-    SET v_pais_id = LAST_INSERT_ID();
-
-    INSERT INTO Multimedia_mundial(multimedia_id, mundial_id, es_banner)
-    VALUES (v_pais_id, v_mundial_id, 1);
-
-    -- COPA
-    INSERT INTO Multimedia(nombre_archivo, tipo_mime, contenido)
-    VALUES (p_copa_nombre, p_copa_mime, p_copa_contenido);
-    SET v_pais_id = LAST_INSERT_ID();
-
-    INSERT INTO Multimedia_mundial(multimedia_id, mundial_id, es_banner)
-    VALUES (v_pais_id, v_mundial_id, 0);
-
-    -- MASCOTA
-    INSERT INTO Multimedia(nombre_archivo, tipo_mime, contenido)
-    VALUES (p_mascota_nombre, p_mascota_mime, p_mascota_contenido);
-    SET v_pais_id = LAST_INSERT_ID();
-
-    INSERT INTO Multimedia_mundial(multimedia_id, mundial_id, es_banner)
-    VALUES (v_pais_id, v_mundial_id, 0);
-
-    COMMIT;
-
-    SELECT v_mundial_id AS id_mundial;
+    -- Regresar ID
+    SELECT nuevo_id AS id_mundial;
 
 END$$
 
 DELIMITER ;
 
-select * from mundial;
+DELIMITER $$
+
+CREATE PROCEDURE sp_agregar_categoria(
+    IN p_nombre VARCHAR(100),
+    IN p_admin INT
+)
+BEGIN
+    INSERT INTO Categorias(nombre, CreadoAdmin)
+    VALUES(p_nombre, p_admin);
+
+    SELECT LAST_INSERT_ID() AS id_categoria;
+END$$
+
+DELIMITER ;
+
+CREATE PROCEDURE sp_obtener_mundial_por_id(IN p_id INT)
+BEGIN
+    SELECT 
+        m.*,
+
+        -- BANNER
+        b.nombre_archivo AS banner_nombre,
+        b.tipo_mime AS banner_mime,
+        TO_BASE64(b.contenido) AS banner_base64,
+
+        -- COPA
+        c.nombre_archivo AS copa_nombre,
+        c.tipo_mime AS copa_mime,
+        TO_BASE64(c.contenido) AS copa_base64,
+
+        -- MASCOTA
+        ma.nombre_archivo AS mascota_nombre,
+        ma.tipo_mime AS mascota_mime,
+        TO_BASE64(ma.contenido) AS mascota_base64
+
+    FROM Mundial m
+
+    -- Banner
+    LEFT JOIN Multimedia_mundial mm_b ON mm_b.mundial_id = m.id AND mm_b.es_banner = 1
+    LEFT JOIN Multimedia b ON b.id = mm_b.multimedia_id
+
+    -- Copa
+    LEFT JOIN Multimedia_mundial mm_c ON mm_c.mundial_id = m.id AND mm_c.es_copa = 1
+    LEFT JOIN Multimedia c ON c.id = mm_c.multimedia_id
+
+    -- Mascota
+    LEFT JOIN Multimedia_mundial mm_ma ON mm_ma.mundial_id = m.id AND mm_ma.es_mascota = 1
+    LEFT JOIN Multimedia ma ON ma.id = mm_ma.multimedia_id
+
+    WHERE m.id = p_id;
+END $$
+
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE sp_listar_mundiales()
+BEGIN
+    SELECT 
+        m.id,
+        m.anio,
+        m.titulo,
+        m.descripcion,
+        m.equipos,
+
+        -- FOTO PRINCIPAL (puede ser NULL)
+        mm.multimedia_id,
+        md.nombre_archivo,
+        md.tipo_mime,
+        TO_BASE64(md.contenido) AS imagen_base64
+
+    FROM Mundial m
+    LEFT JOIN Multimedia_mundial mm 
+        ON mm.mundial_id = m.id AND mm.es_banner = 1
+    LEFT JOIN Multimedia md
+        ON md.id = mm.multimedia_id
+
+    ORDER BY m.anio DESC;
+END $$
+
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE sp_obtener_mundiales()
+BEGIN
+    SELECT 
+        m.id,
+        m.titulo,
+        m.anio,
+
+        md.nombre_archivo AS banner_nombre,
+        md.tipo_mime     AS banner_mime,
+        TO_BASE64(md.contenido) AS banner_base64
+
+    FROM Mundial m
+    LEFT JOIN Multimedia_mundial mm 
+        ON mm.mundial_id = m.id AND mm.es_banner = 1
+    LEFT JOIN Multimedia md
+        ON md.id = mm.multimedia_id
+
+    ORDER BY m.id DESC;
+END $$
+
+DELIMITER ;
+
 DELIMITER $$
 
 CREATE FUNCTION json_to_text_list(p_json JSON)
@@ -259,21 +307,3 @@ END $$
 
 DELIMITER ;
 
-ALTER TABLE Mundial ADD COLUMN detalles JSON NULL;
-
-DELIMITER $$
-
-CREATE PROCEDURE sp_obtener_mundiales()
-BEGIN
-    SELECT 
-        id_mundial,
-        titulo,
-        anio,
-        icono_nombre,
-        icono_mime,
-        icono_contenido
-    FROM mundiales
-    ORDER BY id_mundial DESC;
-END $$
-
-DELIMITER ;
