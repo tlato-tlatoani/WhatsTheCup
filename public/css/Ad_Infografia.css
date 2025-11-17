@@ -358,3 +358,84 @@ a{
 
 }
 
+#datos-mundial {
+    width: 100%;
+    max-width: 1170px;
+    margin: 20px auto;
+    padding: 25px;
+    box-sizing: border-box;
+
+    background-color: #ffffff33;
+    box-shadow: 0 2px 8px 0 #6464642b;
+    border-radius: 20px;
+
+    display: flex;
+    flex-direction: row;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.card-datos-mundial,
+.card-equipos {
+    flex: 1;
+    min-width: 350px;
+    background: rgba(255, 255, 255, 0.87);
+    padding: 25px;
+    border-radius: 18px;
+    backdrop-filter: blur(5px);
+    
+    border: 1px solid rgba(255,255,255,0.4);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+}
+
+.card-datos-mundial h2,
+.card-equipos h2 {
+    font-family: "Fugaz One", sans-serif;
+    color: #0300A0;
+    margin-bottom: 20px;
+    font-size: 26px;
+}
+
+.fila-dato {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px dashed rgba(0,0,0,0.15);
+    font-family: "Poppins", sans-serif;
+    font-size: 16px;
+    color: #0300A0;
+}
+
+.label {
+    font-weight: bold;
+    color: #E52C6D;
+}
+
+.card-equipos ul {
+    padding-left: 20px;
+}
+.card-equipos li {
+    margin-bottom: 8px;
+    font-family: "Poppins", sans-serif;
+    font-size: 16px;
+    color: #0300A0;
+}
+
+#imagenes-mundial {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* espacio entre imágenes */
+    width: 100%;
+    margin: 25px 0;
+}
+
+
+.imagen-card img {
+    height: 420px;      /* MISMA ALTURA */
+    width: auto;        /* ANCHO AUTOMÁTICO, RESPETA PROPORCIÓN */
+    object-fit: contain; /* NO recorta NADA */
+    display: block;
+
+}
+

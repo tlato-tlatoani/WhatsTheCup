@@ -1,12 +1,28 @@
+<?php
+require_once dirname(__DIR__, 3) . '/app/models/Model_Categorias.php';
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Validar sesión
+if (!isset($_SESSION['id_usuario'])) {
+    header("Location: /WhatsTheCup/index.php?route=iniciarsesion");
+    exit;
+}
+
+$model = new Model_Categorias();
+$categorias = $model->obtenerCategorias();
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categorías - What's The Cup</title>
 
-  <title>Categorías - What's The Cup</title>
-  <link rel="stylesheet" href="/WhatsTheCup/public/css/Ad_Categorias.css">
+    <link rel="stylesheet" href="/WhatsTheCup/public/css/Ad_Categorias.css">
     <link rel="stylesheet" href="/WhatsTheCup/public/css/SidebarAdmin.css">
     <link rel="stylesheet" href="/WhatsTheCup/public/css/Header.css">
     <link rel="stylesheet" href="/WhatsTheCup/public/css/Fuentes.css">
@@ -14,43 +30,63 @@
 
 <body>
 
-  <main class="main-container">
+<main class="main-container">
 
-    <div id="sidebar-container"></div>
+    <!-- SIDEBAR -->
+   <div id="sidebar-container">
+    <?php include dirname(__DIR__) . '/SidebarAdmin.php'; ?>
+</div>
 
-    <!-- Right content -->
+
+    <!-- CONTENIDO PRINCIPAL -->
     <section class="categories-section">
-      <h2>CATEGORÍAS</h2>
 
-      <!-- Grid de categorías -->
-      <div class="categories-grid">
-        <div class="category-box">Categoría 1</div>
-        <div class="category-box">Categoría 2</div>
-        <div class="category-box">Categoría 3</div>
-        <div class="category-box">Categoría 4</div>
-        <div class="category-box">Categoría 5</div>
-        <div class="category-box">Categoría 6</div>
-        <div class="category-box">Categoría 7</div>
-        <div class="category-box">Categoría 8</div>
-        <div class="category-box">Categoría 9</div>
-        <div class="category-box">Categoría 10</div>
-        <div class="category-box">Categoría 11</div>
-        <div class="category-box">Categoría 12</div>
-      </div>
+        <h2>CATEGORÍAS</h2>
 
-      <!-- Agregar categoría -->
-      <div class="add-category">
-        <h3>AGREGAR CATEGORIA</h3>
-        <input type="text" placeholder="Nombre de la categoría">
-        <button>AGREGAR</button>
-      </div>
+        <!-- GRID DINÁMICO DE CATEGORÍAS -->
+        <div class="categories-grid">
+
+            <?php if (empty($categorias)): ?>
+                <p style="color:#fff; font-size:18px;">No hay categorías registradas.</p>
+            <?php else: ?>
+                <?php foreach ($categorias as $cat): ?>
+                    <div class="category-box">
+                        <?= htmlspecialchars($cat['nombre']) ?>
+                    </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
+
+        </div>
+
+        <!-- FORMULARIO PARA AGREGAR CATEGORÍA -->
+        <div class="add-category">
+            <h3>AGREGAR CATEGORIA</h3>
+
+            <form method="POST" action="/WhatsTheCup/index.php">
+                <input type="hidden" name="route" value="adcategorias">
+
+                <input type="text" name="nombre_categoria"
+                       placeholder="Nombre de la categoría" required>
+
+                <button type="submit" name="btn_agregar_categoria">AGREGAR</button>
+            </form>
+
+            <?php if (isset($_GET['ok'])): ?>
+                <p class="success-msg">✔ Categoría agregada correctamente</p>
+            <?php endif; ?>
+
+            <?php if (isset($_GET['error'])): ?>
+                <p class="error-msg">✖ Ocurrió un error al agregar la categoría</p>
+            <?php endif; ?>
+
+        </div>
+
     </section>
-  </main>
 
-
-
+</main>
 
 <script src="/WhatsTheCup/public/js/Header.js"></script>
 <script src="/WhatsTheCup/public/js/Categorias.js"></script>
+
 </body>
 </html>

@@ -1,7 +1,8 @@
 body {
   margin: 20px;
   padding:5px;
-  background: linear-gradient(300deg,#aadfad,#f2ea93) !important;
+  background: linear-gradient(300deg,#faffed,#faffed) !important;
+  
   background-size: 400% 400%;
   justify-content: center;
   align-items: center;
@@ -22,18 +23,18 @@ a{
 
 #form-perfil{
   font-family: poppins, sans-serif;
-  color: #0300A0;
+  color: #e52c6d;
 }
 
 #saludo {
   font-family: "Fugaz One", cursive;
-  color: #0300A0;
+  color: #e52c6d;
   display: flex;
   gap:10px;
 }
 
 #saludo h1:first-child {
-  color: #0300A0; /* azul fuerte */
+  color: #e52c6d; /* azul fuerte */
 }
 
 #saludo h1:last-child {

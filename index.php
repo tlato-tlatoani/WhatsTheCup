@@ -14,14 +14,11 @@ if (session_status() == PHP_SESSION_NONE) {
 // ====================================================================
 
 // Verificamos si la solicitud es un envío de formulario (POST)
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    
-    // Si la acción es el registro, cargamos el script de procesamiento
+if ($_SERVER['REQUEST_METHOD'] === 'POST') 
+{
     if (isset($_POST['btn_registrar'])) {
-        // Incluimos el script que contiene tu lógica de registro (Controller)
         require_once PROJECT_ROOT . '/app/controllers/registro_usuario.php';
-   
-        exit(); 
+        exit();
     }
     
     if (isset($_POST['btn_iniciar_sesion'])) {
@@ -29,14 +26,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['btn_actualizar'])) {
         require_once PROJECT_ROOT . '/app/controllers/actualizar_usuario.php';
-        exit;
+        exit();
     }
+
+    if (isset($_POST['btn_agregar_mundial'])) {
+        require_once PROJECT_ROOT . '/app/controllers/agregar_mundial.php';
+        exit();
+    }
+
+    if (isset($_POST['btn_agregar_categoria'])) {
+       require_once PROJECT_ROOT . '/app/controllers/agregar_categorias.php';
+       exit();
     }
 
 }
+
     // Aquí se agregarían otras lógicas de POST 
 
 
@@ -76,13 +82,28 @@ switch ($route) {
     case 'editar_perfil':
         $view_path = PROJECT_ROOT . '/app/views/user-views/Us-editar_perfil.php';
         break;
-  
+        
+    case 'adagregarmundial':
+       $view_path = PROJECT_ROOT . '/app/views/admin-views/Ad-AgregarMundial.php';
+       break;
+    case 'usinfografia':
+    $view_path = PROJECT_ROOT . '/app/views/user-views/Us-Infografia.php';
+    break;
 
+    case 'adinfografia':
+       $view_path = PROJECT_ROOT . '/app/views/admin-views/Ad-Infografia.php';
+       break;
+
+    case 'adcategorias':
+    $view_path = PROJECT_ROOT . '/app/views/admin-views/Ad-Categorias.php';
+    break;
 
     default:
         header("HTTP/1.0 404 Not Found");
         $view_path = PROJECT_ROOT . '/app/views/error-views/404.php';
         break;
+
+        
 }
 
 // 3. Cargar la Vista

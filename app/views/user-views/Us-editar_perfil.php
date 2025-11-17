@@ -97,10 +97,12 @@ if (!empty($usuario['IMAGEN_PERFIL'])) {
                placeholder="EMAIL"
                value="<?= $usuario['CORREO'] ?? '' ?>">
 
-        <input type="password" 
-               name="CONTRASENNA"
-               
-               placeholder="Contraseña (opcional)">
+
+<input type="password" 
+       name="CONTRASENNA"
+       value="<?= htmlspecialchars($usuario['CONTRASENNA'] ?? '') ?>"
+       placeholder="Contraseña (opcional)">
+
 
         <input type="date"
                name="NACIMIENTO"
@@ -112,13 +114,10 @@ if (!empty($usuario['IMAGEN_PERFIL'])) {
                value="<?= $usuario['NACIONALIDAD'] ?? '' ?>">
 
       <select name="GENERO">
-    <option value="">Seleccione género</option>
-    <option value="Masculino" <?= ($usuario['GENERO'] === "M") ? "selected" : "" ?>>Masculino</option>
-    <option value="Femenino"  <?= ($usuario['GENERO'] === "F") ? "selected" : "" ?>>Femenino</option>
-</select>
-
-
-
+             <option value="">Seleccione género</option>
+             <option value="Masculino" <?= ($usuario['GENERO'] === "M") ? "selected" : "" ?>>Masculino</option>
+             <option value="Femenino"  <?= ($usuario['GENERO'] === "F") ? "selected" : "" ?>>Femenino</option>
+       </select>
         <input type="text"
                name="PAIS_ORIGEN"
                placeholder="País de Nacimiento..."
