@@ -1,8 +1,8 @@
 <?php
-
-error_reporting(0);
-ini_set('display_errors', 0);
-
+error_reporting(E_ALL); 
+ini_set('display_errors', 0); // No muestra en pantalla
+ini_set('log_errors', 1); // Activa el registro en archivo
+ini_set('error_log', __DIR__ . '/php_error.log');
 // 1. DEFINIR LA RAÍZ DEL PROYECTO
 define('PROJECT_ROOT', __DIR__);
 
@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
     }
 
     if (isset($_POST['btn_crear_publicacion'])) {
-       require_once PROJECT_ROOT . '/app/controllers/guardar_publicacion.php';
+       require_once PROJECT_ROOT . '/app/controllers/agregar_publicacion.php';
        exit();
     }
 

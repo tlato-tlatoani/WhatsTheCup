@@ -1,12 +1,20 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 ob_clean();
 // 1. Cabeceras para manejar JSON
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *'); 
 
+function devolver_error($message, $http_code = 500) {
+    http_response_code($http_code);
+    echo json_encode(['success' => false, 'message' => $message]);
+    exit;
+}
+
 require_once dirname(__DIR__) . '/models/Model_Mundial.php';
-require_once dirname(__DIR__) . '/models/Model_Categorias.php';
 
 
 
@@ -22,11 +30,11 @@ if (!$id_mundial) {
 try {
     // 3. Instanciar Modelos
     $modelMundial = new Model_Mundial();
-    $modelCategorias = new Model_Categorias();
+
 
     // 4. Obtener datos del Modelo
     $mundial = $modelMundial->obtenerMundialPorId($id_mundial);
-    $categorias = $modelCategorias->obtenerCategorias();
+
 
     if ($mundial) {
         // 5. Devolver los datos combinados en formato JSON

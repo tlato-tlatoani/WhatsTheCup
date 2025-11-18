@@ -58,16 +58,16 @@ function actualizarVistaModal(datos) {
 
     // b. Categorías dinámicas
     // Limpiar opciones existentes y añadir la opción por defecto
-    selectCategoria.innerHTML = '<option value="">Categoría</option>'; 
+     selectCategoria.innerHTML = '<option value="">Categoría</option>'; 
     
     datos.categorias.forEach(cat => {
-        const option = document.createElement('option');
-        // El 'valor' y el 'texto' dependen de la estructura que devuelva Model_Categorias
-        // Asumiendo que devuelve 'id' o 'nombre'
-        option.value = cat.id;     
-        option.textContent = cat.nombre; 
-        selectCategoria.appendChild(option);
-    });
+    const option = document.createElement('option');
+    //     // El 'valor' y el 'texto' dependen de la estructura que devuelva Model_Categorias
+    //     // Asumiendo que devuelve 'id' o 'nombre'
+    option.value = cat.id;     
+    option.textContent = cat.nombre; 
+    selectCategoria.appendChild(option);
+});
 }
 
 
@@ -106,44 +106,14 @@ function cerrarModal() {
         }
     });
 
-    document.querySelectorAll('.multimedia').forEach(btn => {
+  document.querySelectorAll('.multimedia').forEach(btn => {
     btn.addEventListener('click', e => {
-        const tipo = btn.dataset.tipo; // 'imagen' o 'video'
-        if(tipo === 'imagen') {
-            document.getElementById('input-imagen').click();
-        } else {
-            document.getElementById('input-video').click();
-        }
+        // Llama directamente al input-imagen.
+        document.getElementById('input-imagen').click();
     });
-    });
-
-const form = document.getElementById('form-publicacion');
-
-form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    const formData = new FormData(form); 
-    formData.append('btn_crear_publicacion', '1');
-    try {
-        const response = await fetch(form.action, {
-            method: 'POST',
-            body: formData,
-            credentials: 'same-origin'
-        });
-
-        const data = await response.json();
-
-        if (data.success) {
-            alert('Publicación creada correctamente');
-            form.reset();
-        } else {
-            alert('Error: ' + data.message);
-        }
-    } catch (err) {
-        console.error(err);
-        alert('Error de conexión');
-    }
 });
+
+
 
 
 

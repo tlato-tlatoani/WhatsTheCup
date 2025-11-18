@@ -2,6 +2,7 @@
 require_once dirname(__DIR__, 3) . '/app/models/Model_Mundial.php';
 
 $model = new Model_Mundial();
+$modelCategorias = new Model_Categorias();
 
 $id = $_GET['id'] ?? null;
 $mundial = $model->obtenerMundialPorId($id);
@@ -10,7 +11,7 @@ if (!$mundial) {
     echo "Mundial no encontrado.";
     exit;
 }
-
+$categorias = $modelCategorias->obtenerCategorias();
 $detalles = json_decode($mundial['detalles'], true);
 $equipos = explode(",", $mundial['equipos']);
 
@@ -190,22 +191,25 @@ $equipos = explode(",", $mundial['equipos']);
       <textarea id="contenido" name="contenido" placeholder="Contenido de la infografía..." rows="6"></textarea>
 
      <div class="fila-cat">
-          <select id="categoria" name="categoria_id">
-            <option value="">Categoría</option>
-            <option value="noticia">1</option>
-            <option value="estadistica">3</option>
-            <option value="opinion">3</option>
-          </select>
+          <select id="categoria" name="categoria_id" required>
+            
+                        <option value="0" selected disabled>Seleccione Categoría *</option>
 
-        <input type="file" name="imagen" id="input-imagen" accept="image/*" style="display:none">
-        <input type="file" name="video" id="input-video" accept="video/*" style="display:none">
+                        <?php foreach ($categorias as $cat): ?>
+                                <option value="<?= htmlspecialchars($cat['id']) ?>">
+                    <?= htmlspecialchars($cat['NOMBRE'] ?? $cat['nombre']) ?>
+                </option>
+            <?php endforeach; ?>
+          </select>
+
+        <input type="file" name="i_archivo" id="input-imagen" style="display:none">
+        
 
         <button type="button" class="multimedia" data-tipo="imagen">
             <i class="bi bi-image"></i>
         </button>
-        <button type="button" class="multimedia" data-tipo="video">
-            <i class="bi bi-camera-reels"></i>
-        </button>
+
+
 
 
       </div>

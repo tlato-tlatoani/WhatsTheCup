@@ -469,3 +469,5 @@ END sp_block$$
 
 -- 3. Se restaura el delimitador original
 DELIMITER ;
+
+DELIMITER $$
