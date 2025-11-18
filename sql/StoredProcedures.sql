@@ -411,11 +411,12 @@ CREATE PROCEDURE sp_registrar_publicacion_con_multimedia(
 sp_block: BEGIN
     DECLARE v_multimedia_id INT;
     DECLARE v_publicacion_id INT;
-    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    -- ELIMINAR O COMENTAR ESTE BLOQUE
+    /* DECLARE EXIT HANDLER FOR SQLEXCEPTION
     BEGIN
         ROLLBACK;
         SELECT 'error' AS result, 'Hubo un error al registrar la publicación' AS message;
-    END;
+    END; */
 
     START TRANSACTION;
 

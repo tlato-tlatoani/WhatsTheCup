@@ -25,8 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_FILES['i_archivo'])) {
 
 // 2. Recolección y saneamiento de datos
 $titulo      = trim($_POST['titulo'] ?? '');
-$descripcion = trim($_POST['descripcion'] ?? '');
-// Convertir IDs a enteros. Es vital sanitizar, pero aquí solo se fuerza el tipo.
+$descripcion = trim($_POST['contenido'] ?? '');
 
 $autorId = $_SESSION['id_usuario'] ?? null; // Intentamos obtener el ID de la sesión
 
@@ -44,13 +43,16 @@ $mundialId   = filter_var($_POST['mundial_id'] ?? null, FILTER_VALIDATE_INT, FIL
 $categoriaId = filter_var($_POST['categoria_id'] ?? 0, FILTER_VALIDATE_INT);
 $fileData    = $_FILES['i_archivo']; // Asumiendo que el campo de subida es 'i_archivo'
 
-// 3. Validación de datos obligatorios
-if ($autorId === false || $autorId <= 0) {
-     enviarRespuestaJSON(false, 'El ID del autor es inválido o falta.', [], 400);
+if ($mundialId === null || $mundialId <= 0) {
+     enviarRespuestaJSON(false, 'El ID del mundial es obligatorio o inválido.', [], 400);
 }
+
+
 if ($categoriaId === false || $categoriaId <= 0) {
      enviarRespuestaJSON(false, 'La categoría de la publicación es obligatoria.', [], 400);
 }
+
+
 if (empty($titulo) || empty($descripcion)) {
     enviarRespuestaJSON(false, 'El título y la descripción no pueden estar vacíos.', [], 400);
 }
@@ -72,7 +74,12 @@ if ($resultado['success']) {
     // 201 Created para una creación exitosa
     enviarRespuestaJSON(true, $resultado['message'], ['publicacion_id' => $resultado['publicacion_id']], 201);
 } else {
-    // 500 Internal Server Error o 400 Bad Request si el mensaje indica un problema de datos
+    // 5. Devolver Respuesta
+if ($resultado['success']) {
+    // ...
+} else {
+    // EL ERROR ESTÁ AQUÍ O EN UNA LÍNEA CERCANA
     $http_code = strpos($resultado['message'], 'Base de Datos') !== false ? 500 : 400;
-    enviarRespuestaJSON(false, $resultado['message'], [], $http_code);
+    enviarRespuestaJSON(false, $resultado['message'], [], $http_code); 
+}
 }

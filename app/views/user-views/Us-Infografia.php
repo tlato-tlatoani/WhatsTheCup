@@ -1,6 +1,6 @@
 <?php
 require_once dirname(__DIR__, 3) . '/app/models/Model_Mundial.php';
-
+require_once dirname(__DIR__, 3) . '/app/models/Model_Categorias.php';
 $model = new Model_Mundial();
 $modelCategorias = new Model_Categorias();
 

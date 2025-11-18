@@ -15,9 +15,7 @@ function devolver_error($message, $http_code = 500) {
 }
 
 require_once dirname(__DIR__) . '/models/Model_Mundial.php';
-
-
-
+require_once dirname(__DIR__) . '/models/Model_Categorias.php';
 
 // 2. Obtener el ID del Mundial (Asumiendo que se pasa por GET)
 $id_mundial = $_GET['id'] ?? null;
@@ -28,20 +26,19 @@ if (!$id_mundial) {
 }
 
 try {
-    // 3. Instanciar Modelos
-    $modelMundial = new Model_Mundial();
-
+   $modelMundial = new Model_Mundial();
+   $modelCategorias = new Model_Categorias(); // Instancia el modelo de categorías
 
     // 4. Obtener datos del Modelo
     $mundial = $modelMundial->obtenerMundialPorId($id_mundial);
-
+    $categorias = $modelCategorias->obtenerCategorias(); // Obtén las categorías
 
     if ($mundial) {
         // 5. Devolver los datos combinados en formato JSON
         echo json_encode([
             'success' => true,
             'nombre_mundial' => $mundial['titulo'] ?? 'Mundial Desconocido',
-            'categorias' => $categorias
+            'categorias' => $categorias // Ahora $categorias está definida
         ]);
     } else {
         echo json_encode(['success' => false, 'message' => 'Mundial no encontrado.']);

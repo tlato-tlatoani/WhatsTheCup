@@ -123,3 +123,23 @@ Stack trace:
 #0 C:\xampp\htdocs\WhatsTheCup\index.php(127): require_once()
 #1 {main}
   thrown in C:\xampp\htdocs\WhatsTheCup\app\views\user-views\Us-Infografia.php on line 5
+[18-Nov-2025 14:49:42 Europe/Berlin] PHP Warning:  Undefined variable $categorias in C:\xampp\htdocs\WhatsTheCup\app\controllers\obtener_mundiales_modal.php on line 44
+[18-Nov-2025 15:24:56 Europe/Berlin] PHP Fatal error:  Uncaught Error: Class "Model_Categorias" not found in C:\xampp\htdocs\WhatsTheCup\app\controllers\obtener_mundiales_modal.php:32
+Stack trace:
+#0 C:\xampp\htdocs\WhatsTheCup\index.php(111): require_once()
+#1 {main}
+  thrown in C:\xampp\htdocs\WhatsTheCup\app\controllers\obtener_mundiales_modal.php on line 32
+[18-Nov-2025 15:31:04 Europe/Berlin] PHP Fatal error:  Uncaught Error: Class "Model_Categorias" not found in C:\xampp\htdocs\WhatsTheCup\app\controllers\obtener_mundiales_modal.php:32
+Stack trace:
+#0 C:\xampp\htdocs\WhatsTheCup\index.php(111): require_once()
+#1 {main}
+  thrown in C:\xampp\htdocs\WhatsTheCup\app\controllers\obtener_mundiales_modal.php on line 32
+[18-Nov-2025 15:31:57 Europe/Berlin] PHP Fatal error:  Uncaught Error: Class "Model_Categorias" not found in C:\xampp\htdocs\WhatsTheCup\app\controllers\obtener_mundiales_modal.php:32
+Stack trace:
+#0 C:\xampp\htdocs\WhatsTheCup\index.php(111): require_once()
+#1 {main}
+  thrown in C:\xampp\htdocs\WhatsTheCup\app\controllers\obtener_mundiales_modal.php on line 32
+[18-Nov-2025 15:37:07 Europe/Berlin] PHP Parse error:  syntax error, unexpected token "," in C:\xampp\htdocs\WhatsTheCup\app\controllers\agregar_publicacion.php on line 55
+[18-Nov-2025 16:45:44 Europe/Berlin] Error PDO en Model_Publicacion::registrarPublicacion: SQLSTATE[HY000]: General error: 1364 Field 'FECHA_APROBACION' doesn't have a default value
+[18-Nov-2025 16:49:45 Europe/Berlin] Error PDO en Model_Publicacion::registrarPublicacion: SQLSTATE[HY000]: General error: 1364 Field 'FECHA_APROBACION' doesn't have a default value
+[18-Nov-2025 16:54:37 Europe/Berlin] Error PDO en Model_Publicacion::registrarPublicacion: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`wtc`.`publicacion`, CONSTRAINT `publicacion_ibfk_4` FOREIGN KEY (`categoria_id`) REFERENCES `categoria` (`ID_CATEGORIA`))

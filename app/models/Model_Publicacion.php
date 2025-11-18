@@ -56,33 +56,33 @@ class Model_Publicacion
             // Preparar la llamada al Stored Procedure
             $stmt = $this->conn->prepare("
                 CALL sp_registrar_publicacion_con_multimedia(
-                    :titulo,
-                    :descripcion,
-                    :nombre_archivo,
-                    :tipo_mime,
-                    :contenido,
-                    :autor_id,
-                    :mundial_id,
-                    :categoria_id
+                    :p_titulo,
+                    :p_descripcion,
+                    :p_nombre_archivo,
+                    :p_tipo_mime,
+                    :p_contenido,
+                    :p_autor_id,
+                    :p_mundial_id,
+                    :p_categoria_id
                 )
             ");
 
             // 1. Bind de Parámetros de Texto (PARAM_STR)
-            $stmt->bindParam(':titulo', $titulo, PDO::PARAM_STR);
-            $stmt->bindParam(':descripcion', $descripcion, PDO::PARAM_STR);
-            $stmt->bindParam(':nombre_archivo', $nombreArchivo, PDO::PARAM_STR);
-            $stmt->bindParam(':tipo_mime', $tipoMime, PDO::PARAM_STR);
-            $stmt->bindParam(':autor_id', $autorId, PDO::PARAM_INT);
-            $stmt->bindParam(':categoria_id', $categoriaId, PDO::PARAM_INT);
+            $stmt->bindParam(':p_titulo', $titulo, PDO::PARAM_STR);
+            $stmt->bindParam(':p_descripcion', $descripcion, PDO::PARAM_STR);
+            $stmt->bindParam(':p_nombre_archivo', $nombreArchivo, PDO::PARAM_STR);
+            $stmt->bindParam(':p_tipo_mime', $tipoMime, PDO::PARAM_STR);
+            $stmt->bindParam(':p_autor_id', $autorId, PDO::PARAM_INT);
+            $stmt->bindParam(':p_categoria_id', $categoriaId, PDO::PARAM_INT);
             
             // 2. Bind del BLOB (PARAM_LOB)
-            $stmt->bindParam(':contenido', $contenido, PDO::PARAM_LOB); 
+            $stmt->bindParam(':p_contenido', $contenido, PDO::PARAM_LOB); 
 
             // 3. Bind para Mundial ID (manejo de NULL)
             if ($mundialId === null || $mundialId <= 0) {
-                $stmt->bindValue(':mundial_id', null, PDO::PARAM_NULL);
+                $stmt->bindValue(':p_mundial_id', null, PDO::PARAM_NULL);
             } else {
-                $stmt->bindParam(':mundial_id', $mundialId, PDO::PARAM_INT);
+                $stmt->bindParam(':p_mundial_id', $mundialId, PDO::PARAM_INT);
             }
             
             $stmt->execute();
@@ -101,10 +101,14 @@ class Model_Publicacion
             ];
 
         } catch (PDOException $e) {
-            error_log('Error PDO en Model_Publicacion::registrarPublicacion: ' . $e->getMessage());
+           $db_error_message = $e->getMessage();
+            // error_log ya tiene el mensaje real, pero lo dejamos
+            error_log('Error PDO en Model_Publicacion::registrarPublicacion: ' . $db_error_message);
+            
             return [
                 'success' => false,
-                'message' => 'Error de Base de Datos al registrar.'
+                // ¡IMPORTANTE! Devolvemos el mensaje detallado de la excepción
+                'message' => 'Error de BD: ' . $db_error_message
             ];
         } catch (Exception $e) {
             error_log('Error fatal en Model_Publicacion: ' . $e->getMessage());
@@ -113,6 +117,8 @@ class Model_Publicacion
                 'message' => 'Error inesperado del servidor.'
             ];
         }
+        
+
     }
     
     // Aquí irían otros métodos del modelo (consultarPublicaciones, etc.)
