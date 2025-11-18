@@ -6,78 +6,146 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 
-    // En tu archivo JavaScript (Ej: Us_Infografia.js o donde manejes la lógica)
+const modalPublicacion = document.getElementById('modal-publicacion');
+const tituloModal = document.getElementById('titulo-modal');
+const selectCategoria = document.getElementById('categoria');
+const btnCerrar = document.getElementById('modal-close');
+const backdrop = document.getElementById('modal-backdrop');
 
-    // --- Elementos del DOM ---
-    const btnContribuir = document.getElementById('btn-contribuir'); // El botón en Us_Infografia.php
-    const modalPublicacion = document.getElementById('modal-publicacion');
-    const btnCerrar = document.getElementById('modal-close');
-    const backdrop = document.getElementById('modal-backdrop');
 
-    // --- Función Principal ---
-    function abrirModalContribuir() {
-        // 1. Mostrar el modal usando la clase 'show' definida en tu CSS
-        modalPublicacion.classList.add('show');
+/**
+ * Función principal para abrir el modal, trayendo datos del backend.
+ * @param {string} idMundial - El ID del mundial actual.
+ */
+async function abrirModalContribuir(idMundial) {
+    // Mostrar el modal (usando la clase 'show' que ya tienes en CSS)
+    modalPublicacion.classList.add('show');
+    
+    //  Simula la URL de tu endpoint PHP
+    const endpointUrl = `/WhatsTheCup/index.php?route=ajax_mundial_modal&id=${idMundial}`;
 
-        // 2. Aquí iría la lógica para obtener y actualizar el título y categorías
-        // ... (llama a obtenerDatosModelo() y actualizarVistaModal() como se explicó antes)
+    try {
+        // 3. Llamada Asíncrona (Fetch) al backend
+        const response = await fetch(endpointUrl);
+        if (!response.ok) {
+            throw new Error('Error al obtener los datos del servidor.');
+        }
+        
+        const data = await response.json();
+
+        if (data.success) {
+            // Actualizar la vista con los datos recibidos
+            actualizarVistaModal(data);
+        } else {
+            // Manejar error en la respuesta del servidor
+            console.error('Error del servidor:', data.message);
+            tituloModal.textContent = 'Error al cargar los datos';
+        }
+
+    } catch (error) {
+        console.error('Error de red o procesamiento:', error);
+        tituloModal.textContent = 'Error de conexión.';
     }
+}
 
-    // --- Cerrar Modal ---
-    function cerrarModal() {
+
+/**
+ * 5. Actualización de la Vista (Modal)
+ */
+function actualizarVistaModal(datos) {
+    // a. Título dinámico
+    tituloModal.textContent = `Contribuir a ${datos.nombre_mundial}`;
+
+    // b. Categorías dinámicas
+    // Limpiar opciones existentes y añadir la opción por defecto
+    selectCategoria.innerHTML = '<option value="">Categoría</option>'; 
+    
+    datos.categorias.forEach(cat => {
+        const option = document.createElement('option');
+        // El 'valor' y el 'texto' dependen de la estructura que devuelva Model_Categorias
+        // Asumiendo que devuelve 'id' o 'nombre'
+        option.value = cat.id;     
+        option.textContent = cat.nombre; 
+        selectCategoria.appendChild(option);
+    });
+}
+
+
+const urlParams = new URLSearchParams(window.location.search);
+const mundialId = urlParams.get('id'); // Obtiene el valor de 'id' de la URL
+
+document.getElementById('btn-contribuir').addEventListener('click', () => {
+    if (mundialId) {
+        abrirModalContribuir(mundialId);
+    } else {
+        alert("Error: No se encontró el ID del mundial.");
+    }
+});
+
+function cerrarModal() {
+    if (modalPublicacion) {
         modalPublicacion.classList.remove('show');
     }
+}
+    
+    // Cerrar botón ✕
+    if (btnCerrar) {
+        // Pasa la referencia a la función cerrarModal, NO al elemento DOM
+        btnCerrar.addEventListener('click', cerrarModal); 
+    }
+    
+    // Cerrar fondo oscuro
+    if (backdrop) {
+        backdrop.addEventListener('click', cerrarModal); 
+    }
 
-    // --- Event Listeners ---
-    btnContribuir.addEventListener('click', abrirModalContribuir);
-    btnCerrar.addEventListener('click', cerrarModal);
-    // Opcional: Cerrar al hacer clic en el fondo oscuro
-    backdrop.addEventListener('click', cerrarModal);
-
-    // Opcional: Cerrar al presionar la tecla ESC
+    // 3. Cerrar con ESC
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && modalPublicacion.classList.contains('show')) {
+        if (e.key === 'Escape' && modalPublicacion && modalPublicacion.classList.contains('show')) {
             cerrarModal();
         }
     });
 
-
-    // --- 2. SIMULACIÓN DEL MODELO ---
-function obtenerDatosModelo() {
-    // **Aquí es donde contactarías a tu API o backend (el Modelo) para obtener los datos**
-    // Por ejemplo, usando 'fetch()'
-    // fetch('/api/datos-mundial')
-    // .then(response => response.json())
-    // .then(data => actualizarVistaModal(data));
-
-    // SIMULACIÓN DE DATOS ESTATICOS
-    return {
-        nombreMundial: "Norteamérica 2026",
-        categorias: [
-            { valor: "noticia", texto: "Noticias y Novedades" },
-            { valor: "estadistica", texto: "Estadísticas Relevantes" },
-            { valor: "opinion", texto: "Análisis y Opinión" },
-            { valor: "curiosidad", texto: "Datos Curiosos" }
-        ]
-    };
-}
-
-// --- 3. ACTUALIZACIÓN DE LA VISTA ---
-function actualizarVistaModal(datos) {
-    // a. Título dinámico
-    tituloModal.textContent = `Contribuir a ${datos.nombreMundial}`;
-    
-    // b. Categorías dinámicas
-    // Limpiar opciones existentes (excepto la primera "Categoría")
-    selectCategoria.innerHTML = '<option value="">Categoría</option>'; 
-    
-    // Crear e insertar nuevas opciones
-    datos.categorias.forEach(cat => {
-        const option = document.createElement('option');
-        option.value = cat.valor;
-        option.textContent = cat.texto;
-        selectCategoria.appendChild(option);
+    document.querySelectorAll('.multimedia').forEach(btn => {
+    btn.addEventListener('click', e => {
+        const tipo = btn.dataset.tipo; // 'imagen' o 'video'
+        if(tipo === 'imagen') {
+            document.getElementById('input-imagen').click();
+        } else {
+            document.getElementById('input-video').click();
+        }
     });
-}
+    });
+
+const form = document.getElementById('form-publicacion');
+
+form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(form); 
+    formData.append('btn_crear_publicacion', '1');
+    try {
+        const response = await fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            credentials: 'same-origin'
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+            alert('Publicación creada correctamente');
+            form.reset();
+        } else {
+            alert('Error: ' + data.message);
+        }
+    } catch (err) {
+        console.error(err);
+        alert('Error de conexión');
+    }
+});
+
+
+
 });
 

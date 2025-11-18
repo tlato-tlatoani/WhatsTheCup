@@ -1,4 +1,8 @@
 <?php
+
+error_reporting(0);
+ini_set('display_errors', 0);
+
 // 1. DEFINIR LA RAÍZ DEL PROYECTO
 define('PROJECT_ROOT', __DIR__);
 
@@ -38,6 +42,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
 
     if (isset($_POST['btn_agregar_categoria'])) {
        require_once PROJECT_ROOT . '/app/controllers/agregar_categorias.php';
+       exit();
+    }
+
+    if (isset($_POST['btn_crear_publicacion'])) {
+       require_once PROJECT_ROOT . '/app/controllers/guardar_publicacion.php';
        exit();
     }
 
@@ -97,6 +106,12 @@ switch ($route) {
     case 'adcategorias':
     $view_path = PROJECT_ROOT . '/app/views/admin-views/Ad-Categorias.php';
     break;
+
+    case 'ajax_mundial_modal':
+    require_once PROJECT_ROOT . '/app/controllers/obtener_mundiales_modal.php';
+    exit;
+    break;
+
 
     default:
         header("HTTP/1.0 404 Not Found");

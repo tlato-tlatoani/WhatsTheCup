@@ -173,7 +173,7 @@ $equipos = explode(",", $mundial['equipos']);
 </div> <!-- pagina-principal -->
 </div> <!-- layout -->
 
-<h1 id="footer">Whats The Cup. Todos los derechos reservados</h1>
+
 
 <!-- Modal de publicación  -->
 <div id="modal-publicacion" class="modal" aria-hidden="true">
@@ -183,39 +183,47 @@ $equipos = explode(",", $mundial['equipos']);
     <h2 id="titulo-modal">Contribuir a Norteamérica 2026</h2>
     <hr>
 
-    <form id="form-publicacion">
+    <form id="form-publicacion" action="/WhatsTheCup/index.php?route=ajax_mundial_modal" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="mundial_id" id="input-mundial-id" value="<?= $mundial['id'] ?>">
+
       <input type="text" id="titulo" name="titulo" placeholder="AGREGA UN TÍTULO" required>
       <textarea id="contenido" name="contenido" placeholder="Contenido de la infografía..." rows="6"></textarea>
 
      <div class="fila-cat">
-          <select id="categoria" name="categoria">
+          <select id="categoria" name="categoria_id">
             <option value="">Categoría</option>
             <option value="noticia">1</option>
             <option value="estadistica">3</option>
             <option value="opinion">3</option>
           </select>
 
-          <button class="multimedia"><i class="bi bi-camera-reels"></i></button>
-          <button class="multimedia"><i class="bi bi-image"></i></button>
+        <input type="file" name="imagen" id="input-imagen" accept="image/*" style="display:none">
+        <input type="file" name="video" id="input-video" accept="video/*" style="display:none">
+
+        <button type="button" class="multimedia" data-tipo="imagen">
+            <i class="bi bi-image"></i>
+        </button>
+        <button type="button" class="multimedia" data-tipo="video">
+            <i class="bi bi-camera-reels"></i>
+        </button>
+
+
       </div>
+
 
 
       <div class="modal-actions">
       <hr>
-      <button type="submit" class="btn-publicar">Publicar</button>
+      <button type="submit" class="btn-publicar" name="btn_crear_publicacion">Publicar</button>
       </div>
     </form>
   </div>
 </div>
 
-<script src="/WhatsTheCup/public/
 
-</div> <!-- pagina-principal -->
-</div> <!-- layout -->
 
 <h1 id="footer">Whats The Cup. Todos los derechos reservados</h1>
 
-<script src="/WhatsTheCup/public/js/Header.js"></script>
 <script src="/WhatsTheCup/public/js/Us_Infografia.js"></script>
 
 </body>

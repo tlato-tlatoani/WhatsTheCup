@@ -388,3 +388,84 @@ BEGIN
   SELECT LAST_INSERT_ID() AS id_categoria;
 END $$
 DELIMITER ;
+
+
+-- sp publicacion
+DELIMITER $$
+
+-- 1. Se incluye DROP PROCEDURE dentro del bloque para manejar correctamente el delimitador
+-- Se recomienda usar IF EXISTS para evitar errores si el SP no existe
+DROP PROCEDURE IF EXISTS sp_registrar_publicacion_con_multimedia$$ 
+
+-- 2. Definición corregida del Stored Procedure
+CREATE PROCEDURE sp_registrar_publicacion_con_multimedia(
+    IN p_titulo VARCHAR(150),
+    IN p_descripcion TEXT,
+    IN p_nombre_archivo VARCHAR(255),
+    IN p_tipo_mime VARCHAR(100),
+    IN p_contenido LONGBLOB,
+    IN p_autor_id INT,
+    IN p_mundial_id INT,
+    IN p_categoria_id INT
+)
+sp_block: BEGIN
+    DECLARE v_multimedia_id INT;
+    DECLARE v_publicacion_id INT;
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+        SELECT 'error' AS result, 'Hubo un error al registrar la publicación' AS message;
+    END;
+
+    START TRANSACTION;
+
+    -- 1. Insertar multimedia
+    INSERT INTO multimedia(nombre_archivo, tipo_mime, contenido)
+    VALUES (p_nombre_archivo, p_tipo_mime, p_contenido);
+
+    SET v_multimedia_id = LAST_INSERT_ID();
+
+    -- Validación de seguridad:
+    IF v_multimedia_id IS NULL THEN
+        ROLLBACK;
+        SELECT 'error' AS result, 'No se pudo registrar el archivo multimedia.' AS message;
+        LEAVE sp_block;
+    END IF;
+
+    -- 2. Insertar publicación (Con corrección de '0' en aprobadoAdmin)
+    INSERT INTO publicacion(
+        titulo,
+        descripcion,
+        estatus,
+        multimedia,
+        autor_id,
+        aprobadoAdmin,
+        mundial_id,
+        categoria_id
+    ) VALUES (
+        p_titulo,
+        p_descripcion,
+        'pendiente',
+        v_multimedia_id,
+        p_autor_id,
+        0, -- Valor corregido
+        p_mundial_id,
+        p_categoria_id
+    );
+
+    SET v_publicacion_id = LAST_INSERT_ID();
+
+    -- 3. Relación multimedia-publicacion
+    INSERT INTO multimedia_publicacion(estatus, multimedia_id, publicacion_id)
+    VALUES (1, v_multimedia_id, v_publicacion_id);
+
+    COMMIT;
+
+    SELECT 'success' AS result,
+           'Publicación registrada correctamente y enviada al administrador.' AS message,
+           v_publicacion_id AS publicacion_id;
+
+END sp_block$$
+
+-- 3. Se restaura el delimitador original
+DELIMITER ;
