@@ -58,7 +58,7 @@ $equipos = explode(",", $mundial['equipos']);
 
             <?php endif; ?>
 
-            <p><?= nl2br(htmlspecialchars($mundial['descripcion'])) ?></p>
+            <p><?= nl2br(htmlspecialchars($mundial['DESCRIPCION'])) ?></p>
         </div>
      </div>
 
@@ -174,6 +174,39 @@ $equipos = explode(",", $mundial['equipos']);
 </div> <!-- layout -->
 
 <h1 id="footer">Whats The Cup. Todos los derechos reservados</h1>
+
+<!-- Modal de publicación  -->
+<div id="modal-publicacion" class="modal" aria-hidden="true">
+  <div class="modal-backdrop" id="modal-backdrop"></div>
+  <div class="modal-window" role="dialog" aria-modal="true" aria-labelledby="titulo-modal">
+    <button class="modal-close" id="modal-close" aria-label="Cerrar">✕</button>
+    <h2 id="titulo-modal">Contribuir a Norteamérica 2026</h2>
+    <hr>
+
+    <form id="form-publicacion">
+      <input type="text" id="titulo" name="titulo" placeholder="AGREGA UN TÍTULO" required>
+      <textarea id="contenido" name="contenido" placeholder="Contenido de la infografía..." rows="6"></textarea>
+
+     <div class="fila-cat">
+          <select id="categoria" name="categoria">
+            <option value="">Categoría</option>
+            <option value="noticia">1</option>
+            <option value="estadistica">3</option>
+            <option value="opinion">3</option>
+          </select>
+
+          <button class="multimedia"><i class="bi bi-camera-reels"></i></button>
+          <button class="multimedia"><i class="bi bi-image"></i></button>
+      </div>
+
+
+      <div class="modal-actions">
+      <hr>
+      <button type="submit" class="btn-publicar">Publicar</button>
+      </div>
+    </form>
+  </div>
+</div>
 
 <script src="/WhatsTheCup/public/
 

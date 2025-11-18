@@ -74,7 +74,10 @@ if (session_status() === PHP_SESSION_NONE) {
             <div class="imagen-icono">
                 <label>Ícono</label>
 
-                <input type="file" name="i_imagen" id="archivo-icono" accept="image/*" required style="display:none;">
+               <!-- <input type="file" name="i_imagen" id="archivo-icono" accept="image/*" required style="display:none;">-->
+
+                <input type="file" name="i_imagen" id="archivo-icono" accept="image/*" required style="opacity:0; position:absolute; width:0; height:0;">
+
 
                 <button type="button" class="multimedia" onclick="document.getElementById('archivo-icono').click()">
                     <i class="bi bi-image"></i>
@@ -128,7 +131,10 @@ if (session_status() === PHP_SESSION_NONE) {
             <div class="copa">
                 <label>Copa</label>
 
-                <input type="file" name="i_copa" id="archivo-copa" accept="image/*" required style="display:none;">
+                <!--<input type="file" name="i_copa" id="archivo-copa" accept="image/*" required style="display:none;">-->
+
+                <input type="file" name="i_copa" id="archivo-copa" accept="image/*" required style="opacity:0; position:absolute; width:0; height:0;">
+
 
                 <button type="button" class="multimedia" onclick="document.getElementById('archivo-copa').click()">
                     <i class="bi bi-image"></i>
@@ -141,7 +147,10 @@ if (session_status() === PHP_SESSION_NONE) {
             <div class="mascota">
                 <label>Mascota</label>
 
-                <input type="file" name="i_mascota" id="archivo-mascota" accept="image/*" required style="display:none;">
+                <!--<input type="file" name="i_mascota" id="archivo-mascota" accept="image/*" required style="display:none;">-->
+
+                <input type="file" name="i_mascota" id="archivo-mascota" accept="image/*" required style="opacity:0; position:absolute; width:0; height:0;">
+
 
                 <button type="button" class="multimedia" onclick="document.getElementById('archivo-mascota').click()">
                     <i class="bi bi-image"></i>

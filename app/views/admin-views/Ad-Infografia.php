@@ -58,7 +58,7 @@ $equipos = explode(",", $mundial['equipos']);
 
             <?php endif; ?>
 
-            <p><?= nl2br(htmlspecialchars($mundial['descripcion'])) ?></p>
+            <p><?= nl2br(htmlspecialchars($mundial['DESCRIPCION'])) ?></p>
         </div>
      </div>
 

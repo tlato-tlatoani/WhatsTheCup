@@ -1,5 +1,4 @@
 CREATE DATABASE WTC;
-
 USE WTC;
 
 CREATE TABLE USUARIO (
@@ -97,15 +96,154 @@ CREATE TABLE EQUIPO (
     NOMBRE VARCHAR(100) NOT NULL UNIQUE
 );
 
-UPDATE USUARIO
-SET TIPO_USUARIO = 'ADMIN'
-WHERE ID_USUARIO = 18;
+CREATE TABLE multimedia_mundial (
+    id INT(11) AUTO_INCREMENT PRIMARY KEY,
+    multimedia_id INT(11) NOT NULL,
+    mundial_id INT(11) NOT NULL,
+    es_banner TINYINT(1) DEFAULT 0,
+    es_copa TINYINT(1) DEFAULT 0,
+    es_mascota TINYINT(1) DEFAULT 0,
 
-SELECT * FROM USUARIO;
-USE WTC;
-ALTER TABLE USUARIO
-ADD COLUMN IMAGEN_PERFIL LONGBLOB NULL 
-AFTER CONTRASENNA;
+    CONSTRAINT fk_mm_multimedia 
+        FOREIGN KEY (multimedia_id) REFERENCES Multimedia(id)
+        ON DELETE CASCADE ON UPDATE CASCADE,
 
+    CONSTRAINT fk_mm_mundial 
+        FOREIGN KEY (mundial_id) REFERENCES Mundial(ID_MUNDIAL)
+        ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+
+SELECT * FROM MUNDIAL;
 INSERT INTO Multimedia_mundial (multimedia_id, mundial_id, es_copa)
 VALUES (LAST_INSERT_ID(), 6, 1);
+
+
+USE WTC;
+
+
+ALTER TABLE publicacion
+rename column ID_PUBLICACION to id;
+
+ALTER TABLE likes
+DROP foreign key likes_ibfk_2;
+
+CREATE TABLE mundial (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  anio year(4) NOT NULL,
+  titulo varchar(100) NOT NULL,
+  descripcion text DEFAULT NULL,
+  equipos text DEFAULT NULL,
+  formato text DEFAULT NULL,
+  estadios text DEFAULT NULL,
+  partidos text DEFAULT NULL,
+  estadisticas text DEFAULT NULL,
+  entrevistas text DEFAULT NULL,
+  incidentes text DEFAULT NULL,
+  polemicas text DEFAULT NULL,
+  jugadas text DEFAULT NULL,
+  CreadoAdmin int(11) DEFAULT NULL,
+  ModificadoAdmin int(11) DEFAULT NULL,
+  detalles longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(detalles)),
+  PRIMARY KEY (id),
+  KEY mundial_ibfk_1 (CreadoAdmin),
+  KEY mundial_ibfk_2 (ModificadoAdmin),
+  CONSTRAINT mundial_ibfk_1 FOREIGN KEY (CreadoAdmin) REFERENCES usuario (ID_USUARIO),
+  CONSTRAINT mundial_ibfk_2 FOREIGN KEY (ModificadoAdmin) REFERENCES usuario (ID_USUARIO)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+ALTER TABLE publicacion
+CHANGE COLUMN CONTENIDO descripcion TEXT;
+ALTER TABLE publicacion
+CHANGE COLUMN CATEGORIA categoria_id INT;
+ALTER TABLE publicacion
+CHANGE COLUMN MUNDIAL mundial_id INT;
+ALTER TABLE publicacion
+CHANGE COLUMN USUARIO autor_id INT NOT NULL;
+ALTER TABLE publicacion
+ADD COLUMN AprobadoAdmin INT NULL AFTER autor_id;
+ALTER TABLE publicacion
+MODIFY COLUMN titulo VARCHAR(150) NOT NULL;
+ALTER TABLE publicacion
+MODIFY COLUMN fecha_publicacion DATETIME DEFAULT CURRENT_TIMESTAMP();
+UPDATE publicacion
+SET ESTATUS = 
+    CASE
+        WHEN ESTATUS = 'APROBADA' THEN 'aprobada'
+        WHEN ESTATUS = 'RECHAZADA' THEN 'rechazada'
+        ELSE 'pendiente'
+    END
+WHERE id > 0;
+
+ALTER TABLE publicacion
+MODIFY COLUMN ESTATUS 
+    ENUM('pendiente','aprobada','rechazada') 
+    DEFAULT 'pendiente';
+ALTER TABLE publicacion DROP FOREIGN KEY publicacion_ibfk_1;
+ALTER TABLE publicacion DROP FOREIGN KEY publicacion_ibfk_2;
+
+ALTER TABLE publicacion
+ADD CONSTRAINT publicacion_ibfk_2 FOREIGN KEY (mundial_id) REFERENCES mundial(id) ON DELETE SET NULL ON UPDATE CASCADE;
+
+
+CREATE TABLE categorias (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  nombre varchar(100) NOT NULL,
+  CreadoAdmin int(11) DEFAULT NULL,
+  PRIMARY KEY (id),
+  KEY categorias_ibfk_1 (CreadoAdmin),
+  CONSTRAINT categorias_ibfk_1 FOREIGN KEY (CreadoAdmin) REFERENCES usuario (ID_USUARIO)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+DROP TABLE IF EXISTS sede;
+
+CREATE TABLE sede (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  mundial_id int(11) NOT NULL,
+  sede_id int(11) NOT NULL,
+  PRIMARY KEY (id),
+  KEY mundial_id (mundial_id),
+  KEY sede_id (sede_id),
+  CONSTRAINT sede_ibfk_1 FOREIGN KEY (mundial_id) REFERENCES mundial (id) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT sede_ibfk_2 FOREIGN KEY (sede_id) REFERENCES pais (id) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+ALTER TABLE mundial
+RENAME COLUMN ID_MUNDIAL TO id;
+
+
+DROP TABLE IF EXISTS multimedia_mundial;
+
+CREATE TABLE multimedia_mundial (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  multimedia_id int(11) NOT NULL,
+  mundial_id int(11) NOT NULL,
+  es_banner tinyint(1) NOT NULL DEFAULT 0 COMMENT '1 si es el banner principal, 0 si es de la galeria',
+  es_copa tinyint(1) NOT NULL DEFAULT 0,
+  es_mascota tinyint(1) NOT NULL DEFAULT 0,
+  PRIMARY KEY (id),
+  KEY multimedia_id (multimedia_id),
+  KEY mundial_id (mundial_id),
+  CONSTRAINT multimedia_mundial_ibfk_1 FOREIGN KEY (multimedia_id) REFERENCES multimedia (id) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT multimedia_mundial_ibfk_2 FOREIGN KEY (mundial_id) REFERENCES mundial (id) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+
+DROP TABLE IF EXISTS multimedia_publicacion;
+
+CREATE TABLE multimedia_publicacion (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  estatus tinyint(4) DEFAULT 1,
+  multimedia_id int(11) NOT NULL,
+  publicacion_id int(11) NOT NULL,
+  PRIMARY KEY (id),
+  KEY multimedia_id (multimedia_id),
+  KEY publicacion_id (publicacion_id),
+  CONSTRAINT multimedia_publicacion_ibfk_1 FOREIGN KEY (multimedia_id) REFERENCES multimedia (id) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT multimedia_publicacion_ibfk_2 FOREIGN KEY (publicacion_id) REFERENCES publicacion (id) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+

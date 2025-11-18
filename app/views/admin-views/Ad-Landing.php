@@ -46,7 +46,7 @@ $mundiales = $model->obtenerTodosLosMundiales();
 
     <div id="mundiales">
 
-     <?php foreach ($mundiales as $m): ?>
+<?php foreach ($mundiales as $m): ?>
 <a href="<?= BASE_URL ?>index.php?route=adinfografia&id=<?= $m['id'] ?>">
     <div class="card" style="width: 18rem;">
     

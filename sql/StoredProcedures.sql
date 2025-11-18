@@ -165,7 +165,7 @@ END$$
 
 DELIMITER ;
 
-
+DELIMITER $$
 CREATE PROCEDURE sp_registrar_mundial(
     IN p_anio YEAR,
     IN p_titulo VARCHAR(100),
@@ -262,44 +262,47 @@ END$$
 
 DELIMITER ;
 
-CREATE PROCEDURE sp_obtener_mundial_por_id(IN p_id INT)
+DROP PROCEDURE sp_obtener_mundial_por_id;
+DELIMITER $$
+CREATE PROCEDURE `sp_obtener_mundial_por_id`(IN p_id INT)
 BEGIN
-    SELECT 
-        m.*,
+  SELECT 
+    m.*,
 
-        -- BANNER
-        b.nombre_archivo AS banner_nombre,
-        b.tipo_mime AS banner_mime,
-        TO_BASE64(b.contenido) AS banner_base64,
+    -- BANNER
+    b.nombre_archivo AS banner_nombre,
+    b.tipo_mime AS banner_mime,
+    TO_BASE64(b.contenido) AS banner_base64,
 
-        -- COPA
-        c.nombre_archivo AS copa_nombre,
-        c.tipo_mime AS copa_mime,
-        TO_BASE64(c.contenido) AS copa_base64,
+    -- COPA
+    c.nombre_archivo AS copa_nombre,
+    c.tipo_mime AS copa_mime,
+    TO_BASE64(c.contenido) AS copa_base64,
 
-        -- MASCOTA
-        ma.nombre_archivo AS mascota_nombre,
-        ma.tipo_mime AS mascota_mime,
-        TO_BASE64(ma.contenido) AS mascota_base64
+    -- MASCOTA
+    ma.nombre_archivo AS mascota_nombre,
+    ma.tipo_mime AS mascota_mime,
+    TO_BASE64(ma.contenido) AS mascota_base64
 
-    FROM Mundial m
+  FROM Mundial m
 
-    -- Banner
-    LEFT JOIN Multimedia_mundial mm_b ON mm_b.mundial_id = m.id AND mm_b.es_banner = 1
-    LEFT JOIN Multimedia b ON b.id = mm_b.multimedia_id
+  -- Banner
+  LEFT JOIN Multimedia_mundial mm_b ON mm_b.mundial_id = m.id AND mm_b.es_banner = 1
+  LEFT JOIN Multimedia b ON b.id = mm_b.multimedia_id
 
-    -- Copa
-    LEFT JOIN Multimedia_mundial mm_c ON mm_c.mundial_id = m.id AND mm_c.es_copa = 1
-    LEFT JOIN Multimedia c ON c.id = mm_c.multimedia_id
+  -- Copa
+  LEFT JOIN Multimedia_mundial mm_c ON mm_c.mundial_id = m.id AND mm_c.es_copa = 1
+  LEFT JOIN Multimedia c ON c.id = mm_c.multimedia_id
 
-    -- Mascota
-    LEFT JOIN Multimedia_mundial mm_ma ON mm_ma.mundial_id = m.id AND mm_ma.es_mascota = 1
-    LEFT JOIN Multimedia ma ON ma.id = mm_ma.multimedia_id
+  -- Mascota
+  LEFT JOIN Multimedia_mundial mm_ma ON mm_ma.mundial_id = m.id AND mm_ma.es_mascota = 1
+  LEFT JOIN Multimedia ma ON ma.id = mm_ma.multimedia_id
 
-    WHERE m.id = p_id;
+  WHERE m.id = p_id;
 END $$
-
 DELIMITER ;
+
+DELIMITER $$
 
 DELIMITER $$
 CREATE PROCEDURE sp_listar_mundiales()
@@ -321,7 +324,7 @@ BEGIN
     LEFT JOIN Multimedia_mundial mm 
         ON mm.mundial_id = m.id AND mm.es_banner = 1
     LEFT JOIN Multimedia md
-        ON md.id = mm.multimedia_id
+        ON md.ID_MULTIMEDIA = mm.multimedia_id
 
     ORDER BY m.anio DESC;
 END $$
@@ -329,27 +332,27 @@ END $$
 DELIMITER ;
 
 DELIMITER $$
-CREATE PROCEDURE sp_obtener_mundiales()
+CREATE PROCEDURE `sp_obtener_mundiales`()
 BEGIN
-    SELECT 
-        m.id,
-        m.titulo,
-        m.anio,
+  SELECT 
+    m.id,
+    m.titulo,
+    m.anio,
 
-        md.nombre_archivo AS banner_nombre,
-        md.tipo_mime     AS banner_mime,
-        TO_BASE64(md.contenido) AS banner_base64
+    md.nombre_archivo AS banner_nombre,
+    md.tipo_mime   AS banner_mime,
+    TO_BASE64(md.contenido) AS banner_base64
 
-    FROM Mundial m
-    LEFT JOIN Multimedia_mundial mm 
-        ON mm.mundial_id = m.id AND mm.es_banner = 1
-    LEFT JOIN Multimedia md
-        ON md.id = mm.multimedia_id
+  FROM Mundial m
+  LEFT JOIN Multimedia_mundial mm 
+    ON mm.mundial_id = m.id AND mm.es_banner = 1
+  LEFT JOIN Multimedia md
+    ON md.id = mm.multimedia_id
 
-    ORDER BY m.id DESC;
+  ORDER BY m.id DESC;
 END $$
-
 DELIMITER ;
+
 
 DELIMITER $$
 
@@ -373,3 +376,15 @@ END $$
 
 DELIMITER ;
 
+DELIMITER $$
+CREATE PROCEDURE `sp_agregar_categoria`(
+  IN p_nombre VARCHAR(100),
+  IN p_admin INT
+)
+BEGIN
+  INSERT INTO Categorias(nombre, CreadoAdmin)
+  VALUES(p_nombre, p_admin);
+
+  SELECT LAST_INSERT_ID() AS id_categoria;
+END $$
+DELIMITER ;
