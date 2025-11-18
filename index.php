@@ -112,13 +112,23 @@ switch ($route) {
     exit;
     break;
 
+    case 'ad_aprobar_posts':
+        // Cargar el controlador que consulta los datos
+        require_once PROJECT_ROOT . '/app/controllers/publicaciones_pendientes.php';
+        // Definir la vista (los datos ya están disponibles gracias al controlador)
+        $view_path = PROJECT_ROOT . '/app/views/admin-views/Ad-AprobarPosts.php';
+        break;
 
+        case 'aprobar_post':
+        case 'rechazar_post':
+            require_once PROJECT_ROOT . '/app/controllers/aprobar_rechazar_publicacion.php';
+            break;
+        
     default:
         header("HTTP/1.0 404 Not Found");
         $view_path = PROJECT_ROOT . '/app/views/error-views/404.php';
         break;
 
-        
 }
 
 // 3. Cargar la Vista

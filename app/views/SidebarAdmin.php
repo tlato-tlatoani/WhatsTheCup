@@ -53,9 +53,10 @@ if (!empty($usuario['IMAGEN_PERFIL'])) {
 
   <h1><?= htmlspecialchars($nombre) ?></h1>
 
-<a href="/WhatsTheCup/app/views/admin-views/Ad-AprobarPosts.php">
+<a href="/WhatsTheCup/index.php?route=ad_aprobar_posts">
     <button>Publicaciones</button>
-  </a>
+</a>
+
 
   <a href="/WhatsTheCup/app/views/admin-views/Ad-Categorias.php"> 
     <button>Categorías</button> 

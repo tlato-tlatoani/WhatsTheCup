@@ -121,5 +121,58 @@ class Model_Publicacion
 
     }
     
-    // Aquí irían otros métodos del modelo (consultarPublicaciones, etc.)
+    public function obtenerPublicacionesPendientes(): array
+    {
+        try {
+            // Utilizamos la vista v_publicaciones_pendientes
+            $stmt = $this->conn->prepare("SELECT * FROM v_publicaciones_pendientes");
+            $stmt->execute();
+            
+            // Retorna todas las filas encontradas
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            echo ($stmt);
+            
+        } catch (PDOException $e) {
+            // Loguea el error de la base de datos
+            error_log('Error PDO al consultar publicaciones pendientes: ' . $e->getMessage());
+            // Devuelve un array vacío para evitar errores en el controlador/vista
+            return []; 
+        }
+    }
+
+    public function actualizarAprobacionPublicacion(int $id, int $decision): array
+    {
+        try {
+            $stmt = $this->conn->prepare("
+                CALL sp_actualizar_aprobacion_publicacion(:p_id, :p_decision)
+            ");
+
+            $stmt->bindParam(':p_id', $id, PDO::PARAM_INT);
+            $stmt->bindParam(':p_decision', $decision, PDO::PARAM_INT);
+
+            $stmt->execute();
+
+            // Primer resultset: respuesta del SP
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            // IMPORTANTE: limpiar result sets extra que genera MySQL
+            while ($stmt->nextRowset()) { /* limpiar */ }
+
+            $stmt->closeCursor();
+
+            return [
+                'success' => isset($result['result']) && $result['result'] === 'success',
+                'message' => $result['message'] ?? 'Operación realizada correctamente.'
+            ];
+        }
+        catch (PDOException $e) {
+            error_log("Error en actualizarAprobacionPublicacion: " . $e->getMessage());
+            return [
+                'success' => false,
+                'message' => 'Error de BD: ' . $e->getMessage()
+            ];
+        }
+    }
+
+   
 }

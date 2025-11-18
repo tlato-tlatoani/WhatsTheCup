@@ -1,3 +1,27 @@
+<?php
+
+require_once PROJECT_ROOT . '/app/controllers/publicaciones_pendientes.php';
+
+// Este archivo asume que el controlador 'publicaciones_por_aprobar.php' 
+// ya se ha ejecutado y ha poblado la variable $publicaciones_pendientes.
+
+// Fallback si la vista se accede directamente sin el controlador
+if (!isset($publicaciones_pendientes)) {
+    // Si la constante PROJECT_ROOT existe, intentamos cargar el controlador
+    if (defined('PROJECT_ROOT')) {
+        require_once PROJECT_ROOT . '/app/controllers/publicaciones_pendientes.php';
+    } else {
+        // Si no se puede cargar el controlador, inicializamos a vacío
+        $publicaciones_pendientes = [];
+        $error_consulta = "Error: La aplicación no está cargando las publicaciones correctamente.";
+    }
+}
+?>
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,74 +49,77 @@
 
 <div id="publicaciones">
 
-    <div class="publicacion">
+
+<!-- Muestra mensaje de error o publicaciones -->
+    <?php if (!empty($error_consulta)): ?>
+        <div class="message-error" style="color: red; padding: 10px; border: 1px solid red;">
+            <?php echo htmlspecialchars($error_consulta); ?>
+        </div>
+    <?php elseif (empty($publicaciones_pendientes)): ?>
+        <div class="message-info" style="color: #007bff; padding: 10px; border: 1px solid #007bff; background-color: #e6f3ff;">
+            No hay publicaciones pendientes de aprobación.
+        </div>
+    <?php else: ?>
         
 
-           <div class="preview">
-                <div class="nombre-post">
-                <h1 class="titulo">LOREM IPSUM</h1>
-                <h2 class="infografia"> en Norteamérica 2026</h2>
+       
+
+<!-- INICIO DEL BUCLE DE PUBLICACIONES PENDIENTES -->
+        <?php foreach ($publicaciones_pendientes as $post): ?>
+            
+            <div class="publicacion">
+                
+                <div class="preview">
+                    <div class="nombre-post">
+                        <!-- ID y Título de la Publicación -->
+                        <h1 class="titulo">#<?php echo htmlspecialchars($post['id']) . ' - ' . htmlspecialchars($post['titulo']); ?></h1>
+                        <!-- Categoría y Autor -->
+                        <h2 class="infografia">Categoría: <?php echo htmlspecialchars($post['nombre_categoria']); ?> | Autor: <?php echo htmlspecialchars($post['nombre_autor_completo']); ?></h2>
+                    </div>
+
+                    <!-- Descripción de la Publicación -->
+                    <p><?php echo nl2br(htmlspecialchars($post['descripcion'])); ?></p>
+                </div>
+                    
+
+                <div class="interaccion">
+                    <!-- Nota: La imagen/multimedia (MULTIMEDIA) requiere un endpoint PHP para servir el BLOB -->
+                    <!-- Por ahora, usamos un placeholder o la imagen predefinida en tu HTML -->
+                    <img src="/WhatsTheCup/public/imagenes/FDP.png" class="imagen-post" alt="Preview Multimedia">
+                    
+                    <!-- Botones de Acción (Formulario para Aprobación/Rechazo) -->
+
+                    <!-- Botón APROBAR -->
+               <form method="POST" action="<?= BASE_URL ?>index.php?route=aprobar_post" style="display: inline;">
+                    <input type="hidden" name="post_id" value="<?= htmlspecialchars($post['id']) ?>">
+                    <input type="hidden" name="accion" value="aprobar">
+                    <button type="submit" class="btn-aprobar" title="Aprobar publicación">
+                        <i class="bi bi-check-lg"></i>
+                    </button>
+                </form>
+
+                    
+                    <!-- Botón RECHAZAR -->
+                    <form method="POST" action="<?= BASE_URL ?>index.php?route=rechazar_post" style="display: inline;">
+                        <input type="hidden" name="post_id" value="<?= htmlspecialchars($post['id']) ?>">
+                        <input type="hidden" name="accion" value="rechazar">
+                        <button type="submit" class="btn-rechazar" title="Rechazar publicación">
+                            <i class="bi bi-x"></i>
+                        </button>
+                    </form>
+
                 </div>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec volutpat justo. 
-                 Vestibulum at ante at dolor lacinia sollicitudin.In condimentum laoreet orci luctus tristique. 
-                Aliquam erat volutpat. Pellentesque sed ipsum aliquam, feugiat erat et, aliquet eros. </p>
             </div>
-                
+            
+        <?php endforeach; ?>
+        <!-- FIN DEL BUCLE -->
 
-        <div class="interaccion">
-            <img src="imagenes/FDP.png" class="imagen-post">
-            <i class="bi bi-check-lg"></i>
-            <i class="bi bi-x"></i>
-        </div>
+    <?php endif; ?>
 
-    </div>
+    
 
-    <div class="publicacion">
-        
 
-        <div class="preview">
-
-                <h1 class="titulo">LOREM IPSUM</h1>
-                <h2 class="infografia"> en Norteamérica 2026</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec volutpat justo. 
-                 Vestibulum at ante at dolor lacinia sollicitudin.In condimentum laoreet orci luctus tristique. 
-                Aliquam erat volutpat. Pellentesque sed ipsum aliquam, feugiat erat et, aliquet eros. </p>
-            </div>
-               
-
-        <div class="interaccion">
-            <img src="imagenes/FDP.png" class="imagen-post">
-           <i class="bi bi-check-lg"></i>
-            <i class="bi bi-x"></i>
-        </div>
-
-    </div>
-
-    <div class="publicacion">
-        
-        
-
-       <div class="preview">
-
-                <h1 class="titulo"> LOREM IPSUM </h1>
-                <h2 class="infografia"> en Norteamérica 2026</h2>
-        
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec volutpat justo. 
-                 Vestibulum at ante at dolor lacinia sollicitudin.In condimentum laoreet orci luctus tristique. 
-                Aliquam erat volutpat. Pellentesque sed ipsum aliquam, feugiat erat et, aliquet eros. </p>
-            </div>
-                
-
-        <div class="interaccion">
-            <img src="imagenes/FDP.png" class="imagen-post">    
-            <i class="bi bi-check-lg"></i>
-            <i class="bi bi-x"></i>
-
-        </div>
-
-    </div>
 
 </div>
 
@@ -100,7 +127,7 @@
 </div>
 
 
-
+ 
 <h1 id="footer"> Whats The Cup. Todos los derechos reservados </h1>
     
 
