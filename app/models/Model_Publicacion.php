@@ -12,6 +12,11 @@ class Model_Publicacion
         $this->conn = $conexion->getConnection();
     }
 
+
+    public function getConnection() {
+    return $this->conn;
+}
+
     /**
      * Registra una nueva publicación y su multimedia asociada.
      * @param string $titulo Título de la publicación.
@@ -130,7 +135,6 @@ class Model_Publicacion
             
             // Retorna todas las filas encontradas
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
-            echo ($stmt);
             
         } catch (PDOException $e) {
             // Loguea el error de la base de datos
@@ -174,5 +178,118 @@ class Model_Publicacion
         }
     }
 
+    public function obtenerPublicacionesPorMundialAprobadas(int $mundialId): array
+    {
+        try {
+            // Consulta para obtener publicaciones aprobadas (estado_aprobacion = 1) por Mundial ID.
+            // Se asume que 'publicacion', 'usuario' y 'categoria' son las tablas.
+            $sql = "
+                SELECT 
+                    p.id, 
+                    p.titulo, 
+                    p.descripcion, 
+                    c.nombre AS nombre_categoria, 
+                    CONCAT(u.NOMBRES, ' ', u.APELLIDO_P) AS nombre_autor_completo,
+                    p.fecha_publicacion,
+                    m.nombre_archivo,
+                    m.tipo_mime,
+                    TO_BASE64(m.contenido) AS base64_multimedia
+                FROM 
+                    publicacion p
+                JOIN usuario u ON p.autor_id = u.ID_USUARIO
+                JOIN categorias c ON p.categoria_id = c.id
+                LEFT JOIN multimedia m ON p.MULTIMEDIA = m.id
+                WHERE 
+                    p.mundial_id = :p_mundial_id
+                    AND p.AprobadoAdmin = 1
+                ORDER BY 
+                    p.fecha_publicacion DESC
+            ";
+            
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':p_mundial_id', $mundialId, PDO::PARAM_INT);
+            $stmt->execute();
+            
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            
+        } catch (PDOException $e) {
+            error_log('Error PDO al consultar publicaciones por Mundial (Aprobadas): ' . $e->getMessage());
+            return []; 
+        }
+    }
+
+   public function obtenerPublicacionesUsuarioAprobadas($id_usuario)
+{
+    $sql = "SELECT 
+                p.id,
+                p.titulo,
+                p.descripcion,
+                p.fecha_publicacion,
+                p.estatus,
+                p.categoria_id,
+                p.mundial_id,
+                m.nombre_archivo,
+                m.tipo_mime,
+                TO_BASE64(m.contenido) AS multimedia_base64
+            FROM Publicacion p
+            LEFT JOIN Multimedia m ON p.MULTIMEDIA = m.id
+            WHERE p.autor_id = :id_usuario
+              AND p.estatus = 'aprobada'
+            ORDER BY p.fecha_publicacion DESC";
+
+    $stmt = $this->conn->prepare($sql);
+    $stmt->bindParam(':id_usuario', $id_usuario, PDO::PARAM_INT);
+    $stmt->execute();
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+public function toggleLike($id_usuario, $id_publicacion)
+{
+    // Asegurarse de que la publicación esté aprobada
+    $sqlCheck = "SELECT id FROM Publicacion WHERE id = ? AND ESTATUS = 'aprobada' AND AprobadoAdmin = 1";
+    $stmt = $this->conn->prepare($sqlCheck);
+    $stmt->execute([$id_publicacion]);
+    if (!$stmt->fetch()) {
+        return "invalid"; // Publicación no aprobada
+    }
+
+    // Revisar si ya existe like
+    $sql = "SELECT 1 FROM Interacciones WHERE id_usuario = ? AND id_publicacion = ?";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->execute([$id_usuario, $id_publicacion]);
+
+    if ($stmt->fetch()) {
+        // Ya había like → lo quitamos
+        $sql = "DELETE FROM Interacciones WHERE id_usuario = ? AND id_publicacion = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$id_usuario, $id_publicacion]);
+        return "removed";
+    } else {
+        // No había → lo agregamos
+        $sql = "INSERT INTO Interacciones (id_usuario, id_publicacion) VALUES (?, ?)";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$id_usuario, $id_publicacion]);
+        return "added";
+    }
+}
+public function contarLikes($id_publicacion)
+{
+    $sql = "SELECT COUNT(*) AS total_likes FROM Interacciones WHERE id_publicacion = ?";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->execute([$id_publicacion]);
+
+    return (int)$stmt->fetch(PDO::FETCH_ASSOC)['total_likes'];
+}
+public function usuarioDioLike($id_usuario, $id_publicacion)
+{
+    $sql = "SELECT 1 FROM Interacciones WHERE id_usuario = ? AND id_publicacion = ?";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->execute([$id_usuario, $id_publicacion]);
+
+    return (bool)$stmt->fetch();
+}
+
+
    
 }
+// Se elimina el '}' adicional que existía al final del archivo original.

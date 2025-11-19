@@ -50,6 +50,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
        exit();
     }
 
+     if (isset($_POST['btn-like'])) {
+       require_once PROJECT_ROOT . '/app/controllers/like_post.php';
+       exit();
+    }
+    if($_GET['route'] === 'like_post'){
+        require_once PROJECT_ROOT . '/app/controllers/like_post.php';
+        exit;
+    }
+
+
 }
 
     // Aquí se agregarían otras lógicas de POST 
@@ -124,6 +134,16 @@ switch ($route) {
             require_once PROJECT_ROOT . '/app/controllers/aprobar_rechazar_publicacion.php';
             break;
         
+            case 'us_infografia':
+                    $view = 'app/views/user-views/Us-Infografia.php';
+                break;
+
+
+    case 'ver_publicacion':
+    require_once PROJECT_ROOT . '/app/controllers/ver_publicacion.php';
+    $view_path = PROJECT_ROOT . '/app/views/user-views/Us-Post.php';
+    break;
+
     default:
         header("HTTP/1.0 404 Not Found");
         $view_path = PROJECT_ROOT . '/app/views/error-views/404.php';

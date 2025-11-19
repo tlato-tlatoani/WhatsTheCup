@@ -85,7 +85,12 @@ if (!isset($publicaciones_pendientes)) {
                 <div class="interaccion">
                     <!-- Nota: La imagen/multimedia (MULTIMEDIA) requiere un endpoint PHP para servir el BLOB -->
                     <!-- Por ahora, usamos un placeholder o la imagen predefinida en tu HTML -->
-                    <img src="/WhatsTheCup/public/imagenes/FDP.png" class="imagen-post" alt="Preview Multimedia">
+                    <?php if (!empty($post['base64_multimedia'])): ?>
+                                <img src="data:<?= $post['tipo_mime'] ?>;base64,<?= $post['base64_multimedia'] ?>" 
+                                    class="imagen-post">
+                            <?php else: ?>
+                                <img src="/WhatsTheCup/public/imagenes/FDP.png" class="imagen-post">
+                            <?php endif; ?>
                     
                     <!-- Botones de Acción (Formulario para Aprobación/Rechazo) -->
 

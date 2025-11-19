@@ -174,3 +174,314 @@ Stack trace:
 #0 C:\xampp\htdocs\WhatsTheCup\index.php(124): require_once()
 #1 {main}
   thrown in C:\xampp\htdocs\WhatsTheCup\app\controllers\aprobar_rechazar_publicacion.php on line 3
+[18-Nov-2025 21:36:33 Europe/Berlin] ⚡ Controlador publicaciones_pendientes cargado
+[18-Nov-2025 21:36:36 Europe/Berlin] PHP Warning:  require_once(C:\xampp\htdocs\WhatsTheCup/app/models/aprobar_rechazar_publicacion.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\WhatsTheCup\app\controllers\aprobar_rechazar_publicacion.php on line 3
+[18-Nov-2025 21:36:36 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\WhatsTheCup/app/models/aprobar_rechazar_publicacion.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\WhatsTheCup\app\controllers\aprobar_rechazar_publicacion.php:3
+Stack trace:
+#0 C:\xampp\htdocs\WhatsTheCup\index.php(124): require_once()
+#1 {main}
+  thrown in C:\xampp\htdocs\WhatsTheCup\app\controllers\aprobar_rechazar_publicacion.php on line 3
+[18-Nov-2025 21:36:37 Europe/Berlin] ⚡ Controlador publicaciones_pendientes cargado
+[18-Nov-2025 21:37:06 Europe/Berlin] PHP Warning:  require_once(C:\xampp\htdocs\WhatsTheCup/app/models/aprobar_rechazar_publicacion.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\WhatsTheCup\app\controllers\aprobar_rechazar_publicacion.php on line 3
+[18-Nov-2025 21:37:06 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\WhatsTheCup/app/models/aprobar_rechazar_publicacion.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\WhatsTheCup\app\controllers\aprobar_rechazar_publicacion.php:3
+Stack trace:
+#0 C:\xampp\htdocs\WhatsTheCup\index.php(124): require_once()
+#1 {main}
+  thrown in C:\xampp\htdocs\WhatsTheCup\app\controllers\aprobar_rechazar_publicacion.php on line 3
+[18-Nov-2025 21:37:07 Europe/Berlin] ⚡ Controlador publicaciones_pendientes cargado
+[18-Nov-2025 21:37:33 Europe/Berlin] ⚡ Controlador publicaciones_pendientes cargado
+[18-Nov-2025 21:37:35 Europe/Berlin] ⚡ Controlador publicaciones_pendientes cargado
+[18-Nov-2025 21:39:03 Europe/Berlin] ⚡ Controlador publicaciones_pendientes cargado
+[18-Nov-2025 21:39:06 Europe/Berlin] ⚡ Controlador publicaciones_pendientes cargado
+[18-Nov-2025 21:55:03 Europe/Berlin] Error PDO al consultar publicaciones por Mundial (Aprobadas): SQLSTATE[42S22]: Column not found: 1054 Unknown column 'u.nombre' in 'field list'
+[18-Nov-2025 21:55:08 Europe/Berlin] Error PDO al consultar publicaciones por Mundial (Aprobadas): SQLSTATE[42S22]: Column not found: 1054 Unknown column 'u.nombre' in 'field list'
+[18-Nov-2025 21:55:11 Europe/Berlin] Error PDO al consultar publicaciones por Mundial (Aprobadas): SQLSTATE[42S22]: Column not found: 1054 Unknown column 'u.nombre' in 'field list'
+[18-Nov-2025 21:55:14 Europe/Berlin] Error PDO al consultar publicaciones por Mundial (Aprobadas): SQLSTATE[42S22]: Column not found: 1054 Unknown column 'u.nombre' in 'field list'
+[18-Nov-2025 21:57:06 Europe/Berlin] Error PDO al consultar publicaciones por Mundial (Aprobadas): SQLSTATE[42S22]: Column not found: 1054 Unknown column 'u.nombre' in 'field list'
+[18-Nov-2025 21:57:09 Europe/Berlin] Error PDO al consultar publicaciones por Mundial (Aprobadas): SQLSTATE[42S22]: Column not found: 1054 Unknown column 'u.nombre' in 'field list'
+[18-Nov-2025 21:59:10 Europe/Berlin] Error PDO al consultar publicaciones por Mundial (Aprobadas): SQLSTATE[42S22]: Column not found: 1054 Unknown column 'u.nombre' in 'field list'
+[18-Nov-2025 21:59:12 Europe/Berlin] Error PDO al consultar publicaciones por Mundial (Aprobadas): SQLSTATE[42S22]: Column not found: 1054 Unknown column 'u.nombre' in 'field list'
+[18-Nov-2025 21:59:25 Europe/Berlin] Error PDO al consultar publicaciones por Mundial (Aprobadas): SQLSTATE[42S22]: Column not found: 1054 Unknown column 'u.nombre' in 'field list'
+[18-Nov-2025 21:59:30 Europe/Berlin] Error PDO al consultar publicaciones por Mundial (Aprobadas): SQLSTATE[42S22]: Column not found: 1054 Unknown column 'u.nombre' in 'field list'
+[18-Nov-2025 22:00:00 Europe/Berlin] Error PDO al consultar publicaciones por Mundial (Aprobadas): SQLSTATE[42S22]: Column not found: 1054 Unknown column 'u.nombre' in 'field list'
+[18-Nov-2025 22:00:03 Europe/Berlin] Error PDO al consultar publicaciones por Mundial (Aprobadas): SQLSTATE[42S22]: Column not found: 1054 Unknown column 'u.nombre' in 'field list'
+[18-Nov-2025 22:04:12 Europe/Berlin] Error PDO al consultar publicaciones por Mundial (Aprobadas): SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+[18-Nov-2025 22:04:13 Europe/Berlin] Error PDO al consultar publicaciones por Mundial (Aprobadas): SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+[18-Nov-2025 22:04:16 Europe/Berlin] Error PDO al consultar publicaciones por Mundial (Aprobadas): SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+[18-Nov-2025 22:05:17 Europe/Berlin] Error PDO al consultar publicaciones por Mundial (Aprobadas): SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+[18-Nov-2025 22:05:20 Europe/Berlin] Error PDO al consultar publicaciones por Mundial (Aprobadas): SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+[18-Nov-2025 22:05:25 Europe/Berlin] Error PDO al consultar publicaciones por Mundial (Aprobadas): SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+[18-Nov-2025 22:07:44 Europe/Berlin] Error PDO al consultar publicaciones por Mundial (Aprobadas): SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+[18-Nov-2025 22:08:11 Europe/Berlin] Error PDO al consultar publicaciones por Mundial (Aprobadas): SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+[18-Nov-2025 22:09:31 Europe/Berlin] Error PDO al consultar publicaciones por Mundial (Aprobadas): SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+[18-Nov-2025 22:23:30 Europe/Berlin] Error PDO al consultar publicaciones por Mundial (Aprobadas): SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+[18-Nov-2025 22:23:30 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to undefined function vardump() in C:\xampp\htdocs\WhatsTheCup\app\views\user-views\Us-Infografia.php:129
+Stack trace:
+#0 C:\xampp\htdocs\WhatsTheCup\index.php(141): require_once()
+#1 {main}
+  thrown in C:\xampp\htdocs\WhatsTheCup\app\views\user-views\Us-Infografia.php on line 129
+[18-Nov-2025 22:29:11 Europe/Berlin] Error PDO al consultar publicaciones por Mundial (Aprobadas): SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+[18-Nov-2025 22:36:22 Europe/Berlin] Error PDO al consultar publicaciones por Mundial (Aprobadas): SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+[18-Nov-2025 22:36:41 Europe/Berlin] Error PDO al consultar publicaciones por Mundial (Aprobadas): SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+[18-Nov-2025 22:36:43 Europe/Berlin] Error PDO al consultar publicaciones por Mundial (Aprobadas): SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+[18-Nov-2025 22:39:34 Europe/Berlin] PHP Warning:  Undefined array key "fecha_creacion" in C:\xampp\htdocs\WhatsTheCup\app\views\user-views\Us-Infografia.php on line 145
+[18-Nov-2025 22:39:34 Europe/Berlin] PHP Deprecated:  strtotime(): Passing null to parameter #1 ($datetime) of type string is deprecated in C:\xampp\htdocs\WhatsTheCup\app\views\user-views\Us-Infografia.php on line 145
+[18-Nov-2025 22:50:57 Europe/Berlin] ⚡ Controlador publicaciones_pendientes cargado
+[18-Nov-2025 22:52:57 Europe/Berlin] ⚡ Controlador publicaciones_pendientes cargado
+[18-Nov-2025 22:53:03 Europe/Berlin] ⚡ Controlador publicaciones_pendientes cargado
+[18-Nov-2025 22:53:07 Europe/Berlin] ⚡ Controlador publicaciones_pendientes cargado
+[18-Nov-2025 22:53:10 Europe/Berlin] ⚡ Controlador publicaciones_pendientes cargado
+[18-Nov-2025 23:16:28 Europe/Berlin] PHP Fatal error:  Uncaught Error: Cannot access private property Model_Publicacion::$conn in C:\xampp\htdocs\WhatsTheCup\app\controllers\ver_publicacion.php:40
+Stack trace:
+#0 C:\xampp\htdocs\WhatsTheCup\index.php(133): require_once()
+#1 {main}
+  thrown in C:\xampp\htdocs\WhatsTheCup\app\controllers\ver_publicacion.php on line 40
+[18-Nov-2025 23:23:48 Europe/Berlin] PHP Fatal error:  Uncaught Error: Cannot access private property Model_Publicacion::$conn in C:\xampp\htdocs\WhatsTheCup\app\controllers\ver_publicacion.php:40
+Stack trace:
+#0 C:\xampp\htdocs\WhatsTheCup\index.php(133): require_once()
+#1 {main}
+  thrown in C:\xampp\htdocs\WhatsTheCup\app\controllers\ver_publicacion.php on line 40
+[18-Nov-2025 23:23:56 Europe/Berlin] PHP Fatal error:  Uncaught Error: Cannot access private property Model_Publicacion::$conn in C:\xampp\htdocs\WhatsTheCup\app\controllers\ver_publicacion.php:40
+Stack trace:
+#0 C:\xampp\htdocs\WhatsTheCup\index.php(133): require_once()
+#1 {main}
+  thrown in C:\xampp\htdocs\WhatsTheCup\app\controllers\ver_publicacion.php on line 40
+[18-Nov-2025 23:24:24 Europe/Berlin] PHP Fatal error:  Uncaught Error: Cannot access private property Model_Publicacion::$conn in C:\xampp\htdocs\WhatsTheCup\app\controllers\ver_publicacion.php:40
+Stack trace:
+#0 C:\xampp\htdocs\WhatsTheCup\index.php(133): require_once()
+#1 {main}
+  thrown in C:\xampp\htdocs\WhatsTheCup\app\controllers\ver_publicacion.php on line 40
+[18-Nov-2025 23:26:03 Europe/Berlin] PHP Fatal error:  Uncaught Error: Cannot access private property Model_Publicacion::$conn in C:\xampp\htdocs\WhatsTheCup\app\controllers\ver_publicacion.php:40
+Stack trace:
+#0 C:\xampp\htdocs\WhatsTheCup\index.php(133): require_once()
+#1 {main}
+  thrown in C:\xampp\htdocs\WhatsTheCup\app\controllers\ver_publicacion.php on line 40
+[18-Nov-2025 23:26:49 Europe/Berlin] PHP Fatal error:  Uncaught Error: Cannot access private property Model_Publicacion::$conn in C:\xampp\htdocs\WhatsTheCup\app\controllers\ver_publicacion.php:40
+Stack trace:
+#0 C:\xampp\htdocs\WhatsTheCup\index.php(133): require_once()
+#1 {main}
+  thrown in C:\xampp\htdocs\WhatsTheCup\app\controllers\ver_publicacion.php on line 40
+[18-Nov-2025 23:28:05 Europe/Berlin] PHP Fatal error:  Uncaught Error: Cannot access private property Model_Publicacion::$conn in C:\xampp\htdocs\WhatsTheCup\app\controllers\ver_publicacion.php:40
+Stack trace:
+#0 C:\xampp\htdocs\WhatsTheCup\index.php(133): require_once()
+#1 {main}
+  thrown in C:\xampp\htdocs\WhatsTheCup\app\controllers\ver_publicacion.php on line 40
+[18-Nov-2025 23:29:46 Europe/Berlin] PHP Fatal error:  Uncaught Error: Cannot access private property Model_Publicacion::$conn in C:\xampp\htdocs\WhatsTheCup\app\controllers\ver_publicacion.php:40
+Stack trace:
+#0 C:\xampp\htdocs\WhatsTheCup\index.php(133): require_once()
+#1 {main}
+  thrown in C:\xampp\htdocs\WhatsTheCup\app\controllers\ver_publicacion.php on line 40
+[18-Nov-2025 23:29:51 Europe/Berlin] PHP Fatal error:  Uncaught Error: Cannot access private property Model_Publicacion::$conn in C:\xampp\htdocs\WhatsTheCup\app\controllers\ver_publicacion.php:40
+Stack trace:
+#0 C:\xampp\htdocs\WhatsTheCup\index.php(133): require_once()
+#1 {main}
+  thrown in C:\xampp\htdocs\WhatsTheCup\app\controllers\ver_publicacion.php on line 40
+[18-Nov-2025 23:30:52 Europe/Berlin] PHP Fatal error:  Uncaught Error: Cannot access private property Model_Publicacion::$conn in C:\xampp\htdocs\WhatsTheCup\app\controllers\ver_publicacion.php:43
+Stack trace:
+#0 C:\xampp\htdocs\WhatsTheCup\index.php(133): require_once()
+#1 {main}
+  thrown in C:\xampp\htdocs\WhatsTheCup\app\controllers\ver_publicacion.php on line 43
+[18-Nov-2025 23:30:53 Europe/Berlin] PHP Fatal error:  Uncaught Error: Cannot access private property Model_Publicacion::$conn in C:\xampp\htdocs\WhatsTheCup\app\controllers\ver_publicacion.php:43
+Stack trace:
+#0 C:\xampp\htdocs\WhatsTheCup\index.php(133): require_once()
+#1 {main}
+  thrown in C:\xampp\htdocs\WhatsTheCup\app\controllers\ver_publicacion.php on line 43
+[19-Nov-2025 00:27:01 Europe/Berlin] PHP Warning:  require_once(C:\xampp\htdocs\WhatsTheCup\app/Conexion.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\WhatsTheCup\app\models\Model_interaccion.php on line 2
+[19-Nov-2025 00:27:01 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\WhatsTheCup\app/Conexion.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\WhatsTheCup\app\models\Model_interaccion.php:2
+Stack trace:
+#0 C:\xampp\htdocs\WhatsTheCup\app\controllers\like_post.php(2): require_once()
+#1 C:\xampp\htdocs\WhatsTheCup\index.php(58): require_once('C:\\xampp\\htdocs...')
+#2 {main}
+  thrown in C:\xampp\htdocs\WhatsTheCup\app\models\Model_interaccion.php on line 2
+[19-Nov-2025 00:27:04 Europe/Berlin] PHP Warning:  require_once(C:\xampp\htdocs\WhatsTheCup\app/Conexion.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\WhatsTheCup\app\models\Model_interaccion.php on line 2
+[19-Nov-2025 00:27:04 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\WhatsTheCup\app/Conexion.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\WhatsTheCup\app\models\Model_interaccion.php:2
+Stack trace:
+#0 C:\xampp\htdocs\WhatsTheCup\app\controllers\like_post.php(2): require_once()
+#1 C:\xampp\htdocs\WhatsTheCup\index.php(58): require_once('C:\\xampp\\htdocs...')
+#2 {main}
+  thrown in C:\xampp\htdocs\WhatsTheCup\app\models\Model_interaccion.php on line 2
+[19-Nov-2025 00:27:48 Europe/Berlin] PHP Warning:  require_once(C:\xampp\htdocs\WhatsTheCup\app/Conexion.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\WhatsTheCup\app\models\Model_interaccion.php on line 2
+[19-Nov-2025 00:27:48 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\WhatsTheCup\app/Conexion.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\WhatsTheCup\app\models\Model_interaccion.php:2
+Stack trace:
+#0 C:\xampp\htdocs\WhatsTheCup\app\controllers\like_post.php(2): require_once()
+#1 C:\xampp\htdocs\WhatsTheCup\index.php(58): require_once('C:\\xampp\\htdocs...')
+#2 {main}
+  thrown in C:\xampp\htdocs\WhatsTheCup\app\models\Model_interaccion.php on line 2
+[19-Nov-2025 00:27:51 Europe/Berlin] PHP Warning:  require_once(C:\xampp\htdocs\WhatsTheCup\app/Conexion.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\WhatsTheCup\app\models\Model_interaccion.php on line 2
+[19-Nov-2025 00:27:51 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\WhatsTheCup\app/Conexion.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\WhatsTheCup\app\models\Model_interaccion.php:2
+Stack trace:
+#0 C:\xampp\htdocs\WhatsTheCup\app\controllers\like_post.php(2): require_once()
+#1 C:\xampp\htdocs\WhatsTheCup\index.php(58): require_once('C:\\xampp\\htdocs...')
+#2 {main}
+  thrown in C:\xampp\htdocs\WhatsTheCup\app\models\Model_interaccion.php on line 2
+[19-Nov-2025 00:27:55 Europe/Berlin] PHP Warning:  require_once(C:\xampp\htdocs\WhatsTheCup\app/Conexion.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\WhatsTheCup\app\models\Model_interaccion.php on line 2
+[19-Nov-2025 00:27:55 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\WhatsTheCup\app/Conexion.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\WhatsTheCup\app\models\Model_interaccion.php:2
+Stack trace:
+#0 C:\xampp\htdocs\WhatsTheCup\app\controllers\like_post.php(2): require_once()
+#1 C:\xampp\htdocs\WhatsTheCup\index.php(58): require_once('C:\\xampp\\htdocs...')
+#2 {main}
+  thrown in C:\xampp\htdocs\WhatsTheCup\app\models\Model_interaccion.php on line 2
+[19-Nov-2025 00:29:27 Europe/Berlin] PHP Warning:  require_once(C:\xampp\htdocs\WhatsTheCup\app/Conexion.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\WhatsTheCup\app\models\Model_interaccion.php on line 2
+[19-Nov-2025 00:29:27 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\WhatsTheCup\app/Conexion.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\WhatsTheCup\app\models\Model_interaccion.php:2
+Stack trace:
+#0 C:\xampp\htdocs\WhatsTheCup\app\controllers\like_post.php(2): require_once()
+#1 C:\xampp\htdocs\WhatsTheCup\index.php(58): require_once('C:\\xampp\\htdocs...')
+#2 {main}
+  thrown in C:\xampp\htdocs\WhatsTheCup\app\models\Model_interaccion.php on line 2
+[19-Nov-2025 00:30:04 Europe/Berlin] PHP Warning:  require_once(C:\xampp\htdocs\WhatsTheCup\app/Conexion.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\WhatsTheCup\app\models\Model_interaccion.php on line 2
+[19-Nov-2025 00:30:04 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\WhatsTheCup\app/Conexion.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\WhatsTheCup\app\models\Model_interaccion.php:2
+Stack trace:
+#0 C:\xampp\htdocs\WhatsTheCup\app\controllers\like_post.php(2): require_once()
+#1 C:\xampp\htdocs\WhatsTheCup\index.php(58): require_once('C:\\xampp\\htdocs...')
+#2 {main}
+  thrown in C:\xampp\htdocs\WhatsTheCup\app\models\Model_interaccion.php on line 2
+[19-Nov-2025 00:30:05 Europe/Berlin] PHP Warning:  require_once(C:\xampp\htdocs\WhatsTheCup\app/Conexion.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\WhatsTheCup\app\models\Model_interaccion.php on line 2
+[19-Nov-2025 00:30:05 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\WhatsTheCup\app/Conexion.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\WhatsTheCup\app\models\Model_interaccion.php:2
+Stack trace:
+#0 C:\xampp\htdocs\WhatsTheCup\app\controllers\like_post.php(2): require_once()
+#1 C:\xampp\htdocs\WhatsTheCup\index.php(58): require_once('C:\\xampp\\htdocs...')
+#2 {main}
+  thrown in C:\xampp\htdocs\WhatsTheCup\app\models\Model_interaccion.php on line 2
+[19-Nov-2025 00:30:06 Europe/Berlin] PHP Warning:  require_once(C:\xampp\htdocs\WhatsTheCup\app/Conexion.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\WhatsTheCup\app\models\Model_interaccion.php on line 2
+[19-Nov-2025 00:30:06 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\WhatsTheCup\app/Conexion.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\WhatsTheCup\app\models\Model_interaccion.php:2
+Stack trace:
+#0 C:\xampp\htdocs\WhatsTheCup\app\controllers\like_post.php(2): require_once()
+#1 C:\xampp\htdocs\WhatsTheCup\index.php(58): require_once('C:\\xampp\\htdocs...')
+#2 {main}
+  thrown in C:\xampp\htdocs\WhatsTheCup\app\models\Model_interaccion.php on line 2
+[19-Nov-2025 00:30:07 Europe/Berlin] PHP Warning:  require_once(C:\xampp\htdocs\WhatsTheCup\app/Conexion.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\WhatsTheCup\app\models\Model_interaccion.php on line 2
+[19-Nov-2025 00:30:07 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\WhatsTheCup\app/Conexion.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\WhatsTheCup\app\models\Model_interaccion.php:2
+Stack trace:
+#0 C:\xampp\htdocs\WhatsTheCup\app\controllers\like_post.php(2): require_once()
+#1 C:\xampp\htdocs\WhatsTheCup\index.php(58): require_once('C:\\xampp\\htdocs...')
+#2 {main}
+  thrown in C:\xampp\htdocs\WhatsTheCup\app\models\Model_interaccion.php on line 2
+[19-Nov-2025 00:30:07 Europe/Berlin] PHP Warning:  require_once(C:\xampp\htdocs\WhatsTheCup\app/Conexion.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\WhatsTheCup\app\models\Model_interaccion.php on line 2
+[19-Nov-2025 00:30:07 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\WhatsTheCup\app/Conexion.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\WhatsTheCup\app\models\Model_interaccion.php:2
+Stack trace:
+#0 C:\xampp\htdocs\WhatsTheCup\app\controllers\like_post.php(2): require_once()
+#1 C:\xampp\htdocs\WhatsTheCup\index.php(58): require_once('C:\\xampp\\htdocs...')
+#2 {main}
+  thrown in C:\xampp\htdocs\WhatsTheCup\app\models\Model_interaccion.php on line 2
+[19-Nov-2025 00:30:09 Europe/Berlin] PHP Warning:  require_once(C:\xampp\htdocs\WhatsTheCup\app/Conexion.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\WhatsTheCup\app\models\Model_interaccion.php on line 2
+[19-Nov-2025 00:30:09 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\WhatsTheCup\app/Conexion.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\WhatsTheCup\app\models\Model_interaccion.php:2
+Stack trace:
+#0 C:\xampp\htdocs\WhatsTheCup\app\controllers\like_post.php(2): require_once()
+#1 C:\xampp\htdocs\WhatsTheCup\index.php(58): require_once('C:\\xampp\\htdocs...')
+#2 {main}
+  thrown in C:\xampp\htdocs\WhatsTheCup\app\models\Model_interaccion.php on line 2
+[19-Nov-2025 00:30:23 Europe/Berlin] PHP Warning:  require_once(C:\xampp\htdocs\WhatsTheCup\app/Conexion.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\WhatsTheCup\app\models\Model_interaccion.php on line 2
+[19-Nov-2025 00:30:23 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\WhatsTheCup\app/Conexion.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\WhatsTheCup\app\models\Model_interaccion.php:2
+Stack trace:
+#0 C:\xampp\htdocs\WhatsTheCup\app\controllers\like_post.php(2): require_once()
+#1 C:\xampp\htdocs\WhatsTheCup\index.php(58): require_once('C:\\xampp\\htdocs...')
+#2 {main}
+  thrown in C:\xampp\htdocs\WhatsTheCup\app\models\Model_interaccion.php on line 2
+[19-Nov-2025 00:30:23 Europe/Berlin] PHP Warning:  require_once(C:\xampp\htdocs\WhatsTheCup\app/Conexion.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\WhatsTheCup\app\models\Model_interaccion.php on line 2
+[19-Nov-2025 00:30:23 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\WhatsTheCup\app/Conexion.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\WhatsTheCup\app\models\Model_interaccion.php:2
+Stack trace:
+#0 C:\xampp\htdocs\WhatsTheCup\app\controllers\like_post.php(2): require_once()
+#1 C:\xampp\htdocs\WhatsTheCup\index.php(58): require_once('C:\\xampp\\htdocs...')
+#2 {main}
+  thrown in C:\xampp\htdocs\WhatsTheCup\app\models\Model_interaccion.php on line 2
+[19-Nov-2025 00:30:31 Europe/Berlin] PHP Warning:  require_once(C:\xampp\htdocs\WhatsTheCup\app/Conexion.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\WhatsTheCup\app\models\Model_interaccion.php on line 2
+[19-Nov-2025 00:30:31 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\WhatsTheCup\app/Conexion.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\WhatsTheCup\app\models\Model_interaccion.php:2
+Stack trace:
+#0 C:\xampp\htdocs\WhatsTheCup\app\controllers\like_post.php(2): require_once()
+#1 C:\xampp\htdocs\WhatsTheCup\index.php(58): require_once('C:\\xampp\\htdocs...')
+#2 {main}
+  thrown in C:\xampp\htdocs\WhatsTheCup\app\models\Model_interaccion.php on line 2
+[19-Nov-2025 00:31:53 Europe/Berlin] PHP Warning:  require_once(C:\xampp\htdocs\WhatsTheCup\app/Conexion.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\WhatsTheCup\app\models\Model_interaccion.php on line 2
+[19-Nov-2025 00:31:53 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\WhatsTheCup\app/Conexion.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\WhatsTheCup\app\models\Model_interaccion.php:2
+Stack trace:
+#0 C:\xampp\htdocs\WhatsTheCup\app\controllers\like_post.php(3): require_once()
+#1 C:\xampp\htdocs\WhatsTheCup\index.php(58): require_once('C:\\xampp\\htdocs...')
+#2 {main}
+  thrown in C:\xampp\htdocs\WhatsTheCup\app\models\Model_interaccion.php on line 2
+[19-Nov-2025 00:31:55 Europe/Berlin] PHP Warning:  require_once(C:\xampp\htdocs\WhatsTheCup\app/Conexion.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\WhatsTheCup\app\models\Model_interaccion.php on line 2
+[19-Nov-2025 00:31:55 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\WhatsTheCup\app/Conexion.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\WhatsTheCup\app\models\Model_interaccion.php:2
+Stack trace:
+#0 C:\xampp\htdocs\WhatsTheCup\app\controllers\like_post.php(3): require_once()
+#1 C:\xampp\htdocs\WhatsTheCup\index.php(58): require_once('C:\\xampp\\htdocs...')
+#2 {main}
+  thrown in C:\xampp\htdocs\WhatsTheCup\app\models\Model_interaccion.php on line 2
+[19-Nov-2025 00:40:19 Europe/Berlin] Error toggleLike: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'wtc.interaccion' doesn't exist
+[19-Nov-2025 00:40:21 Europe/Berlin] Error toggleLike: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'wtc.interaccion' doesn't exist
+[19-Nov-2025 00:40:22 Europe/Berlin] Error toggleLike: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'wtc.interaccion' doesn't exist
+[19-Nov-2025 00:42:10 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\WhatsTheCup\app\controllers\like_post.php on line 3
+[19-Nov-2025 00:42:10 Europe/Berlin] Error toggleLike: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'wtc.interaccion' doesn't exist
+[19-Nov-2025 00:42:10 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'wtc.interaccion' doesn't exist in C:\xampp\htdocs\WhatsTheCup\app\models\Model_interaccion.php:47
+Stack trace:
+#0 C:\xampp\htdocs\WhatsTheCup\app\models\Model_interaccion.php(47): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\WhatsTheCup\app\controllers\like_post.php(18): Model_Interaccion->contarLikes(4)
+#2 C:\xampp\htdocs\WhatsTheCup\index.php(58): require_once('C:\\xampp\\htdocs...')
+#3 {main}
+  thrown in C:\xampp\htdocs\WhatsTheCup\app\models\Model_interaccion.php on line 47
+[19-Nov-2025 00:42:11 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\WhatsTheCup\app\controllers\like_post.php on line 3
+[19-Nov-2025 00:42:11 Europe/Berlin] Error toggleLike: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'wtc.interaccion' doesn't exist
+[19-Nov-2025 00:42:11 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'wtc.interaccion' doesn't exist in C:\xampp\htdocs\WhatsTheCup\app\models\Model_interaccion.php:47
+Stack trace:
+#0 C:\xampp\htdocs\WhatsTheCup\app\models\Model_interaccion.php(47): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\WhatsTheCup\app\controllers\like_post.php(18): Model_Interaccion->contarLikes(4)
+#2 C:\xampp\htdocs\WhatsTheCup\index.php(58): require_once('C:\\xampp\\htdocs...')
+#3 {main}
+  thrown in C:\xampp\htdocs\WhatsTheCup\app\models\Model_interaccion.php on line 47
+[19-Nov-2025 00:43:03 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\WhatsTheCup\app\controllers\like_post.php on line 3
+[19-Nov-2025 00:43:03 Europe/Berlin] PHP Fatal error:  Uncaught Error: Class "Model_Interaccion" not found in C:\xampp\htdocs\WhatsTheCup\app\controllers\like_post.php:16
+Stack trace:
+#0 C:\xampp\htdocs\WhatsTheCup\index.php(58): require_once()
+#1 {main}
+  thrown in C:\xampp\htdocs\WhatsTheCup\app\controllers\like_post.php on line 16
+[19-Nov-2025 00:43:04 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\WhatsTheCup\app\controllers\like_post.php on line 3
+[19-Nov-2025 00:43:04 Europe/Berlin] PHP Fatal error:  Uncaught Error: Class "Model_Interaccion" not found in C:\xampp\htdocs\WhatsTheCup\app\controllers\like_post.php:16
+Stack trace:
+#0 C:\xampp\htdocs\WhatsTheCup\index.php(58): require_once()
+#1 {main}
+  thrown in C:\xampp\htdocs\WhatsTheCup\app\controllers\like_post.php on line 16
+[19-Nov-2025 00:43:04 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\WhatsTheCup\app\controllers\like_post.php on line 3
+[19-Nov-2025 00:43:04 Europe/Berlin] PHP Fatal error:  Uncaught Error: Class "Model_Interaccion" not found in C:\xampp\htdocs\WhatsTheCup\app\controllers\like_post.php:16
+Stack trace:
+#0 C:\xampp\htdocs\WhatsTheCup\index.php(58): require_once()
+#1 {main}
+  thrown in C:\xampp\htdocs\WhatsTheCup\app\controllers\like_post.php on line 16
+[19-Nov-2025 00:43:04 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\WhatsTheCup\app\controllers\like_post.php on line 3
+[19-Nov-2025 00:43:04 Europe/Berlin] PHP Fatal error:  Uncaught Error: Class "Model_Interaccion" not found in C:\xampp\htdocs\WhatsTheCup\app\controllers\like_post.php:16
+Stack trace:
+#0 C:\xampp\htdocs\WhatsTheCup\index.php(58): require_once()
+#1 {main}
+  thrown in C:\xampp\htdocs\WhatsTheCup\app\controllers\like_post.php on line 16
+[19-Nov-2025 00:43:43 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\WhatsTheCup\app\controllers\like_post.php on line 3
+[19-Nov-2025 00:43:47 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\WhatsTheCup\app\controllers\like_post.php on line 3
+[19-Nov-2025 00:43:48 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\WhatsTheCup\app\controllers\like_post.php on line 3
+[19-Nov-2025 00:43:48 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\WhatsTheCup\app\controllers\like_post.php on line 3
+[19-Nov-2025 00:43:49 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\WhatsTheCup\app\controllers\like_post.php on line 3
+[19-Nov-2025 00:43:51 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\WhatsTheCup\app\controllers\like_post.php on line 3
+[19-Nov-2025 00:43:52 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\WhatsTheCup\app\controllers\like_post.php on line 3
+[19-Nov-2025 00:44:09 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\WhatsTheCup\app\controllers\like_post.php on line 3
+[19-Nov-2025 00:44:10 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\WhatsTheCup\app\controllers\like_post.php on line 3
+[19-Nov-2025 00:44:10 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\WhatsTheCup\app\controllers\like_post.php on line 3
+[19-Nov-2025 00:44:11 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\WhatsTheCup\app\controllers\like_post.php on line 3
+[19-Nov-2025 00:53:17 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\WhatsTheCup\app\controllers\like_post.php on line 3
+[19-Nov-2025 00:53:52 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\WhatsTheCup\app\controllers\like_post.php on line 3
+[19-Nov-2025 00:54:48 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\WhatsTheCup\app\controllers\like_post.php on line 3
+[19-Nov-2025 00:56:44 Europe/Berlin] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in C:\xampp\htdocs\WhatsTheCup\app\controllers\like_post.php on line 3
+[19-Nov-2025 00:58:21 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to undefined method Model_Publicacion::obtenerLikes() in C:\xampp\htdocs\WhatsTheCup\app\controllers\ver_publicacion.php:48
+Stack trace:
+#0 C:\xampp\htdocs\WhatsTheCup\index.php(143): require_once()
+#1 {main}
+  thrown in C:\xampp\htdocs\WhatsTheCup\app\controllers\ver_publicacion.php on line 48
+[19-Nov-2025 00:59:02 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to undefined method Model_Publicacion::obtenerLikes() in C:\xampp\htdocs\WhatsTheCup\app\controllers\ver_publicacion.php:49
+Stack trace:
+#0 C:\xampp\htdocs\WhatsTheCup\index.php(143): require_once()
+#1 {main}
+  thrown in C:\xampp\htdocs\WhatsTheCup\app\controllers\ver_publicacion.php on line 49
+[19-Nov-2025 00:59:03 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to undefined method Model_Publicacion::obtenerLikes() in C:\xampp\htdocs\WhatsTheCup\app\controllers\ver_publicacion.php:49
+Stack trace:
+#0 C:\xampp\htdocs\WhatsTheCup\index.php(143): require_once()
+#1 {main}
+  thrown in C:\xampp\htdocs\WhatsTheCup\app\controllers\ver_publicacion.php on line 49
+[19-Nov-2025 00:59:38 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to undefined method Model_Publicacion::obtenerLikes() in C:\xampp\htdocs\WhatsTheCup\app\controllers\ver_publicacion.php:49
+Stack trace:
+#0 C:\xampp\htdocs\WhatsTheCup\index.php(143): require_once()
+#1 {main}
+  thrown in C:\xampp\htdocs\WhatsTheCup\app\controllers\ver_publicacion.php on line 49

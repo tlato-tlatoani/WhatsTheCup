@@ -1,0 +1,67 @@
+<?php
+require_once dirname(__DIR__, 2) . '/Conexion.php';
+
+class Model_interaccion
+{
+    private $conn;
+
+    public function __construct()
+    {
+        $conexion = new Conexion();
+        $this->conn = $conexion->getConnection();
+    }
+
+    /**
+     * Agrega o quita un like según si el usuario ya lo tiene.
+     * @param int $usuario_id
+     * @param int $publicacion_id
+     * @return int Total de likes actualizados
+     * @throws Exception
+     */
+   public function toggleLike(int $usuarioId, int $publicacionId): bool {
+    try {
+        // Revisar si ya existe el like
+        $stmt = $this->conn->prepare("SELECT * FROM interacciones WHERE usuario_id = :uid AND publicacion_id = :pid");
+        $stmt->execute([':uid' => $usuarioId, ':pid' => $publicacionId]);
+        $like = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($like) {
+            // Ya existe: eliminar (deslike)
+            $stmt = $this->conn->prepare("DELETE FROM interacciones WHERE usuario_id = :uid AND publicacion_id = :pid");
+            $stmt->execute([':uid' => $usuarioId, ':pid' => $publicacionId]);
+            return false; // retornamos false: ya no le dio like
+        } else {
+            // No existe: insertar
+            $stmt = $this->conn->prepare("INSERT INTO interacciones(usuario_id, publicacion_id) VALUES(:uid, :pid)");
+            $stmt->execute([':uid' => $usuarioId, ':pid' => $publicacionId]);
+            return true; // retornamos true: like agregado
+        }
+
+    } catch (PDOException $e) {
+        error_log("Error toggleLike: " . $e->getMessage());
+        return false;
+    }
+}
+public function contarLikes(int $publicacionId): int {
+    $stmt = $this->conn->prepare("SELECT COUNT(*) FROM interacciones WHERE publicacion_id = :pid");
+    $stmt->execute([':pid' => $publicacionId]);
+    return (int)$stmt->fetchColumn();
+}
+
+    /**
+     * Obtiene el total de likes de una publicación
+     */
+    public function obtenerLikes(int $publicacion_id): int
+    {
+        try {
+        $stmt = $this->conn->prepare("SELECT fn_contar_likes(:p_id) AS total_likes");
+        $stmt->bindParam(':p_id', $id_publicacion, PDO::PARAM_INT);
+        $stmt->execute();
+        $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $resultado['total_likes'] ?? 0;
+    } catch (PDOException $e) {
+        error_log("Error al obtener likes: " . $e->getMessage());
+        return 0;
+    }
+    }
+}

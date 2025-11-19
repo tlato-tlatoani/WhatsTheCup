@@ -1,3 +1,14 @@
+<?php
+require_once PROJECT_ROOT . '/app/controllers/ver_publicacion.php';
+$likes_actuales = $likes_actuales ?? 0;
+
+if ($error_publicacion) {
+    echo "<h2 style='color:red'>$error_publicacion</h2>";
+    exit;
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,36 +30,35 @@
     <div id="publicacion-contenido">
 
     <div id="titulo">
-        <h1>LOREM IPSUM</h1>
-        <h2> Autor | 08 de Septiembre 2025</h2>
+        <h1><?= htmlspecialchars($publicacion['titulo']) ?></h1>
+        
+        <h2>
+    <?= htmlspecialchars($publicacion['nombre_autor_completo']) ?> | 
+    <?= date("d \d\e F \d\e Y", strtotime($publicacion['fecha_publicacion'])) ?>
+      </h2>
+
     </div>
 
-    <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vulputate vulputate dolor sit amet venenatis. 
-        Nam facilisis, velit at vehicula feugiat, enim eros finibus diam, eu aliquet sapien tellus vel mi. 
-        Donec rhoncus purus in justo iaculis, nec imperdiet nulla suscipit. In blandit magna arcu, et tincidunt tortor commodo venenatis. 
-        In vehicula enim quis elit molestie, id pulvinar lorem tempus. Sed metus leo, maximus a imperdiet in, consequat et turpis. 
-        Suspendisse porta, dui ut tincidunt laoreet, arcu ligula sollicitudin arcu, vel vulputate justo diam eu nibh. 
-        Praesent suscipit faucibus mauris et suscipit. Aenean ultricies efficitur est, id viverra lacus scelerisque et. 
-        Duis eu molestie nunc, id bibendum quam. Proin vulputate scelerisque dui, non varius orci interdum faucibus. 
-        Duis viverra molestie velit, sodales feugiat turpis mattis et. Etiam quis sollicitudin metus.
-    </p>
+   <p><?= nl2br(htmlspecialchars($publicacion['descripcion'])) ?></p>
 
-    <p>
-        Maecenas elementum arcu tellus, nec mattis quam dignissim eu. Sed viverra commodo dui quis tincidunt. In et mollis eros. 
-        Proin eu blandit arcu, non ornare ipsum. Nulla eget velit vel elit blandit imperdiet. Integer ultrices purus mauris. Fusce a tortor 
-        eget nunc facilisis tempus. Curabitur venenatis sagittis augue, nec bibendum tortor. Quisque dictum, orci eu aliquet placerat, 
-        neque dolor bibendum quam, vel rutrum augue massa ut nunc. Sed dictum lacus ornare tortor aliquam viverra. Pellentesque dignissim 
-        tortor vel tortor imperdiet scelerisque. Nunc accumsan, tellus sed gravida feugiat, elit odio sagittis ipsum, vel ultricies metus 
-        elit sit amet libero. Fusce efficitur, erat ut congue consequat, magna nulla bibendum enim, eget pretium lorem sapien ac ipsum.
-    </p>
 
-    <img id="imagen-publicacion">
+    <?php if (!empty($publicacion['base64_multimedia'])): ?>
+    <img id="imagen-publicacion"
+         src="data:<?= $publicacion['tipo_mime'] ?>;base64,<?= $publicacion['base64_multimedia'] ?>">
+<?php endif; ?>
 
-    <h2 id="categoria">Categoría</h2>
+<h2 id="categoria"><?= htmlspecialchars($publicacion['nombre_categoria']) ?></h2>
+
     </div>
 
-    <h3> <i class="bi bi-heart-fill"></i> 10 Likes</h3>
+  <div class="likes">
+            <button type="button" class="btn-like" data-id="<?= $publicacion['id'] ?>">
+                <i class="bi bi-heart-fill"></i>
+                <span class="like-count"><?= $likes_actuales ?></span>
+            </button>
+        </div>
+
+
     <hr>
 
 
@@ -85,6 +95,45 @@
     
 <script src="/WhatsTheCup/public/js/Header.js"></script>
 <script src="/WhatsTheCup/public/js/Us_Post.js"></script>
+<script>
+// JS para manejar el click de likes
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll('.btn-like').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const publicacionId = btn.dataset.id;
 
+      try {
+        const response = await fetch('/WhatsTheCup/index.php?route=like_post', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ publicacion_id: publicacionId })
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+          // Actualizar contador
+          btn.querySelector('.like-count').textContent = data.likes;
+          
+          // Cambiar clase del botón según like/deslike
+          if (data.liked) {
+            btn.classList.add('liked'); // por ejemplo, cambiar color
+          } else {
+            btn.classList.remove('liked');
+          }
+
+        } else {
+          console.error("No se pudo registrar el like:", data.message);
+        }
+
+      } catch (error) {
+        console.error("Error de red al dar like:", error);
+      }
+    });
+  });
+});
+
+
+</script>
 </body>
 </html>

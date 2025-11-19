@@ -8,6 +8,7 @@ if (!defined('BASE_URL')) {
 }
 
 require_once dirname(__DIR__, 3) . '/Conexion.php';
+require_once PROJECT_ROOT . '/app/controllers/publicaciones_usuario.php';
 
 $conexion = new Conexion();
 $conn = $conexion->getConnection();
@@ -140,71 +141,54 @@ if (!empty($usuario['IMAGEN_PERFIL'])) {
     </div>
   
 
-  <a href="/WhatsTheCup/app/views/user-views/Us-Post.php">
-    <div class="publicacion">
-        
+  
 
-           <div class="preview">
-                <h1 class="titulo">LOREM IPSUM</h1>
-                <h2 class="infografia"> en Norteamérica 2026</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec volutpat justo. 
-                 Vestibulum at ante at dolor lacinia sollicitudin.In condimentum laoreet orci luctus tristique. 
-                Aliquam erat volutpat. Pellentesque sed ipsum aliquam, feugiat erat et, aliquet eros. </p>
+    <?php if (!empty($publicaciones_usuario)): ?>
+
+    <?php foreach ($publicaciones_usuario as $pub): ?>
+
+        <a href="/WhatsTheCup/index.php?route=ver_publicacion&id=<?= $pub['id'] ?>">
+            <div class="publicacion">
+
+                <div class="preview">
+                    <h1 class="titulo"><?= htmlspecialchars($pub['titulo']) ?></h1>
+
+                    <h2 class="infografia">
+                        <?= !empty($pub['mundial_id']) 
+                                ? "Infografía #" . htmlspecialchars($pub['mundial_id'])
+                                : "" ?>
+                    </h2>
+
+                    <p><?= nl2br(htmlspecialchars($pub['descripcion'])) ?></p>
+                </div>
+
+                <div class="interaccion">
+                    
+                    <?php if (!empty($pub['multimedia_base64'])): ?>
+                        <img src="data:<?= $pub['tipo_mime'] ?>;base64,<?= $pub['multimedia_base64'] ?>" 
+                             class="imagen-post">
+                    <?php else: ?>
+                        <img src="/WhatsTheCup/public/imagenes/FDP.png" class="imagen-post">
+                    <?php endif; ?>
+
+                    <h2><i class="bi bi-heart-fill"></i> 0</h2>
+                    <h2><i class="bi bi-chat-right-text"></i> 0</h2>
+                </div>
             </div>
-                
+        </a>
 
-        <div class="interaccion">
-            <img src="/WhatsTheCup/public/imagenes/FDP.png" class="imagen-post">
-            <h2> <i class="bi bi-heart-fill"></i> 10</h2>
-            <h2> <i class="bi bi-chat-right-text"></i> 5</h2>
-        </div>
+    <?php endforeach; ?>
 
-    </div>
-    </a>
+<?php else: ?>
 
-    <a href="/WhatsTheCup/app/views/user-views/Us-Post.php">
     <div class="publicacion">
-        
-
-           <div class="preview">
-                <h1 class="titulo">LOREM IPSUM</h1>
-                <h2 class="infografia"> en Norteamérica 2026</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec volutpat justo. 
-                 Vestibulum at ante at dolor lacinia sollicitudin.In condimentum laoreet orci luctus tristique. 
-                Aliquam erat volutpat. Pellentesque sed ipsum aliquam, feugiat erat et, aliquet eros. </p>
-            </div>
-                
-
-        <div class="interaccion">
-            <img src="/WhatsTheCup/public/imagenes/FDP.png" class="imagen-post">
-            <h2> <i class="bi bi-heart-fill"></i> 10</h2>
-            <h2> <i class="bi bi-chat-right-text"></i> 5</h2>
-        </div>
-
+        <p style="padding:20px; text-align:center; font-size:18px;">
+            Aún no tienes publicaciones aprobadas.
+        </p>
     </div>
-    </a>
 
-    <a href="/WhatsTheCup/app/views/user-views/Us-Post.php">
-    <div class="publicacion">
-        
+<?php endif; ?>
 
-           <div class="preview" style="text-decoration: none;">
-                <h1 class="titulo">LOREM IPSUM</h1>
-                <h2 class="infografia"> en Norteamérica 2026</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec volutpat justo. 
-                 Vestibulum at ante at dolor lacinia sollicitudin.In condimentum laoreet orci luctus tristique. 
-                Aliquam erat volutpat. Pellentesque sed ipsum aliquam, feugiat erat et, aliquet eros. </p>
-            </div>
-                
-
-        <div class="interaccion">
-            <img src="/WhatsTheCup/public/imagenes/FDP.png" class="imagen-post">
-            <h2> <i class="bi bi-heart-fill"></i> 10</h2>
-            <h2> <i class="bi bi-chat-right-text"></i> 5</h2>
-        </div>
-
-    </div>
-    </a>
    
 
 

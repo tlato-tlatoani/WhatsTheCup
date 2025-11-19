@@ -1,6 +1,10 @@
 <?php
 require_once dirname(__DIR__, 3) . '/app/models/Model_Mundial.php';
 require_once dirname(__DIR__, 3) . '/app/models/Model_Categorias.php';
+
+require_once PROJECT_ROOT . '/app/controllers/publicaciones_por_infografia.php';
+
+
 $model = new Model_Mundial();
 $modelCategorias = new Model_Categorias();
 
@@ -119,56 +123,48 @@ $equipos = explode(",", $mundial['equipos']);
      
 <div id="publicaciones">
 
-    <a href="/WhatsTheCup/app/views/admin-views/Ad-Post.php">
-    <div class="publicacion">
-        <div class="preview">
-            <h1 class="titulo">LOREM IPSUM</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-            Cras nec volutpat justo. Vestibulum at ante at dolor lacinia sollicitudin.</p>
+            <?php 
+            if (!empty($error_consulta) && empty($publicaciones_infografia)): ?>
+                <div class="message-info" style="color: red; padding: 10px; border: 1px solid red; background-color: #f8d7da;">
+                    <?php echo htmlspecialchars($error_consulta); ?>
+                </div>
+                
+            <?php else: ?>
+                
+                <?php foreach ($publicaciones_infografia as $post): ?>
+                    
+                    <div class="publicacion">
+                        
+                        <div class="preview">
+                            <div class="nombre-post">
+                                <h1 class="titulo"><?php echo htmlspecialchars($post['titulo']); ?></h1>
+                                <h2 class="infografia">
+                                    Categoría: <?php echo htmlspecialchars($post['nombre_categoria']); ?> | Autor: <?php echo htmlspecialchars($post['nombre_autor_completo']); ?>
+                                    | Fecha: <?php echo htmlspecialchars(date('d/m/Y', strtotime($post['fecha_publicacion']))); ?>
+                                </h2>
+                            </div>
+
+                            <p><?php echo nl2br(htmlspecialchars($post['descripcion'])); ?></p>
+                        </div>
+                            
+                        <div class="multimedia">
+                            <?php if (!empty($post['base64_multimedia'])): ?>
+                                <img src="data:<?= $post['tipo_mime'] ?>;base64,<?= $post['base64_multimedia'] ?>" 
+                                    class="imagen-post">
+                            <?php else: ?>
+                                <img src="/WhatsTheCup/public/imagenes/FDP.png" class="imagen-post">
+                            <?php endif; ?>
+                            
+                            <a href="<?= BASE_URL ?>index.php?route=ver_publicacion&id=<?= htmlspecialchars($post['id']) ?>" class="btn-ver-post">
+                                Ver Publicación Completa <i class="bi bi-eye"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                <?php endforeach; ?>
+                <?php endif; ?>
+
         </div>
-
-        <div class="interaccion">
-            <img src="/WhatsTheCup/public/imagenes/FDP.png" class="imagen-post">
-            <h2><i class="bi bi-heart-fill"></i> 10</h2>
-            <h2><i class="bi bi-chat-right-text"></i> 5</h2>
-        </div>
-    </div>
-    </a>
-
-    <a href="/WhatsTheCup/app/views/admin-views/Ad-Post.php">
-    <div class="publicacion">
-        <div class="preview">
-            <h1 class="titulo">LOREM IPSUM</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-            Cras nec volutpat justo. Vestibulum at ante at dolor lacinia sollicitudin.</p>
-        </div>
-
-        <div class="interaccion">
-            <img src="/WhatsTheCup/public/imagenes/FDP.png" class="imagen-post">
-            <h2><i class="bi bi-heart-fill"></i> 10</h2>
-            <h2><i class="bi bi-chat-right-text"></i> 5</h2>
-        </div>
-    </div>
-    </a>
-
-    <a href="/WhatsTheCup/app/views/admin-views/Ad-Post.php">
-    <div class="publicacion">
-        <div class="preview">
-            <h1 class="titulo">LOREM IPSUM</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-            Cras nec volutpat justo. Vestibulum at ante at dolor lacinia sollicitudin.</p>
-        </div>
-
-        <div class="interaccion">
-            <img src="/WhatsTheCup/public/imagenes/FDP.png" class="imagen-post">
-            <h2><i class="bi bi-heart-fill"></i> 10</h2>
-            <h2><i class="bi bi-chat-right-text"></i> 5</h2>
-        </div>
-    </div>
-    </a>
-
-
-</div> <!-- publicaciones -->
 
 
 </div> <!-- pagina-principal -->
