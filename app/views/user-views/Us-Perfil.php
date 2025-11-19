@@ -171,8 +171,8 @@ if (!empty($usuario['IMAGEN_PERFIL'])) {
                         <img src="/WhatsTheCup/public/imagenes/FDP.png" class="imagen-post">
                     <?php endif; ?>
 
-                    <h2><i class="bi bi-heart-fill"></i> 0</h2>
-                    <h2><i class="bi bi-chat-right-text"></i> 0</h2>
+                   <h2><i class="bi bi-heart-fill"></i> <?= htmlspecialchars($pub['likes_count'] ?? 0) ?></h2>
+                   <h2><i class="bi bi-chat-right-text"></i> <?= htmlspecialchars($pub['comentarios_count'] ?? 0) ?></h2>
                 </div>
             </div>
         </a>

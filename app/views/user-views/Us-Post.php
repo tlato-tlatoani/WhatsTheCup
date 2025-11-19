@@ -1,5 +1,6 @@
 <?php
 require_once PROJECT_ROOT . '/app/controllers/ver_publicacion.php';
+
 $likes_actuales = $likes_actuales ?? 0;
 
 if ($error_publicacion) {
@@ -65,24 +66,42 @@ if ($error_publicacion) {
     <div id="comentarios">
     <div id="escribir-comentario">
         <img src="/WhatsTheCup/public/imagenes/FDP.png" class="foto-comentario">
-        <input type="text" placeholder="Añade un comentario...">
+        <form id="form-agregar-comentario">
+            <input type="hidden" name="publicacion_id" value="<?= htmlspecialchars($publicacion['id']) ?>">
+
+            <input type="text" 
+                   name="contenido" 
+                   id="input-comentario" 
+                   placeholder="Añade un comentario..."
+                   required>
+            
+            <button type="submit" style="display: none;"></button>
+        </form>
     </div>
     
    <div class="comentario">
-  <img src="/WhatsTheCup/public/imagenes/FDP.png" class="foto-comentario">
-  <div class="comentario-contenido">
-    <h3>Usuario X</h3>
-    <p class="comentario-usuario">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec volutpat justo. Vestibulum at ante at dolor lacinia sollicitudin. In condimentum laoreet orci luctus tristique.</p>
-  </div>
+ <?php 
+    // Aseguramos que la variable exista si el controlador no la seteo
+    $comentarios_activos = $comentarios_activos ?? []; 
+    
+    if (!empty($comentarios_activos)): ?>
+        <?php foreach ($comentarios_activos as $comentario): ?>
+            <div class="comentario">
+              <img src="/WhatsTheCup/public/imagenes/FDP.png" class="foto-comentario">
+              <div class="comentario-contenido">
+                <h3><?= htmlspecialchars($comentario['nombre_usuario']) ?></h3>
+                <p class="comentario-usuario"><?= nl2br(htmlspecialchars($comentario['contenido'])) ?></p>
+              </div>
+            </div>
+        <?php endforeach; ?>
+    <?php else: ?>
+        <p style="text-align: center; color: gray;">Sé el primero en comentar.</p>
+    <?php endif; ?>
+    </div>
+
+    
 </div>
 
-<div class="comentario">
-  <img src="/WhatsTheCup/public/imagenes/FDP.png" class="foto-comentario">
-  <div class="comentario-contenido">
-    <h3>Usuario X</h3>
-    <p class="comentario-usuario">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec volutpat justo. Vestibulum at ante at dolor lacinia sollicitudin. In condimentum laoreet orci luctus tristique.</p>
-  </div>
-</div>
 
     </div>
 
@@ -96,44 +115,123 @@ if ($error_publicacion) {
 <script src="/WhatsTheCup/public/js/Header.js"></script>
 <script src="/WhatsTheCup/public/js/Us_Post.js"></script>
 <script>
-// JS para manejar el click de likes
+// JS para manejar el click de likes y el envío de comentarios
 document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll('.btn-like').forEach(btn => {
-    btn.addEventListener('click', async () => {
-      const publicacionId = btn.dataset.id;
 
-      try {
-        const response = await fetch('/WhatsTheCup/index.php?route=like_post', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ publicacion_id: publicacionId })
+    // ==========================================================
+    // 1. LÓGICA DE LIKES 
+    // ==========================================================
+    document.querySelectorAll('.btn-like').forEach(btn => {
+        btn.addEventListener('click', async () => {
+            const publicacionId = btn.dataset.id;
+
+            try {
+                const response = await fetch('/WhatsTheCup/index.php?route=like_post', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ publicacion_id: publicacionId })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    // Actualizar contador
+                    btn.querySelector('.like-count').textContent = data.likes;
+                    
+                    // Cambiar clase del botón según like/deslike
+                    if (data.liked) {
+                        btn.classList.add('liked'); // por ejemplo, cambiar color
+                    } else {
+                        btn.classList.remove('liked');
+                    }
+
+                } else {
+                    console.error("No se pudo registrar el like:", data.message);
+                }
+
+            } catch (error) {
+                console.error("Error de red al dar like:", error);
+            }
         });
-
-        const data = await response.json();
-
-        if (data.success) {
-          // Actualizar contador
-          btn.querySelector('.like-count').textContent = data.likes;
-          
-          // Cambiar clase del botón según like/deslike
-          if (data.liked) {
-            btn.classList.add('liked'); // por ejemplo, cambiar color
-          } else {
-            btn.classList.remove('liked');
-          }
-
-        } else {
-          console.error("No se pudo registrar el like:", data.message);
-        }
-
-      } catch (error) {
-        console.error("Error de red al dar like:", error);
-      }
     });
-  });
+
+    // ==========================================================
+    // 2. LÓGICA DE COMENTARIOS (FALTABA E IMPLEMENTADA)
+    // ==========================================================
+    const formComentario = document.getElementById('form-agregar-comentario');
+    const inputComentario = document.getElementById('input-comentario');
+
+    if (formComentario) {
+        // Intercepta el evento SUBMIT (se dispara al presionar Enter)
+        formComentario.addEventListener('submit', async (e) => {
+            e.preventDefault(); // Detiene el envío de formulario tradicional
+
+            const contenido = inputComentario.value.trim();
+            // Obtiene el ID de la publicación del input oculto
+            const publicacionId = formComentario.querySelector('input[name="publicacion_id"]').value; 
+
+            if (contenido === '') {
+                return; // No enviar si está vacío
+            }
+
+            const dataToSend = {
+                publicacion_id: publicacionId,
+                contenido: contenido
+            };
+
+            try {
+                const response = await fetch('/WhatsTheCup/index.php?route=agregar_comentario', {
+                    method: 'POST',
+                    // Enviar datos como JSON
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(dataToSend) 
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    console.log("Comentario enviado con éxito.");
+                    inputComentario.value = ''; // Limpia el input
+                    alert("¡Comentario publicado con éxito!"); 
+                    // [PENDIENTE]: Lógica para actualizar la lista de comentarios sin recargar.
+
+                } else {
+                    console.error("Error al enviar comentario:", data.message);
+                    alert("Error al enviar comentario: " + data.message);
+                }
+
+            } catch (error) {
+                console.error("Error de red al enviar comentario:", error);
+            }
+        });
+    }
+
+// Función auxiliar para construir el HTML del comentario.
+// Usaremos la plantilla HTML de tu vista Us-Post.php.
+function buildComentarioHTML(comentarioData) {
+    // 1. Formatear la fecha (opcional, pero mejora la vista)
+    const fecha = new Date(comentarioData.fecha_creacion).toLocaleDateString('es-ES', { 
+        day: 'numeric', month: 'long', year: 'numeric' 
+    });
+
+    // 2. Devolver la estructura HTML
+    return `
+        <div class="comentario">
+            <img src="/WhatsTheCup/public/imagenes/FDP.png" class="foto-comentario" alt="Foto de perfil">
+            <div class="comentario-contenido">
+                <h3>${comentarioData.nombre_usuario}</h3>
+                <p class="comentario-usuario">${comentarioData.contenido}</p>
+                <small class="comentario-fecha">${fecha}</small>
+            </div>
+        </div>
+    `;
+}
+
+
+
 });
-
-
+    
+    // ==========================================================
 </script>
 </body>
 </html>

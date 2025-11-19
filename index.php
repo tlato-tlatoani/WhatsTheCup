@@ -58,6 +58,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
         require_once PROJECT_ROOT . '/app/controllers/like_post.php';
         exit;
     }
+    if($_GET['route'] === 'agregar_comentario'){
+        require_once PROJECT_ROOT . '/app/controllers/agregar_comentarios.php';
+        exit;
+    }
+
+    if($_GET['route'] === 'eliminar_comentario'){
+        require_once PROJECT_ROOT . '/app/controllers/eliminar_comentarios.php';
+        exit;
+    }
+
+    if($_GET['route'] === 'btn_buscar'){
+               
+        require_once PROJECT_ROOT . '/app/controllers/buscar_publicaciones.php';
+        exit;
+    }
 
 
 }
@@ -143,6 +158,10 @@ switch ($route) {
     require_once PROJECT_ROOT . '/app/controllers/ver_publicacion.php';
     $view_path = PROJECT_ROOT . '/app/views/user-views/Us-Post.php';
     break;
+
+    case 'us_busqueda':
+        $view_path = PROJECT_ROOT . '/app/views/user-views/Us-Busqueda.php';
+        break;
 
     default:
         header("HTTP/1.0 404 Not Found");

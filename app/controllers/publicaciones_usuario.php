@@ -1,7 +1,10 @@
 <?php
-// tlato-tlatoani/whatsthecup/WhatsTheCup-post/app/controllers/publicaciones_por_usuario.php
+
 
 require_once PROJECT_ROOT . '/app/models/Model_Publicacion.php';
+require_once PROJECT_ROOT . '/app/models/Model_Interaccion.php';
+require_once PROJECT_ROOT . '/app/models/Model_Comentario.php';
+
 
 // Iniciar sesión para obtener el ID del usuario
 if (session_status() === PHP_SESSION_NONE) {
@@ -13,6 +16,8 @@ $id_usuario = $_SESSION['id_usuario'] ?? null;
 // Variables para la vista
 $publicaciones_usuario = [];
 $error_consulta = null;
+
+
 
 if (!$id_usuario) {
     // Si no hay usuario logueado, no se puede consultar
@@ -26,6 +31,17 @@ if (!$id_usuario) {
 
         if (empty($publicaciones_usuario)) {
             $error_consulta = "Aún no tienes publicaciones aprobadas.";
+        }
+
+        else {
+             // 2. [LÓGICA MOVIDA Y CORREGIDA] Si hay publicaciones, contar los likes
+             $modelInteraccion = new Model_Interaccion();
+             $modelComentario = new Model_Comentario(); 
+             foreach ($publicaciones_usuario as &$pub) {
+                 $pub['likes_count'] = $modelInteraccion->contarLikes($pub['id']); 
+                 $pub['comentarios_count'] = $modelComentario->contarComentarios($pub['id']);
+             }
+             unset($pub); // Siempre romper la referencia después de un foreach con &
         }
 
     } catch (Exception $e) {

@@ -184,27 +184,24 @@ class Model_Publicacion
             // Consulta para obtener publicaciones aprobadas (estado_aprobacion = 1) por Mundial ID.
             // Se asume que 'publicacion', 'usuario' y 'categoria' son las tablas.
             $sql = "
-                SELECT 
-                    p.id, 
-                    p.titulo, 
-                    p.descripcion, 
-                    c.nombre AS nombre_categoria, 
-                    CONCAT(u.NOMBRES, ' ', u.APELLIDO_P) AS nombre_autor_completo,
-                    p.fecha_publicacion,
-                    m.nombre_archivo,
-                    m.tipo_mime,
-                    TO_BASE64(m.contenido) AS base64_multimedia
-                FROM 
-                    publicacion p
-                JOIN usuario u ON p.autor_id = u.ID_USUARIO
-                JOIN categorias c ON p.categoria_id = c.id
-                LEFT JOIN multimedia m ON p.MULTIMEDIA = m.id
-                WHERE 
-                    p.mundial_id = :p_mundial_id
-                    AND p.AprobadoAdmin = 1
-                ORDER BY 
-                    p.fecha_publicacion DESC
-            ";
+        SELECT
+            id,
+            titulo,
+            descripcion,
+            nombre_categoria,
+            nombre_autor_completo,
+            fecha_publicacion,
+            nombre_archivo,
+            tipo_mime,
+            base64_multimedia
+        FROM
+            vw_publicaciones_completas
+        WHERE
+            mundial_id = :p_mundial_id
+            AND AprobadoAdmin = 1
+        ORDER BY
+            fecha_publicacion DESC
+    ";
             
             $stmt = $this->conn->prepare($sql);
             $stmt->bindParam(':p_mundial_id', $mundialId, PDO::PARAM_INT);
@@ -221,25 +218,26 @@ class Model_Publicacion
    public function obtenerPublicacionesUsuarioAprobadas($id_usuario)
 {
     $sql = "SELECT 
-                p.id,
-                p.titulo,
-                p.descripcion,
-                p.fecha_publicacion,
-                p.estatus,
-                p.categoria_id,
-                p.mundial_id,
-                m.nombre_archivo,
-                m.tipo_mime,
-                TO_BASE64(m.contenido) AS multimedia_base64
-            FROM Publicacion p
-            LEFT JOIN Multimedia m ON p.MULTIMEDIA = m.id
-            WHERE p.autor_id = :id_usuario
-              AND p.estatus = 'aprobada'
-            ORDER BY p.fecha_publicacion DESC";
+                id, 
+                titulo, 
+                descripcion, 
+                fecha_publicacion, 
+                estatus, 
+                categoria_id, 
+                mundial_id, 
+                nombre_archivo, 
+                tipo_mime, 
+                multimedia_base64
+            FROM vw_publicaciones_con_multimedia
+            WHERE autor_id = :id_usuario
+              AND estatus = 'aprobada'
+            ORDER BY fecha_publicacion DESC";
 
     $stmt = $this->conn->prepare($sql);
     $stmt->bindParam(':id_usuario', $id_usuario, PDO::PARAM_INT);
     $stmt->execute();
+
+
 
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
@@ -290,6 +288,56 @@ public function usuarioDioLike($id_usuario, $id_publicacion)
 }
 
 
-   
+// En Model_Publicacion.php (Añadir o modificar el método)
+
+public function buscarPublicaciones(array $filtros): array
+{
+    $sql = "
+        SELECT 
+            p.id, p.titulo, p.descripcion, p.fecha_publicacion, m.titulo AS nombre_mundial,
+            CONCAT(u.NOMBRES, ' ', u.APELLIDO_P) AS nombre_autor_completo, 
+            c.nombre AS nombre_categoria, p.base64_multimedia
+        FROM 
+            vw_publicaciones_completas p
+        JOIN usuario u ON p.autor_id = u.ID_USUARIO
+        JOIN categorias c ON p.categoria_id = c.id
+        LEFT JOIN mundial m ON p.mundial_id = m.id
+        WHERE 
+            p.AprobadoAdmin = 1 
+    ";
+    
+    $parametros = [];
+
+    // Filtro 1: Palabra clave (Título o Descripción)
+    if (!empty($filtros['q'])) {
+        $sql .= " AND (p.titulo LIKE :termino OR p.descripcion LIKE :termino)";
+        $termino_like = '%' . $filtros['q'] . '%';
+        $parametros[':termino'] = $termino_like;
+    }
+
+    // Filtro 2: Rango de Fechas
+    if (!empty($filtros['desde']) && !empty($filtros['hasta'])) {
+        $sql .= " AND p.fecha_publicacion BETWEEN :desde AND :hasta";
+        $parametros[':desde'] = $filtros['desde'];
+        // Ajustamos la fecha "hasta" para incluir todo el día
+        $parametros[':hasta'] = $filtros['hasta'] . ' 23:59:59'; 
+    }
+
+    // Filtro 3: Categoría
+    if (!empty($filtros['categoria_id'])) {
+        $sql .= " AND c.id = :categoria_id";
+        $parametros[':categoria_id'] = (int)$filtros['categoria_id'];
+    }
+
+    // Filtro 4: Autor (Usuario)
+    if (!empty($filtros['usuario_id'])) {
+        $sql .= " AND u.ID_USUARIO = :usuario_id";
+        $parametros[':usuario_id'] = (int)$filtros['usuario_id'];
+    }
+    
+    $sql .= " ORDER BY p.fecha_publicacion DESC";
+
+    $stmt = $this->conn->prepare($sql);
+    $stmt->execute($parametros);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
-// Se elimina el '}' adicional que existía al final del archivo original.

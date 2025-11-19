@@ -11,6 +11,28 @@ require_once dirname(__DIR__, 3) . '/app/models/Model_Mundial.php';
 $model = new Model_Mundial();
 $mundiales = $model->obtenerTodosLosMundiales();
 
+
+// ------------ FILTROS ------------ //
+
+$sede = $_GET['sede'] ?? '';
+$orden = $_GET['orden'] ?? 'reciente';
+
+// FILTRAR POR SEDE (busca en el título)
+if ($sede !== '') {
+    $mundiales = array_filter($mundiales, function($m) use ($sede) {
+        return stripos($m['titulo'], $sede) !== false;
+    });
+}
+
+// ORDENAR POR AÑO
+usort($mundiales, function($a, $b) use ($orden) {
+    if ($orden === 'antiguo') {
+        return $a['anio'] - $b['anio']; // ascendente
+    }
+    return $b['anio'] - $a['anio']; // descendente
+});
+
+
 //$listaMundiales = $model->obtenerMundiales();
 // $listaMundiales es un array con todos los registros
 ?>
@@ -36,32 +58,49 @@ $mundiales = $model->obtenerTodosLosMundiales();
 
     <div id="header-mundiales">
       <h1>LISTA DE MUNDIALES</h1>
+<!-- FORMULARIO DE FILTROS -->
+      <form method="GET" class="filtros-container">
 
-      <select>
-        <option>Más reciente</option>
-        <option>Más antiguo</option>
-        <option>Más popular</option>
-      </select>
-    </div>
+    <input type="hidden" name="route" value="adlanding">
+
+    <input 
+        type="text" 
+        name="sede" 
+        placeholder="Filtrar por sede (México, Brasil...)"
+        value="<?= htmlspecialchars($sede) ?>"
+    >
+
+    <select name="orden">
+        <option value="reciente" <?= $orden === 'reciente' ? 'selected' : '' ?>>Más reciente</option>
+        <option value="antiguo"  <?= $orden === 'antiguo'  ? 'selected' : '' ?>>Más antiguo</option>
+    </select>
+
+    <button type="submit" class="btn-filtrar">Aplicar</button>
+
+    <a href="index.php?route=adlanding" class="btn-limpiar">Limpiar</a>
+
+</form>
+  
+</div>
 
     <div id="mundiales">
 
-     <?php foreach ($mundiales as $m): ?>
-<a href="<?= BASE_URL ?>index.php?route=usinfografia&id=<?= $m['id'] ?>">
-    <div class="card" style="width: 18rem;">
-    
-        <img 
-            src="data:<?= $m['banner_mime'] ?>;base64,<?= $m['banner_base64'] ?>"
-            class="card-img-top"
-        />
+          <?php foreach ($mundiales as $m): ?>
+      <a href="<?= BASE_URL ?>index.php?route=usinfografia&id=<?= $m['id'] ?>">
+          <div class="card" style="width: 18rem;">
+          
+              <img 
+                  src="data:<?= $m['banner_mime'] ?>;base64,<?= $m['banner_base64'] ?>"
+                  class="card-img-top"
+              />
 
-        <div class="card-body">
-            <p class="card-text"><?= $m['titulo'] ?> (<?= $m['anio'] ?>)</p>
-        </div>
+              <div class="card-body">
+                  <p class="card-text"><?= $m['titulo'] ?> (<?= $m['anio'] ?>)</p>
+              </div>
 
-    </div>
-</a>
-<?php endforeach; ?>
+          </div>
+      </a>
+      <?php endforeach; ?>
 
     </div>
 

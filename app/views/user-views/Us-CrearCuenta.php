@@ -134,14 +134,15 @@ $datos = $_SESSION['datos_registro'] ?? [];
           <!-- Botón enviar -->
           <div class="btn">
             <button type="submit" name="btn_registrar" class="btn-text">REGISTRARSE</button>
+             <a href="<?php echo htmlspecialchars($google_login_url); ?>" class="btn-google">
+                    <!-- Icono de Google. Asumo que tienes una imagen SVG o PNG en esta ruta -->
+                    Registrarse con Google
+                </a>
+
           </div>
         </form>
 
-           <a href="<?php echo htmlspecialchars($google_login_url); ?>" class="btn-google">
-                    <!-- Icono de Google. Asumo que tienes una imagen SVG o PNG en esta ruta -->
-                    <img src="/WhatsTheCup/public/img/google-icon.svg" alt="Google Icon" class="google-icon"> 
-                    Registrarse con Google
-                </a>
+       
 
       </div>
     </div>

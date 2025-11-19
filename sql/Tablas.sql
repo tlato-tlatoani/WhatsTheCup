@@ -258,3 +258,26 @@ CREATE TABLE multimedia_publicacion (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
+DROP TABLE IF EXISTS interacciones;
+
+CREATE TABLE interacciones (
+    usuario_id INT NOT NULL,
+    publicacion_id INT NOT NULL,
+    tipo ENUM('like') NOT NULL DEFAULT 'like',
+    fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY(usuario_id, publicacion_id),
+    FOREIGN KEY (usuario_id) REFERENCES usuario(ID_USUARIO) ON DELETE CASCADE,
+    FOREIGN KEY (publicacion_id) REFERENCES publicacion(id) ON DELETE CASCADE
+);
+
+CREATE TABLE comentarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    publicacion_id INT NOT NULL,
+    usuario_id INT NOT NULL,
+    contenido TEXT NOT NULL,
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    activo BOOLEAN DEFAULT TRUE, -- Campo para baja lógica (eliminación por el Admin)
+    
+    FOREIGN KEY (publicacion_id) REFERENCES publicacion(id) ON DELETE CASCADE,
+    FOREIGN KEY (usuario_id) REFERENCES usuario(ID_USUARIO) ON DELETE CASCADE
+);

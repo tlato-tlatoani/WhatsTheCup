@@ -354,41 +354,6 @@ END $$
 DELIMITER ;
 
 
-DELIMITER $$
-
-CREATE FUNCTION json_to_text_list(p_json JSON)
-RETURNS VARCHAR(500)
-DETERMINISTIC
-BEGIN
-    DECLARE resultado VARCHAR(500);
-
-    SELECT GROUP_CONCAT(JSON_UNQUOTE(JSON_EXTRACT(p_json, CONCAT('$[', n.n, ']'))) SEPARATOR ',')
-    INTO resultado
-    FROM (
-        SELECT 0 AS n UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION
-        SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION 
-        SELECT 10 UNION SELECT 11 UNION SELECT 12 UNION SELECT 13 UNION SELECT 14
-    ) n
-    WHERE n.n < JSON_LENGTH(p_json);
-
-    RETURN resultado;
-END $$
-
-DELIMITER ;
-
-DELIMITER $$
-CREATE PROCEDURE `sp_agregar_categoria`(
-  IN p_nombre VARCHAR(100),
-  IN p_admin INT
-)
-BEGIN
-  INSERT INTO Categorias(nombre, CreadoAdmin)
-  VALUES(p_nombre, p_admin);
-
-  SELECT LAST_INSERT_ID() AS id_categoria;
-END $$
-DELIMITER ;
-
 
 -- sp publicacion
 DELIMITER $$
@@ -471,4 +436,97 @@ END sp_block$$
 -- 3. Se restaura el delimitador original
 DELIMITER ;
 
+
+DROP PROCEDURE IF EXISTS sp_actualizar_aprobacion_publicacion;
+
 DELIMITER $$
+
+DROP PROCEDURE IF EXISTS sp_actualizar_aprobacion_publicacion;
+
+DELIMITER $$
+
+CREATE PROCEDURE sp_actualizar_aprobacion_publicacion (
+    IN p_publicacion_id INT,
+    IN p_decision INT   -- 1 = aprobar, -1 = rechazar
+)
+BEGIN
+    -- Validación: si p_decision no es 1 ni -1 devolvemos un SELECT con error
+    IF p_decision NOT IN (1, -1) THEN
+        SELECT 'error' AS result, 'Valor inválido para decisión' AS message;
+    ELSE
+        -- Actualizamos solamente la columna de aprobación; el trigger se encargará
+        -- de FECHA_APROBACION y ESTATUS
+        UPDATE PUBLICACION
+        SET AprobadoAdmin = p_decision
+        WHERE id = p_publicacion_id;
+
+        -- Informamos resultado
+        SELECT 'success' AS result, 'Actualización exitosa' AS message;
+    END IF;
+END$$
+
+DELIMITER ;
+
+
+
+DELIMITER $$
+CREATE PROCEDURE sp_contar_comentarios(
+    IN p_publicacion_id INT
+)
+BEGIN
+    SELECT COUNT(*) 
+    FROM comentarios 
+    WHERE publicacion_id = p_publicacion_id AND activo = TRUE;
+END $$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE PROCEDURE sp_obtener_comentarios(
+    IN p_publicacion_id INT
+)
+BEGIN
+    SELECT 
+        c.id, 
+        c.contenido, 
+        c.fecha_creacion, 
+        CONCAT(u.NOMBRES, ' ', u.APELLIDO_P) AS nombre_usuario,
+        u.ID_USUARIO AS autor_id
+    FROM comentarios c
+    JOIN usuario u ON c.usuario_id = u.ID_USUARIO
+    WHERE c.publicacion_id = p_publicacion_id AND c.activo = TRUE
+    ORDER BY c.fecha_creacion DESC;
+END $$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE PROCEDURE sp_eliminar_comentario(
+    IN p_comentario_id INT
+)
+BEGIN
+    UPDATE comentarios 
+    SET activo = FALSE 
+    WHERE id = p_comentario_id;
+END $$
+
+DELIMITER ;
+
+-- SP: sp_agregar_comentario (Modificación)
+
+DELIMITER $$
+CREATE PROCEDURE sp_agregar_comentario(
+    IN p_publicacion_id INT,
+    IN p_usuario_id INT,
+    IN p_contenido TEXT
+)
+BEGIN
+    INSERT INTO comentarios (publicacion_id, usuario_id, contenido)
+    VALUES (p_publicacion_id, p_usuario_id, p_contenido);
+
+    -- [CAMBIO CLAVE] Devolver el ID recién insertado
+    SELECT LAST_INSERT_ID() AS nuevo_id;
+END $$
+DELIMITER ;

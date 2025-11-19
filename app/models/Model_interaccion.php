@@ -18,6 +18,13 @@ class Model_interaccion
      * @return int Total de likes actualizados
      * @throws Exception
      */
+
+    public function verificarLike(int $usuarioId, int $publicacionId): bool {
+    $stmt = $this->conn->prepare("SELECT COUNT(*) FROM interacciones WHERE usuario_id = :uid AND publicacion_id = :pid");
+    $stmt->execute([':uid' => $usuarioId, ':pid' => $publicacionId]);
+    return (int)$stmt->fetchColumn() > 0;
+}
+
    public function toggleLike(int $usuarioId, int $publicacionId): bool {
     try {
         // Revisar si ya existe el like

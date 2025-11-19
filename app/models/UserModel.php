@@ -91,12 +91,6 @@ class UserModel {
             }
 
 
-
-
-
-
-
-
             
         } catch (PDOException $e) {
             // Manejo de excepción de PDO (ej. error de conexión)
@@ -156,39 +150,42 @@ class UserModel {
     public function actualizarUsuario(int $id_usuario, array $datos): bool|string {
         
         // Extraer y asignar los datos del array
-        $nombres      = $datos['nombres'];
-        $apellido_p   = $datos['apellido_p'];
-        $apellido_m   = $datos['apellido_m'];
-        $nacimiento   = $datos['nacimiento'];
-        $genero       = $datos['genero'];
-        $nacionalidad = $datos['nacionalidad'];
-        $pais_origen  = $datos['pais_origen'];
-        $correo       = $datos['correo'];
-        $contrasenna  = $datos['contrasenna'];
-        $imagen_perfil= $datos['imagen_perfil'];
+
+        $NOMBRES = $datos['NOMBRES'];
+        $APELLIDO_P = $datos['APELLIDO_P'];
+        $APELLIDO_M = $datos['APELLIDO_M'];
+        $NACIMIENTO = $datos['NACIMIENTO'];
+        $GENERO = $datos['GENERO'];
+        $NACIONALIDAD = $datos['NACIONALIDAD'];
+        $PAIS_ORIGEN = $datos['PAIS_ORIGEN'];
+        $CORREO = $datos['CORREO'];
+        $CONTRASENNA = $datos['CONTRASENNA']; 
+        $IMAGEN_PERFIL_BLOB = $datos['IMAGEN_PERFIL_BLOB'];
 
         $sql = "CALL sp_actualizar_usuario(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"; 
         
         try {
             $pdo = $this->db->getConnection();
             $stmt = $pdo->prepare($sql);
-    
-            $stmt->bindParam(1, $id_usuario, PDO::PARAM_INT);
-            $stmt->bindParam(2, $nombres, PDO::PARAM_STR);
-            $stmt->bindParam(3, $apellido_p, PDO::PARAM_STR);
-            $stmt->bindParam(4, $apellido_m, PDO::PARAM_STR);
-            $stmt->bindParam(5, $nacimiento, PDO::PARAM_STR);
-            $stmt->bindParam(6, $genero, PDO::PARAM_STR);
-            $stmt->bindParam(7, $nacionalidad, PDO::PARAM_STR);
-            $stmt->bindParam(8, $pais_origen, PDO::PARAM_STR);
-            $stmt->bindParam(9, $correo, PDO::PARAM_STR);
-            $stmt->bindParam(10, $contrasenna, PDO::PARAM_STR);
             
-            if ($imagen_perfil === NULL) {
+            $stmt->bindParam(1, $id_usuario, PDO::PARAM_INT);
+            $stmt->bindParam(2, $NOMBRES, PDO::PARAM_STR);
+            $stmt->bindParam(3, $APELLIDO_P, PDO::PARAM_STR);
+            $stmt->bindParam(4, $APELLIDO_M, PDO::PARAM_STR);
+            $stmt->bindParam(5, $NACIMIENTO, PDO::PARAM_STR); 
+            $stmt->bindParam(6, $GENERO, PDO::PARAM_STR);
+            $stmt->bindParam(7, $NACIONALIDAD, PDO::PARAM_STR);
+            $stmt->bindParam(8, $PAIS_ORIGEN, PDO::PARAM_STR);
+            $stmt->bindParam(9, $CORREO, PDO::PARAM_STR);
+            $stmt->bindParam(10, $CONTRASENNA, PDO::PARAM_STR); 
+
+            if ($IMAGEN_PERFIL_BLOB === NULL) {
                 $stmt->bindValue(11, null, PDO::PARAM_NULL);
             } else {
-                $stmt->bindParam(11, $imagen_perfil, PDO::PARAM_LOB); 
+               
+                $stmt->bindParam(11, $IMAGEN_PERFIL_BLOB, PDO::PARAM_LOB); 
             }
+           
 
             $resultado = $stmt->execute();
             $stmt->closeCursor();

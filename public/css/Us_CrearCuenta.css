@@ -305,3 +305,13 @@ form input:focus {
 .suggestions-box li:hover {
     background-color: #f0f0f0;
 }
+
+.btn-google{
+
+    border-radius: 40px;
+    border: none;
+    padding: 12px 30px;
+    background-color: #ddd;
+    align-self: center;
+
+}
